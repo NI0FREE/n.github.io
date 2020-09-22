@@ -1,0 +1,186 @@
+<html><head>
+    <style text="text/css">
+    html, body {
+        padding: 0; margin: 0;
+    }
+    #canvas {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    #fakeca {
+        width: 2000px;
+        height: 2000px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    #window {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    </style>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    </head>
+    <body>
+	<div id="windowc">    
+    <div id="window">
+    <canvas id="fakeca" width="2000" height="2000" style="cursor: default; top: -12px; left: 0px;"></canvas>
+    <canvas id="canvas" width="200" height="200" style="cursor: default; top: -12px; left: 0px;"></canvas>
+    </div>
+		 </div>
+
+
+    
+	<script>
+		window.onload = function(){
+            var fakeca = document.getElementById('fakeca');
+            var gtx = fakeca.getContext('2d', { alpha: false });
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d', { alpha: false });
+            var objs = [];
+            var x = -1, y = 0;
+            
+            ctx.mozImageSmoothingEnabled = false;
+            ctx.webkitImageSmoothingEnabled = false;
+            ctx.msImageSmoothingEnabled = false;
+            ctx.imageSmoothingEnabled = false;
+            gtx.mozImageSmoothingEnabled = false;
+            gtx.webkitImageSmoothingEnabled = false;
+            gtx.msImageSmoothingEnabled = false;
+            gtx.imageSmoothingEnabled = false;
+            
+           
+            pixgen()
+            function pixgen() {
+            for (var i = 1; i<=39999; i++) {
+                x = x + 1;
+                if (i == ((y+1)/1)*200){y = y + 1; x = -1;}
+                objs.push({
+	            	'x': x,
+	            	'y': y,	    	
+                    'r': 50,
+                    'g': 130,
+                    'b': 184,
+                    'id': i,
+	            })	
+		    ctx.fillStyle = "rgb("+50+","+130+","+184+")";
+                ctx.fillRect(objs[i-1].x, objs[i-1].y, 1, 1);
+            }console.log("i_generate_pix_wall" +" /*/ "+ objs[0].id); };
+
+            var capture = false, cx = 0, cy = 0,canidraw=0;
+            x = 0; y = 0;
+            fakeca.addEventListener('mousedown', function (event) {
+	            capture = true;
+	            x = event.clientX;
+	            y = event.clientY;
+                fakeca.style.cursor = 'grab';
+        }, false);
+        fakeca.addEventListener('mouseup', function () {
+	        capture = false;
+	        fakeca.style.cursor = 'default';
+            if(canidraw == true){console.log("draw");draw()}
+            canidraw = true;
+        }, false);
+
+        fakeca.addEventListener('mousemove', function (event) {
+            
+	        if (capture) {
+                
+                if (false !=canidraw) {canidraw = false};
+		        cx -= x - event.clientX, cy -= y - event.clientY;
+	            fakeca.style.top  = cy + 'px';
+	            fakeca.style.left = cx + 'px';
+                x = event.clientX;
+		        y = event.clientY;	
+	        }
+        }, false);
+        
+        function draw(){
+
+            var dx, dy, idd;
+            dx = event.clientX - cx;
+            dy = event.clientY - cy;
+            dx = dx / 10;
+            dy = dy / 10;
+            // if (scale - 1 > 0){
+            // dx = dx + 1000 * (scale - 1);
+            // dy = dy + 1000 * (scale - 1);
+            // dx = dx / scale;
+            // dy = dy / scale;
+            // }
+            console.log(dy + "/*/" + dx)
+            dx = Math.trunc(dx / 1);
+            dy = Math.trunc(dy / 1);
+            console.log(dy + "/*/" + dx)
+            idd = dx + dy * 200;
+            ////////////////////////
+            
+            ctx.fillStyle = "blue";
+            var o = objs[idd];
+          
+            let path1 = new Path2D();
+            path1.rect(o.x , o.y, 1, 1);
+            
+            ctx.fill(path1);
+            
+            console.log(o.id)
+            console.log(ctx)
+            gtx.drawImage(canvas, -2000, -2000, 8000, 8000);
+        }
+    }
+    </script>
+      <script>
+             var fakeca = document.getElementById('fakeca');
+            var gtx = fakeca.getContext('2d', { alpha: false });
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d', { alpha: false });
+            ctx.mozImageSmoothingEnabled = false;
+            ctx.webkitImageSmoothingEnabled = false;
+            ctx.msImageSmoothingEnabled = false;
+            ctx.imageSmoothingEnabled = false;
+            gtx.mozImageSmoothingEnabled = false;
+            gtx.webkitImageSmoothingEnabled = false;
+            gtx.msImageSmoothingEnabled = false;
+            gtx.imageSmoothingEnabled = false;
+        function addOnWheel(elem, handler) {
+          if (elem.addEventListener) {
+            if ('onwheel' in document) {
+              // IE9+, FF17+
+              elem.addEventListener("wheel", handler);
+            } else if ('onmousewheel' in document) {
+              // устаревший вариант события
+              elem.addEventListener("mousewheel", handler);
+            } else {
+              // 3.5 <= Firefox < 17, более старое событие DOMMouseScroll пропустим
+              elem.addEventListener("MozMousePixelScroll", handler);
+            }
+          } else { // IE8-
+            text.attachEvent("onmousewheel", handler);
+          }
+        }
+    
+        var scale = 0;
+    
+        addOnWheel(fakeca, function(e) {
+    
+          var delta = e.deltaY || e.detail || e.wheelDelta;
+         
+          // отмасштабируем при помощи CSS
+          if (delta > 0) {gtx.drawImage(canvas, -1000, -1000, 4000, 4000);
+          }
+          else if(scale != 1) {gtx.drawImage(canvas, 0, 0, 2000, 2000);};
+    
+        //   canvas.style.transform = canvas.style.WebkitTransform = canvas.style.MsTransform = 'scale(' + scale + ')';
+    
+          // отменим прокрутку
+          e.preventDefault();
+        });
+      </script>
+    
+
+</body></html>
