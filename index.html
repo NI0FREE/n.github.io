@@ -11,8 +11,8 @@
         overflow: hidden;
     }
     #largecanv {
-      width: 3000px;
-        height: 3000px;
+      width: 2000px;
+        height: 2000px;
         position: absolute;
         top: 0px;
         left: 0px;
@@ -26,7 +26,7 @@
 	<div id="windowc">    
     <div id="window">
       <div id="layer2">
-        <canvas id="largecanv" width="3000" height="3000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
+        <canvas id="largecanv" width="2000" height="2000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
       </div>
     </div>
@@ -69,7 +69,7 @@
             dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
             x = x + 1;
             };
-            ctx.drawImage(lcanv, 0, 0, 3000, 3000);
+            ctx.drawImage(lcanv, 0, 0, 2000, 2000);
         }
         //Навигация по большому канвасу (PC)
         if(iphone!=1){
@@ -142,14 +142,14 @@
           var dx, dy, idd;
           dx = evx - cx;
           dy = evy - cy;
-          dx = Math.trunc(dx / 15);
-          dy = Math.trunc(dy / 15);
+          dx = Math.trunc(dx / 10);
+          dy = Math.trunc(dy / 10);
           idd = dx + dy * 200;
           var o = pixlb[idd];
           dtx.fillStyle = "red";
           path1.rect(o.x , o.y, 1, 1);
           dtx.fill(path1);
-          ctx.drawImage(lcanv, 0, 0, 3000, 3000);
+          ctx.drawImage(lcanv, 0, 0, 2000, 2000);
         }
 
         //Увеличение колесиком мыши
