@@ -59,7 +59,7 @@
             dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
             x = x + 1;
             };
-            ctx.drawImage(lcanv, 0, 0, 2000, 2000);
+            ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         }
         //Навигация по большому канвасу (ПК)
         var capture = false, cx = 0, cy = 0,canidraw=0;
@@ -72,18 +72,21 @@
         }, false);
 
         bcanv.addEventListener('mousedown', function (event) {
-	        //capture = true;
-	    
-          bcanv.style.cursor = 'grab';
+          capture = true;
+	            x = event.clientX;
+	            y = event.clientY;
+              bcanv.style.cursor = 'grab';
         }, false)
 
         bcanv.addEventListener('mousemove', function (event) {
-          if (capture) {
-            if (canidraw != false) {canidraw = false};
-            cx = cx - (x - event.clientX), cy = cy - (y - event.clientY);	
-          }
-          x = event.clientX;
-          y = event.clientY;
+	        if (capture) {
+            if (false !=canidraw) {canidraw = false};
+		        cx -= x - event.clientX, cy -= y - event.clientY;
+            bcanv.style.top  = cy + 'px';
+            bcanv.style.left = cx + 'px';
+            x = event.clientX;
+		        y = event.clientY;	
+	        }
         }, false);
 
         //
@@ -93,8 +96,8 @@
           var dx, dy, idd;
           dx = event.clientX - cx;
           dy = event.clientY - cy;
-          dx = Math.trunc(dx / 10);
-          dy = Math.trunc(dy / 10);
+          dx = Math.trunc(dx / 20);
+          dy = Math.trunc(dy / 20);
           idd = dx + dy * 200;
           var o = pixlb[idd];
           dtx.fillStyle = "red";
@@ -127,31 +130,9 @@
           var delta = e.deltaY || e.detail || e.wheelDelta;
           var cursx = dx 
           if (delta > 0 && scale < 1.92) {
-            ctx.clearRect(0, 0, bcanv.width, bcanv.height);
-            //dx = dx-250/scale;
-            //dy = dy-250/scale;
-            dx = Math.trunc(dx);
-          dy = Math.trunc(dy);
-            tsx = 500/scale;
-            tsy = 500/scale;
-            ctx.drawImage(lcanv, dx, dy, tsx, tsy);
-            scale = scale * 2;
-            console.log(scale+" "+dx+" "+dy)
           }
           else if(scale != 0.12 && delta <0) {
-            ctx.clearRect(0, 0, bcanv.width, bcanv.height);
-            //dx = dx - tsx;
-            //dy = dy - tsy;
-            dx = Math.trunc(dx);
-          dy = Math.trunc(dy);
-            ctx.drawImage(lcanv, dx, dy, tsx*2, tsy*2);
-            tsx = tsx *2
-            tsy = tsy *2
-            scale = scale *100;
-            scale = Math.floor(scale/2)
-            scale = scale /100;
-            console.log(scale+" "+dx+" "+dy)
-           };
+          };
           e.preventDefault();
         });
     //}
