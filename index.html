@@ -12,11 +12,12 @@
     }
     #largecanv {
     position: absolute;
-    draggable: true
-    left: 0;
+    transition: transform 0ms linear;
+    transition: all 0ms ease 0s;
     right: 0;
-    top: 0;
+  
     bottom: 0;
+    
 }
     </style>
 
@@ -26,7 +27,7 @@
 	<div id="windowc">    
     <div id="window">
       <div class="layer2">
-        <canvas id="largecanv" width="3000" height="3000"></canvas>
+        <canvas id="largecanv" width="3000" height="3000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
       </div>
     </div>
@@ -123,10 +124,12 @@
 	        if (captureP) {
             if (false !=canidrawP) {canidrawP = false};
 		        cxP -= x - event.touches[0].pageX, cyP -= y - event.touches[0].pageY;
-            bcanv.style.top  = cyP + 'px';
-            bcanv.style.left = cxP + 'px';
+            bcanv.style ="translateY("+cyP+"px);";
+        
+  
             x = event.touches[0].pageX;
 		        y = event.touches[0].pageY;	
+            console.log(x+" "+y)
 	        }
         }, false);
 
