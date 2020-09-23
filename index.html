@@ -30,7 +30,7 @@
         <canvas id="littlcanv" width="200" height="200"></canvas>
       </div>
     </div>
-	</div>
+  </div>
 	<script>
 	//	window.onload = function(){
         let bcanv = document.getElementById('largecanv');
@@ -40,6 +40,14 @@
         document.getElementById('littlcanv').remove()
         //Убираем размытие
         ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;dtx.mozImageSmoothingEnabled = false;dtx.webkitImageSmoothingEnabled = false;dtx.msImageSmoothingEnabled = false;dtx.imageSmoothingEnabled = false;
+        //
+        //Определение телефон ли это
+        var iphone = 0;
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+
+          iphone = 1;
+
+        } 
         //
         var x = 0, y =0; let pixlb = [];
         wallOfPixelsGen()
@@ -63,12 +71,13 @@
             ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         }
         //Навигация по большому канвасу (PC)
+        if(iphone!=1){
         var capture = false, cx = 0, cy = 0,canidraw=0;
 
         bcanv.addEventListener('mouseup', function () {
 	        capture = false;
 	        bcanv.style.cursor = 'default';
-          if(canidraw == true){draw(); console.log("Пытаюсь рисовать..")}
+          if(canidraw == true){draw(cx,cy,event.clientX,event.clientY); console.log("Пытаюсь рисовать..")}
           canidraw = true;
         }, false);
 
@@ -90,18 +99,19 @@
 		        y = event.clientY;	
 	        }
         }, false);
+        }
         //Навигация по большому канвасу (PHONE)
         var captureP = false, cxP = 0, cyP = 0,canidrawP=0;
-
-        bcanv.addEventListener("touchend", function () {
+        let levent;
+        bcanv.addEventListener("touchend", function (event) {
 	        captureP = false;
 	        
-          if(canidrawP == true){draw(); console.log("Пытаюсь рисовать..")}
+          if(canidrawP == true){draw(cxP,cyP,levent.touches[0].pageX,levent.touches[0].pageY); console.log("Пытаюсь рисовать..")}
           canidrawP = true;
         }, false);
 
         bcanv.addEventListener("touchstart", function (event) {
-          
+          levent = event;
           captureP = true;
 	            x = event.touches[0].pageX;
 	            y = event.touches[0].pageY;
@@ -125,10 +135,10 @@
         //
 
         let path1 = new Path2D();
-        function draw(){
+        function draw(cx,cy,evx,evy){
           var dx, dy, idd;
-          dx = event.clientX - cx;
-          dy = event.clientY - cy;
+          dx = evx - cx;
+          dy = evy - cy;
           dx = Math.trunc(dx / 20);
           dy = Math.trunc(dy / 20);
           idd = dx + dy * 200;
