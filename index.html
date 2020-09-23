@@ -3,183 +3,163 @@
     html, body {
         padding: 0; margin: 0;
     }
-    #canvas {
-        width: 200px;
-        height: 200px;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-    }
-    #fakeca {
-        width: 2000px;
-        height: 2000px;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-    }
+
     #window {
         position: absolute;
         width: 100%;
         height: 100%;
         overflow: hidden;
     }
+    #largecanv {
+    position: absolute;
+    
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
     </style>
+
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     </head>
     <body>
 	<div id="windowc">    
     <div id="window">
-    <canvas id="fakeca" width="2000" height="2000" style="cursor: default; top: -12px; left: 0px;"></canvas>
-    <canvas id="canvas" width="200" height="200" style="cursor: default; top: -12px; left: 0px;"></canvas>
+      <div class="layer2">
+        <canvas id="largecanv" width="1000" height="550"></canvas>
+        <canvas id="littlcanv" width="200" height="200"></canvas>
+      </div>
     </div>
-		 </div>
-
-
-    
+	</div>
 	<script>
-		window.onload = function(){
-            var fakeca = document.getElementById('fakeca');
-            var gtx = fakeca.getContext('2d', { alpha: false });
-            var canvas = document.getElementById('canvas');
-            var ctx = canvas.getContext('2d', { alpha: false });
-            var objs = [];
-            var x = -1, y = 0;
-            
-            ctx.mozImageSmoothingEnabled = false;
-            ctx.webkitImageSmoothingEnabled = false;
-            ctx.msImageSmoothingEnabled = false;
-            ctx.imageSmoothingEnabled = false;
-            gtx.mozImageSmoothingEnabled = false;
-            gtx.webkitImageSmoothingEnabled = false;
-            gtx.msImageSmoothingEnabled = false;
-            gtx.imageSmoothingEnabled = false;
-            
-           
-            pixgen()
-            function pixgen() {
-            for (var i = 1; i<=39999; i++) {
-                x = x + 1;
-                if (i == ((y+1)/1)*200){y = y + 1; x = -1;}
-                objs.push({
-	            	'x': x,
-	            	'y': y,	    	
-                    'r': 50,
-                    'g': 130,
-                    'b': 184,
-                    'id': i,
-	            })	
-		    ctx.fillStyle = "rgb("+50+","+130+","+184+")";
-                ctx.fillRect(objs[i-1].x, objs[i-1].y, 1, 1);
-            }console.log("i_generate_pix_wall" +" /*/ "+ objs[0].id); };
+	//	window.onload = function(){
+        let bcanv = document.getElementById('largecanv');
+        let lcanv = document.getElementById('littlcanv');
+        let ctx   = bcanv.getContext('2d', { alpha: false });
+        let dtx   = lcanv.getContext('2d', { alpha: false });
+        //Убираем размытие
+        ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;dtx.mozImageSmoothingEnabled = false;dtx.webkitImageSmoothingEnabled = false;dtx.msImageSmoothingEnabled = false;dtx.imageSmoothingEnabled = false;
+        //
+        var x = 0, y =0; let pixlb = [];
+        wallOfPixelsGen()
+        function wallOfPixelsGen(){
+          for (var i = 0; i<=40000; i++) {
+            if (i == ((y+1)/1)*200) {y = y + 1; x = 0;}
 
-            var capture = false, cx = 0, cy = 0,canidraw=0;
-            x = 0; y = 0;
-            fakeca.addEventListener('mousedown', function (event) {
-	            capture = true;
-	            x = event.clientX;
-	            y = event.clientY;
-                fakeca.style.cursor = 'grab';
-        }, false);
-        fakeca.addEventListener('mouseup', function () {
-	        capture = false;
-	        fakeca.style.cursor = 'default';
-            if(canidraw == true){console.log("draw");draw()}
-            canidraw = true;
-        }, false);
+            pixlb.push({
+	          	'x': x,
+	          	'y': y,	    	
+              'r': 50,
+              'g': 130,
+              'b': 184,
+              'id': i+1,
+	          });
 
-        fakeca.addEventListener('mousemove', function (event) {
-            
-	        if (capture) {
-                
-                if (false !=canidraw) {canidraw = false};
-		        cx -= x - event.clientX, cy -= y - event.clientY;
-	            fakeca.style.top  = cy + 'px';
-	            fakeca.style.left = cx + 'px';
-                x = event.clientX;
-		        y = event.clientY;	
-	        }
-        }, false);
-        
-        function draw(){
-
-            var dx, dy, idd;
-            dx = event.clientX - cx;
-            dy = event.clientY - cy;
-            dx = dx / 10;
-            dy = dy / 10;
-            // if (scale - 1 > 0){
-            // dx = dx + 1000 * (scale - 1);
-            // dy = dy + 1000 * (scale - 1);
-            // dx = dx / scale;
-            // dy = dy / scale;
-            // }
-            console.log(dy + "/*/" + dx)
-            dx = Math.trunc(dx / 1);
-            dy = Math.trunc(dy / 1);
-            console.log(dy + "/*/" + dx)
-            idd = dx + dy * 200;
-            ////////////////////////
-            
-            ctx.fillStyle = "blue";
-            var o = objs[idd];
-          
-            let path1 = new Path2D();
-            path1.rect(o.x , o.y, 1, 1);
-            
-            ctx.fill(path1);
-            
-            console.log(o.id)
-            console.log(ctx)
-            gtx.drawImage(canvas, -2000, -2000, 8000, 8000);
+		        dtx.fillStyle = "rgb("+randomInteger(1, 110)+","+randomInteger(1, 110)+","+randomInteger(100, 110)+")";
+            dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
+            x = x + 1;
+            };
+            ctx.drawImage(lcanv, 0, 0, 2000, 2000);
         }
-    }
-    </script>
-      <script>
-             var fakeca = document.getElementById('fakeca');
-            var gtx = fakeca.getContext('2d', { alpha: false });
-            var canvas = document.getElementById('canvas');
-            var ctx = canvas.getContext('2d', { alpha: false });
-            ctx.mozImageSmoothingEnabled = false;
-            ctx.webkitImageSmoothingEnabled = false;
-            ctx.msImageSmoothingEnabled = false;
-            ctx.imageSmoothingEnabled = false;
-            gtx.mozImageSmoothingEnabled = false;
-            gtx.webkitImageSmoothingEnabled = false;
-            gtx.msImageSmoothingEnabled = false;
-            gtx.imageSmoothingEnabled = false;
+        //Навигация по большому канвасу (ПК)
+        var capture = false, cx = 0, cy = 0,canidraw=0;
+
+        bcanv.addEventListener('mouseup', function () {
+	        capture = false;
+	        bcanv.style.cursor = 'default';
+          if(canidraw == true){draw(); console.log("Пытаюсь рисовать..")}
+          canidraw = true;
+        }, false);
+
+        bcanv.addEventListener('mousedown', function (event) {
+	        //capture = true;
+	    
+          //bcanv.style.cursor = 'grab';
+        }, false)
+
+        bcanv.addEventListener('mousemove', function (event) {
+          if (capture) {
+            if (canidraw != false) {canidraw = false};
+            cx = cx - (x - event.clientX), cy = cy - (y - event.clientY);	
+          }
+          x = event.clientX;
+          y = event.clientY;
+        }, false);
+
+        //
+
+        let path1 = new Path2D();
+        function draw(){
+          var dx, dy, idd;
+          dx = event.clientX - cx;
+          dy = event.clientY - cy;
+          dx = Math.trunc(dx / 10);
+          dy = Math.trunc(dy / 10);
+          idd = dx + dy * 200;
+          var o = pixlb[idd];
+          dtx.fillStyle = "red";
+          path1.rect(o.x , o.y, 1, 1);
+          dtx.fill(path1);
+          ctx.drawImage(lcanv, 0, 0, 2000, 2000);
+        }
+
+        //Увеличение колесиком мыши
+        
         function addOnWheel(elem, handler) {
           if (elem.addEventListener) {
             if ('onwheel' in document) {
-              // IE9+, FF17+
               elem.addEventListener("wheel", handler);
             } else if ('onmousewheel' in document) {
-              // устаревший вариант события
               elem.addEventListener("mousewheel", handler);
             } else {
-              // 3.5 <= Firefox < 17, более старое событие DOMMouseScroll пропустим
               elem.addEventListener("MozMousePixelScroll", handler);
             }
-          } else { // IE8-
+          } else {
             text.attachEvent("onmousewheel", handler);
           }
         }
-    
-        var scale = 0;
-    
-        addOnWheel(fakeca, function(e) {
-    
+        var scale = 1; var tsx,tsy;
+        addOnWheel(bcanv, function(e) {
+          dx = event.clientX - cx;
+          dy = event.clientY - cy;
+          dx = Math.trunc(dx);
+          dy = Math.trunc(dy);
           var delta = e.deltaY || e.detail || e.wheelDelta;
-         
-          // отмасштабируем при помощи CSS
-          if (delta > 0) {gtx.drawImage(canvas, -1000, -1000, 4000, 4000);
+          if (delta > 0 && scale < 1.92) {
+            ctx.clearRect(0, 0, bcanv.width, bcanv.height);
+            dx = dx-250/scale;
+            dy = dy-250/scale;
+            dx = Math.trunc(dx);
+          dy = Math.trunc(dy);
+            tsx = 500/scale;
+            tsy = 500/scale;
+            ctx.drawImage(lcanv, dx, dy, tsx, tsy);
+            scale = scale * 2;
+            console.log(scale+" "+dx+" "+dy)
           }
-          else if(scale != 1) {gtx.drawImage(canvas, 0, 0, 2000, 2000);};
-    
-        //   canvas.style.transform = canvas.style.WebkitTransform = canvas.style.MsTransform = 'scale(' + scale + ')';
-    
-          // отменим прокрутку
+          else if(scale != 0.12 && delta <0) {
+            ctx.clearRect(0, 0, bcanv.width, bcanv.height);
+            dx = dx - tsx;
+            dy = dy - tsy;
+            dx = Math.trunc(dx);
+          dy = Math.trunc(dy);
+            ctx.drawImage(lcanv, dx, dy, tsx*2, tsy*2);
+            tsx = tsx *2
+            tsy = tsy *2
+            scale = scale *100;
+            scale = Math.floor(scale/2)
+            scale = scale /100;
+            console.log(scale+" "+dx+" "+dy)
+           };
           e.preventDefault();
         });
+    //}
+        function randomInteger(min, max) {
+  // случайное число от min до (max+1)
+           let rand = min + Math.random() * (max + 1 - min);
+          return Math.floor(rand);
+        }
+
       </script>
     
 
