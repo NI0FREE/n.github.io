@@ -74,7 +74,7 @@
         bcanv.addEventListener('mousedown', function (event) {
 	        //capture = true;
 	    
-          //bcanv.style.cursor = 'grab';
+          bcanv.style.cursor = 'grab';
         }, false)
 
         bcanv.addEventListener('mousemove', function (event) {
@@ -100,7 +100,7 @@
           dtx.fillStyle = "red";
           path1.rect(o.x , o.y, 1, 1);
           dtx.fill(path1);
-          ctx.drawImage(lcanv, 0, 0, 2000, 2000);
+          ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         }
 
         //Увеличение колесиком мыши
@@ -125,10 +125,11 @@
           dx = Math.trunc(dx);
           dy = Math.trunc(dy);
           var delta = e.deltaY || e.detail || e.wheelDelta;
+          var cursx = dx 
           if (delta > 0 && scale < 1.92) {
             ctx.clearRect(0, 0, bcanv.width, bcanv.height);
-            dx = dx-250/scale;
-            dy = dy-250/scale;
+            //dx = dx-250/scale;
+            //dy = dy-250/scale;
             dx = Math.trunc(dx);
           dy = Math.trunc(dy);
             tsx = 500/scale;
@@ -139,8 +140,8 @@
           }
           else if(scale != 0.12 && delta <0) {
             ctx.clearRect(0, 0, bcanv.width, bcanv.height);
-            dx = dx - tsx;
-            dy = dy - tsy;
+            //dx = dx - tsx;
+            //dy = dy - tsy;
             dx = Math.trunc(dx);
           dy = Math.trunc(dy);
             ctx.drawImage(lcanv, dx, dy, tsx*2, tsy*2);
