@@ -16,6 +16,7 @@
         position: absolute;
         top: 0px;
         left: 0px;
+        transition: all 125ms linear 0s;
     
 }
     </style>
@@ -176,7 +177,7 @@
           var delta = e.deltaY || e.detail || e.wheelDelta;
           
           if (delta > 0){
-            if (scale < 1){
+            if (scale < 1.5){
             scale = scale + 0.02;
             camer.style.transform = camer.style.WebkitTransform = camer.style.MsTransform = 'scale(' + scale + ')';
             }
