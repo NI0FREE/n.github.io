@@ -13,7 +13,7 @@
     #largecanv {
     position: absolute;
     transition: transform 0ms linear;
-    transition: all 150ms ease 0s;
+    transition: all 150ms linear 0s;
     right: 0;
   
     bottom: 0;
@@ -86,7 +86,7 @@
           capture = true;
 	            x = event.clientX;
 	            y = event.clientY;
-              bcanv.style.cursor = 'grab';
+              
         }, false)
 
         bcanv.addEventListener('mousemove', function (event) {
@@ -94,8 +94,7 @@
 	        if (capture) {
             if (false !=canidraw) {canidraw = false};
 		        cx -= x - event.clientX, cy -= y - event.clientY;
-            bcanv.style.top  = cy + 'px';
-            bcanv.style.left = cx + 'px';
+            bcanv.style = "top: "+cy+"px; left: "+cx+"px;";
             x = event.clientX;
 		        y = event.clientY;	
 	        }
@@ -125,8 +124,8 @@
             if (false !=canidrawP) {canidrawP = false};
 		        cxP -= x - event.touches[0].pageX, cyP -= y - event.touches[0].pageY;
             
-            bcanv.style.top  = cyP + 'px';
-            bcanv.style.left = cxP + 'px';
+            bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;";
+            
   
             x = event.touches[0].pageX;
 		        y = event.touches[0].pageY;	
