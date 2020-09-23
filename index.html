@@ -106,15 +106,15 @@
         bcanv.addEventListener("touchend", function (event) {
 	        captureP = false;
 	        
-          if(canidrawP == true){draw(cxP,cyP,levent.touches[0].pageX,levent.touches[0].pageY); console.log("Пытаюсь рисовать..")}
+          if(canidrawP == true){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); console.log("Пытаюсь рисовать..")}
           canidrawP = true;
         }, false);
 
         bcanv.addEventListener("touchstart", function (event) {
           levent = event;
           captureP = true;
-	            x = event.touches[0].pageX;
-	            y = event.touches[0].pageY;
+	            x = event.touches[0].clientX;
+	            y = event.touches[0].clientY;
            
         }, false)
 
@@ -122,13 +122,13 @@
           
 	        if (captureP) {
             if (false !=canidrawP) {canidrawP = false};
-		        cxP -= x - event.touches[0].pageX, cyP -= y - event.touches[0].pageY;
+		        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
             
             bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;";
             
   
-            x = event.touches[0].pageX;
-		        y = event.touches[0].pageY;	
+            x = event.touches[0].clientX;
+		        y = event.touches[0].clientY;	
             
 	        }
         }, false);
