@@ -12,7 +12,7 @@
     }
     #largecanv {
     position: absolute;
-    
+    draggable: true
     left: 0;
     right: 0;
     top: 0;
@@ -62,7 +62,7 @@
             };
             ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         }
-        //Навигация по большому канвасу (ПК)
+        //Навигация по большому канвасу (PC)
         var capture = false, cx = 0, cy = 0,canidraw=0;
 
         bcanv.addEventListener('mouseup', function () {
@@ -90,6 +90,37 @@
 		        y = event.clientY;	
 	        }
         }, false);
+        //Навигация по большому канвасу (PHONE)
+        var captureP = false, cxP = 0, cyP = 0,canidrawP=0;
+
+        bcanv.addEventListener("touchend", function () {
+	        captureP = false;
+	        
+          if(canidrawP == true){draw(); console.log("Пытаюсь рисовать..")}
+          canidrawP = true;
+        }, false);
+
+        bcanv.addEventListener("touchstart", function (event) {
+          
+          captureP = true;
+	            x = event.touches[0].pageX;
+	            y = event.touches[0].pageY;
+           
+        }, false)
+
+        bcanv.addEventListener("touchmove", function (event) {
+          
+	        if (captureP) {
+            if (false !=canidrawP) {canidrawP = false};
+		        cxP -= x - event.touches[0].pageX, cyP -= y - event.touches[0].pageY;
+            bcanv.style.top  = cyP + 'px';
+            bcanv.style.left = cxP + 'px';
+            x = event.touches[0].pageX;
+		        y = event.touches[0].pageY;	
+	        }
+        }, false);
+
+
 
         //
 
