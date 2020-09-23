@@ -12,7 +12,8 @@
     }
     #largecanv {
     position: absolute;
-  
+    transition: transform 0ms linear;
+    transition: all 100ms ease 0s;
     right: 0;
   
     bottom: 0;
@@ -129,7 +130,7 @@
   
             x = event.touches[0].pageX;
 		        y = event.touches[0].pageY;	
-            console.log(x+" "+y)
+            
 	        }
         }, false);
 
