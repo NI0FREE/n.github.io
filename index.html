@@ -26,7 +26,7 @@
 	<div id="windowc">    
     <div id="window">
       <div class="layer2">
-        <canvas id="largecanv" width="4000" height="4000"></canvas>
+        <canvas id="largecanv" width="3000" height="3000"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
       </div>
     </div>
@@ -68,7 +68,7 @@
             dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
             x = x + 1;
             };
-            ctx.drawImage(lcanv, 0, 0, 4000, 4000);
+            ctx.drawImage(lcanv, 0, 0, 3000, 3000);
         }
         //Навигация по большому канвасу (PC)
         if(iphone!=1){
@@ -139,14 +139,14 @@
           var dx, dy, idd;
           dx = evx - cx;
           dy = evy - cy;
-          dx = Math.trunc(dx / 20);
-          dy = Math.trunc(dy / 20);
+          dx = Math.trunc(dx / 15);
+          dy = Math.trunc(dy / 15);
           idd = dx + dy * 200;
           var o = pixlb[idd];
           dtx.fillStyle = "red";
           path1.rect(o.x , o.y, 1, 1);
           dtx.fill(path1);
-          ctx.drawImage(lcanv, 0, 0, 4000, 4000);
+          ctx.drawImage(lcanv, 0, 0, 3000, 3000);
         }
 
         //Увеличение колесиком мыши
