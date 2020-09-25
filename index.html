@@ -135,7 +135,7 @@
         //
            
         }, false);
-
+        var randscale=0;
         bcanv.addEventListener("touchmove", function (event) {
           
 	        if (captureP) {
@@ -145,8 +145,9 @@
             
            //    
             if (scaling) {
-          
+                
                  curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
+                 if(randscale != curr_scale){
                  if(curr_scale > 0 && scale < 2500){
                   scale = scale + 60;
                   perspc = ((scale)/2)/100;
@@ -160,7 +161,7 @@
                   cyP = cyP + 30;
                   cxP = cxP + 30;  
                   bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                 }
+                 }randscale = curr_scale;}
                  document.getElementById("gas").innerText = curr_scale;  
             }else{bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";}
          //
