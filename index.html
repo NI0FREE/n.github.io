@@ -26,7 +26,7 @@
     <body>
 	    
       <div id="window">
-      
+        <div id="gas"></div>
         <canvas id="largecanv" width="2000" height="2000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
       </div>
@@ -216,6 +216,7 @@
         /*Пишем функцию, которая определяет расстояние меж пальцами*/
         function distance (p1, p2) {
          return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
+         
         }
         /*Ловим начало косания*/
         objzoom.addEventListener('touchstart', function(evt) {
@@ -233,9 +234,10 @@
         evt.preventDefault();
         var tt = evt.targetTouches;
         if (scaling) {
+          
           curr_scale = distance(tt[0], tt[1]) / dist * scale_factor;
           objzoom.style.WebkitTransform = "scale(" + curr_scale + ", " + curr_scale + ")";
-          
+          document.getElementById("gas").innerText = curr_scale;
         }
         }, false);
         /*Ловим конец косания*/
