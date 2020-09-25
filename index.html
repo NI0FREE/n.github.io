@@ -16,7 +16,7 @@
         position: absolute;
         top: 0px;
         left: 0px;
-        transition: all 175ms linear 0s;
+        transition: all 125ms linear 0s;
     
 }
     </style>
@@ -149,6 +149,7 @@
                  curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                  if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
                  if(curr_scale > 0 && scale < 2500){
+                  canidrawP = false;
                   scale = scale + 60;
                   perspc = ((scale)/2)/100;
                   cyP = cyP - 30;
@@ -156,6 +157,7 @@
                   bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                   dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                  }else if(scale != 500){
+                  canidrawP = false;
                   scale = scale - 60;
                    perspc = ((scale)/2)/100;
                   cyP = cyP + 30;
