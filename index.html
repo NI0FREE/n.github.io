@@ -140,7 +140,7 @@
           
 	        if (captureP) {
             if (false !=canidrawP) {canidrawP = false};
-		        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
+		        
             //cxP = cxP-20;cyP = cyP - 20;
             
            //    
@@ -164,7 +164,8 @@
                   dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                  }randscale = curr_scale;}
                  document.getElementById("gas").innerText = curr_scale;  
-            }else{bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";}
+            }else{cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
+              bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";}
          //
             x = event.touches[0].clientX;
 		        y = event.touches[0].clientY;	
