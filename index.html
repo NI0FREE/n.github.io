@@ -110,6 +110,7 @@
 	        captureP = false;
           if(canidrawP == true){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY);};
           canidrawP = true;
+          scaling = false;
         }, false);
         //////
          function distance (p1, p2) {
@@ -127,7 +128,7 @@
                   if (event.targetTouches.length >= 2) {
                   dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                   scaling = true;
-                  document.getElementById("gas").innerText = dist;
+                 
                 } else {
                   scaling = false;
                 }
@@ -142,8 +143,15 @@
 		        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
             //cxP = cxP-20;cyP = cyP - 20;
             bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-            
-  
+           //    
+            if (scaling) {
+          
+                 curr_scale = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1])) - dist;
+                 document.getElementById("gas").innerText = curr_scale;
+                 
+                 
+            }
+         //
             x = event.touches[0].clientX;
 		        y = event.touches[0].clientY;	
             
