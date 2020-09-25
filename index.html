@@ -142,7 +142,7 @@
             if (false !=canidrawP) {canidrawP = false};
 		        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
             //cxP = cxP-20;cyP = cyP - 20;
-            bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+            
            //    
             if (scaling) {
           
@@ -161,10 +161,8 @@
                   cxP = cxP + 30;  
                   bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                  }
-                 document.getElementById("gas").innerText = curr_scale;
-                 
-                 
-            }
+                 document.getElementById("gas").innerText = curr_scale;  
+            }else{bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";}
          //
             x = event.touches[0].clientX;
 		        y = event.touches[0].clientY;	
