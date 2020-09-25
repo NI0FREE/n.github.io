@@ -147,6 +147,20 @@
             if (scaling) {
           
                  curr_scale = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1])) - dist;
+                 if(curr_scale > 0 && scale < 2500){
+                  scale = scale + 60;
+                  perspc = ((scale)/2)/100;
+                  cyP = cyP - 30;
+                  cxP = cxP - 30;
+                  bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+            
+                 }else if(scale != 500){
+                  scale = scale - 60;
+                   perspc = ((scale)/2)/100;
+                  cyP = cyP + 30;
+                  cxP = cxP + 30;  
+                  bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                 }
                  document.getElementById("gas").innerText = curr_scale;
                  
                  
