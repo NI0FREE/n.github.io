@@ -146,7 +146,7 @@
            //    
             if (scaling) {
           
-                 curr_scale = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1])) - dist;
+                 curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                  if(curr_scale > 0 && scale < 2500){
                   scale = scale + 60;
                   perspc = ((scale)/2)/100;
