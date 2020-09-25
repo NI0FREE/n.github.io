@@ -234,22 +234,8 @@
         var tt = evt.targetTouches;
         if (scaling) {
           curr_scale = distance(tt[0], tt[1]) / dist * scale_factor;
-          //objzoom.style.WebkitTransform = "scale(" + curr_scale + ", " + curr_scale + ")";
-          if(curr_scale>0){
-            scale = scale + 60;
-            perspc = ((scale)/2)/100;
-            cyP = cyP - 30;
-            cxP = cxP - 30;
-            bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-            
-          }else{
-            scale = scale - 60;
-            perspc = ((scale)/2)/100;
-            cyP = cyP + 30;
-            cxP = cxP + 30;  
-            bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-            
-          }
+          objzoom.style.WebkitTransform = "scale(" + curr_scale + ", " + curr_scale + ")";
+          
         }
         }, false);
         /*Ловим конец косания*/
