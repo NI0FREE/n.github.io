@@ -16,7 +16,7 @@
         position: absolute;
         top: 0px;
         left: 0px;
-        transition: all 125ms linear 0s;
+        transition: all 150ms linear 0s;
     
 }
     </style>
@@ -139,7 +139,7 @@
         bcanv.addEventListener("touchmove", function (event) {
           
 	        if (captureP) {
-            if (false !=canidrawP) {canidrawP = false};
+            if (false !=canidrawP) {canidrawP = false;canidraw = false;};
 		        
             //cxP = cxP-20;cyP = cyP - 20;
             
@@ -149,19 +149,19 @@
                  curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                  if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
                  if(curr_scale > 0 && scale < 2500){
-                  canidrawP = false;
-                  scale = scale + 60;
+                  canidrawP = false;canidraw = false;
+                  scale = scale + 70;
                   perspc = ((scale)/2)/100;
-                  cyP = cyP - 30;
-                  cxP = cxP - 30;
+                  cyP = cyP - 35;
+                  cxP = cxP - 35;
                   bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                   dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                  }else if(scale != 500){
-                  canidrawP = false;
-                  scale = scale - 60;
+                  canidrawP = false;canidraw = false;
+                  scale = scale - 70;
                    perspc = ((scale)/2)/100;
-                  cyP = cyP + 30;
-                  cxP = cxP + 30;  
+                  cyP = cyP + 35;
+                  cxP = cxP + 35;  
                   bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                   dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                  }randscale = curr_scale;}
