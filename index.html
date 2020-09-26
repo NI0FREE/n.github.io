@@ -92,7 +92,7 @@
         top: 13px;
     }
     .slfzoom-cont {
-        width: 132px;
+        width: 135px;
         height: 30px;
         cursor: pointer;
         padding: 14px 19px;
@@ -113,27 +113,26 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     </head>
     <body>
-	    
-      <div id="window">
         <div class="slfzoom">
-            <div class="minus_control">
+            <div class="minus_control"  id="min">
                 <svg width="14" height="3" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.666.75h-11a.918.918 0 0 0 0 1.834h11a.918.918 0 1 0 0-1.834z" fill-rule="nonzero"></path>
                 </svg>
             </div>
-            <div class="slfzoom-cont">
+            <div class="slfzoom-cont"id ="fsaclecon" >
                 <div class="slfzoom-in">
-                    <div class="slfzoom-lin"></div>
-                    <div class="slfzoom-bl" style="width: 2%;"></div>
-                    <div class="slfzoom-posX" style="left: 2%;"></div>
+                    <div class="slfzoom-lin" ></div>
+                    <div class="slfzoom-bl"  id="colorline1" style="width: 18.4%;"></div>
+                    <div class="slfzoom-posX"  id="colorline0" style="left: 18.4%;"></div>
                 </div>
             </div>
-            <div class="pluss_control">
+            <div class="pluss_control" id="pls">
                 <svg width="13" height="13" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.333 5.5h4.584a.917.917 0 0 1 0 1.833H7.333v4.584a.917.917 0 1 1-1.833 0V7.333H.917a.917.917 0 1 1 0-1.833H5.5V.917a.917.917 0 1 1 1.833 0V5.5z" fill-rule="nonzero"></path>
                 </svg>
             </div>
         </div>
+      <div id="window">
         <div id="gas"></div>
         <canvas id="largecanv" width="2000" height="2000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
@@ -142,7 +141,7 @@
       <script>
         let bcanv = document.getElementById('largecanv');
         let lcanv = document.getElementById('littlcanv');
-        let camer = document.getElementById('layer2');
+        let windowP = document.getElementById('window');
         let ctx   = bcanv.getContext('2d', { alpha: false });
         let dtx   = lcanv.getContext('2d', { alpha: false });
         document.getElementById('littlcanv').remove();
@@ -154,7 +153,7 @@
             iphone = true;
             
         } 
-        document.getElementById("gas").innerText = "Game ver: 1.3a " + '\n' + "I play on phone? : " + iphone;
+        document.getElementById("gas").innerHTML = "Game ver: 1.3a " + '&nbsp;&nbsp;&nbsp;' + "I play on phone? : " + iphone;
         // Генерация тестового стенда canvas
         var x = 0, y =0; let pixlb = [];
         wallOfPixelsGen();
@@ -184,21 +183,21 @@
         var capture = false, cx = 0, cy = 0,canidraw=0;
         var sz=1,sxx=1,syy=1;
         if(iphone == false){
-            document.addEventListener('mouseup', function () {
+            windowP.addEventListener('mouseup', function () {
             capture = false;
             bcanv.style.cursor = 'default';
             if(canidraw == true){draw(cx,cy,event.clientX,event.clientY); }
             canidraw = true;
             }, false);
 
-            document.addEventListener('mousedown', function (event) {
+            windowP.addEventListener('mousedown', function (event) {
             capture = true;
             x = event.clientX;
             y = event.clientY;
                 
             }, false);
 
-            document.addEventListener('mousemove', function (event) {
+            windowP.addEventListener('mousemove', function (event) {
                 if (capture) {
                     if (false !=canidraw) {canidraw = false};
                     cx -= x - event.clientX, cy -= y - event.clientY;
@@ -232,25 +231,86 @@
                 if (delta > 0){
                     if (scale < 6000)
                     {
-                        scale = scale + 60;
-                        perspc = ((scale)/2)/100;
-                        cy = cy - 30;
-                        cx = cx - 30;
-                        bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                        console.log(cy)
+                        scalePcControlPlus()
                     }
                 }
                 else if(scale != 500) 
                 {
-                    scale = scale - 60;
-                    perspc = ((scale)/2)/100;
-                    cy = cy + 30;
-                    cx = cx + 30;  
-                    bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                    console.log(cy);
+                    scalePcControlMinus()
                 };
                 e.preventDefault();
             });            
+            let mincntr = document.getElementById('min');
+        let maxcntr = document.getElementById('pls');
+        let dot     = document.getElementById('colorline0');  
+        let line    = document.getElementById('colorline1');  
+        var fsc     = document.getElementById('fsaclecon'); 
+        var dotscale = 18.4,caniscale = false, xfsb;
+        mincntr.addEventListener('mousedown', function () {
+            scalePcControlMinus()
+        }, false);
+        maxcntr.addEventListener('mousedown', function () {
+            scalePcControlPlus();
+        }, false);
+
+        document.addEventListener('mouseup', function () {
+            caniscale = false;
+        }, false);
+
+        fsc.addEventListener('mousedown', function (event) {
+            caniscale = true;
+            xfsb = event.clientX;
+            
+                
+        }, false);
+
+        fsc.addEventListener('mousemove', function (event) {
+            if (caniscale) {
+                var rxfsb, xcxc;
+                xcxc = event.clientX;
+                rxfsb = xfsb - xcxc;
+                console.log(rxfsb)
+                if(rxfsb < -3 ){ 
+                    xfsb = xcxc;
+                    scalePcControlPlus()
+                }else if (rxfsb > 3){
+                    xfsb = xcxc;
+                    scalePcControlMinus()
+                }
+                
+                
+            }
+        }, false);
+
+        function scalePcControlPlus(){
+            if (scale < 6000)
+                {   
+                    dotscale = dotscale + 3.1;
+                    line.style.width = dotscale + "%";
+                    dot.style.left = dotscale + "%";
+                    scale = scale + 300;
+                    perspc = ((scale)/2)/100;
+                    cy = cy - 150;
+                    cx = cx - 150;
+                    bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                    
+                }    
+            }
+            function scalePcControlMinus(){
+                if(scale > 500) 
+                    {   
+                        dotscale = dotscale - 3.1;
+                        
+                        line.style.width = dotscale + "%";
+                        dot.style.left = dotscale + "%";
+                        scale = scale - 300;
+                        perspc = ((scale)/2)/100;
+                        cy = cy + 150;
+                        cx = cx + 150;  
+                        bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                        
+                    };
+            }
         }
         else //Навигация по большому канвасу (PHONE)
         {
@@ -260,7 +320,7 @@
             var curr_scale = 1.0;
             var captureP = false, cxP = 0, cyP = 0,canidrawP=0;
             let levent;var touchcouts=0;var randscale=0;var drawscalecontrol=0;
-            document.addEventListener("touchstart", function (event) {
+            windowP.addEventListener("touchstart", function (event) {
                 touchcouts = touchcouts+1;
                 levent = event;
                 captureP = true;
@@ -276,7 +336,7 @@
                 } 
             }, false); 
 
-            document.addEventListener("touchmove", function (event) {
+            windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
                     if (false !=canidrawP) {canidrawP = false;};   
@@ -284,21 +344,13 @@
                         curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                         if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
                             if(curr_scale > 0 && scale < 2500){
-                                scale = scale + 120;
-                                perspc = ((scale)/2)/100;
-                                cyP = cyP - 60;
-                                cxP = cxP - 60;
-                                bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                                scalePhoneControlMinus()
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                                 
                             }
                             else if(scale > 500)
                             {
-                                scale = scale - 120;
-                                perspc = ((scale)/2)/100;
-                                cyP = cyP + 60;
-                                cxP = cxP + 60;  
-                                bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                                scalePhoneControlPlus()
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                             }
                             randscale = curr_scale;
@@ -314,7 +366,7 @@
                     y = event.touches[0].clientY;	
                 }
         }, false);
-        document.addEventListener("touchend", function (event) {
+        windowP.addEventListener("touchend", function (event) {
             touchcouts = touchcouts-1;
 	        captureP = false;
             if(canidrawP == true && drawscalecontrol ==0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); };
@@ -352,5 +404,78 @@
           let rand = min + Math.random() * (max + 1 - min);
           return Math.floor(rand);
         }
+        // // // // // // // // // // // // // // // //
+        let mincntr = document.getElementById('min');
+        let maxcntr = document.getElementById('pls');
+        let dot     = document.getElementById('colorline0');  
+        let line    = document.getElementById('colorline1');  
+        var fsc     = document.getElementById('fsaclecon'); 
+        var dotscale = 18.4,caniscale = false, xfsb;
+        mincntr.addEventListener('click', function () {
+            scalePhoneControlMinus()
+        }, false);
+        maxcntr.addEventListener('click', function () {
+            scalePhoneControlPlus()
+        }, false);
+
+        document.addEventListener('touchend', function () {
+            caniscale = false;
+        }, false);
+
+        fsc.addEventListener('touchstart', function (event) {
+            caniscale = true;
+            xfsb = event.touches[0].clientX;
+            
+                
+        }, false);
+
+        fsc.addEventListener('touchmove', function (event) {
+            if (caniscale) {
+                var rxfsb, xcxc;
+                xcxc = event.touches[0].clientX;
+                rxfsb = xfsb - xcxc;
+                console.log(rxfsb)
+                if(rxfsb < -3 ){ 
+                    xfsb = xcxc;
+                    scalePhoneControlPlus()
+                }else if (rxfsb > 3){
+                    xfsb = xcxc;
+                    
+                    scalePhoneControlMinus()
+                }
+                
+                
+            }
+        }, false);
+
+        function scalePhoneControlPlus(){
+            if (scale < 6000)
+                {   
+                    dotscale = dotscale + 3.1;
+                    line.style.width = dotscale + "%";
+                    dot.style.left = dotscale + "%";
+                    scale = scale + 300;
+                    perspc = ((scale)/2)/100;
+                    cyP = cyP - 150;
+                    cxP = cxP - 150; ;  
+                    bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                    
+                }    
+            }
+            function scalePhoneControlMinus(){
+                if(scale > 500) 
+                    {   
+                        dotscale = dotscale - 3.1;
+                        
+                        line.style.width = dotscale + "%";
+                        dot.style.left = dotscale + "%";
+                        scale = scale - 300;
+                        perspc = ((scale)/2)/100;
+                        cyP = cyP + 150;
+                        cxP = cxP + 150;  
+                        bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                        
+                    };
+            }
     </script>
     </body></html>
