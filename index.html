@@ -109,7 +109,9 @@
         document.addEventListener("touchend", function (event) {
           touchcouts = touchcouts-1;
 	        captureP = false;
-          if(canidrawP == true && touchcouts == 0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY);};
+         
+          if(canidrawP == true && drawscalecontrol ==0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); };
+          if(touchcouts==0){drawscalecontrol = 0;}
           canidrawP = true;
           scaling = false;
         }, false);
@@ -138,9 +140,9 @@
         //
            
         }, false);
-        var randscale=0;
+        var randscale=0;var drawscalecontrol=0;
         document.addEventListener("touchmove", function (event) {
-          
+          if(drawscalecontrol != 1){drawscalecontrol = 1;}
 	        if (captureP) {
             if (false !=canidrawP) {canidrawP = false;canidraw = false;};
 		        
