@@ -10,6 +10,9 @@
         height: 100%;
         overflow: hidden;
     }
+    body {
+        background-color: #b3b1e6;
+    }
     #largecanv {
       width: 2000px;
         height: 2000px;
@@ -18,7 +21,93 @@
         left: 0px;
         transition: all 150ms linear 0s;
     
-}
+    }
+    .i-on-all{
+        z-index:99999999;   
+    }
+    .slfzoom {
+        left: 20px;
+        top: 20px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        display: flex;
+        border: 1px solid rgba(0,0,0,.04);
+      
+    }
+    .minus_control {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: #fff;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        border-right: 1px solid #f5f5f5;
+        box-sizing: border-box;
+        display: flex;
+        border-radius: 0px 0 0 0px;
+        align-items: center;
+        justify-content: center;
+    }
+    .minus_control svg {
+        fill: #0073ff;
+    }
+    .pluss_control svg {
+        fill: #0073ff;
+    }
+    .pluss_control {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: #fff;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        border-left: 1px solid #f5f5f5;
+        box-sizing: border-box;
+        border-radius: 0 6px 6px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slfzoom, .lp {
+        position: fixed;
+        background-color: #fff;
+        z-index: 11;
+    }
+
+    .slfzoom-lin {
+        background-color: #b8c1cc;
+        opacity: .5;
+        right: 35px;
+    }
+    .slfzoom-bl {
+        background-color: #528bcc;
+    }
+    .slfzoom-bl, .slfzoom-lin {
+        height: 4px;
+        border-radius: 2px;
+        position: absolute;
+        left: 35px;
+        top: 13px;
+    }
+    .slfzoom-cont {
+        width: 132px;
+        height: 30px;
+        cursor: pointer;
+        padding: 14px 19px;
+        box-sizing: border-box;
+    }
+    .slfzoom-posX {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+        background: #528bcc;
+        border-radius: 50%;
+        top: 8px;
+        margin-left: 25px;
+    }
     </style>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -26,9 +115,29 @@
     <body>
 	    
       <div id="window">
+        <div class="slfzoom">
+            <div class="minus_control">
+                <svg width="14" height="3" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.666.75h-11a.918.918 0 0 0 0 1.834h11a.918.918 0 1 0 0-1.834z" fill-rule="nonzero"></path>
+                </svg>
+            </div>
+            <div class="slfzoom-cont">
+                <div class="slfzoom-in">
+                    <div class="slfzoom-lin"></div>
+                    <div class="slfzoom-bl" style="width: 2%;"></div>
+                    <div class="slfzoom-posX" style="left: 2%;"></div>
+                </div>
+            </div>
+            <div class="pluss_control">
+                <svg width="13" height="13" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.333 5.5h4.584a.917.917 0 0 1 0 1.833H7.333v4.584a.917.917 0 1 1-1.833 0V7.333H.917a.917.917 0 1 1 0-1.833H5.5V.917a.917.917 0 1 1 1.833 0V5.5z" fill-rule="nonzero"></path>
+                </svg>
+            </div>
+        </div>
         <div id="gas"></div>
         <canvas id="largecanv" width="2000" height="2000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
+        
       </div>
       <script>
         let bcanv = document.getElementById('largecanv');
@@ -61,8 +170,11 @@
               'b': 184,
               'id': i+1,
 	          });
-
-		        dtx.fillStyle = "rgb("+randomInteger(200, 250)+","+randomInteger(200, 250)+","+randomInteger(110, 120)+")";
+                if(y >= (x)){
+		        dtx.fillStyle = "rgb("+randomInteger(x, 100)+","+randomInteger(x, 100)+","+randomInteger(250, 255)+")";
+                }else{
+                    dtx.fillStyle = "rgb("+randomInteger(x, 100)+","+randomInteger(x, 100)+","+randomInteger(250, 255)+")";  
+                }
             dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
             x = x + 1;
             };
@@ -118,7 +230,7 @@
                 var delta = e.deltaY || e.detail || e.wheelDelta;
                 
                 if (delta > 0){
-                    if (scale < 2500)
+                    if (scale < 6000)
                     {
                         scale = scale + 60;
                         perspc = ((scale)/2)/100;
@@ -178,7 +290,7 @@
                                 cxP = cxP - 60;
                                 bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
-                                document.getElementById("gas").innerText = "Game ver: 1.3a " + '\n' + "I play on phone? : " + iphone + '\n' + "Par 1 : " + scale;
+                                
                             }
                             else if(scale > 500)
                             {
@@ -229,7 +341,7 @@
 
           idd = dx + dy * 200;
           var o = pixlb[idd];
-          dtx.fillStyle = "indigo";
+          dtx.fillStyle = "red";
           path1.rect(o.x , o.y, 1, 1);
           dtx.fill(path1);
           ctx.drawImage(lcanv, 0, 0, 2000, 2000);
