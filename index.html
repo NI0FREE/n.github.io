@@ -200,6 +200,14 @@
                     y = event.touches[0].clientY;	
                 }
         }, false);
+        document.addEventListener("touchend", function (event) {
+            touchcouts = touchcouts-1;
+	        captureP = false;
+            if(canidrawP == true && drawscalecontrol ==0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); };
+            if(touchcouts==0){drawscalecontrol = 0;}
+            canidrawP = true;
+            scaling = false;
+        }, false);
             function distance (p1, p2) {
              return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
             }
