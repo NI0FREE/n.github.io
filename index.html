@@ -108,7 +108,7 @@
         let levent;
         document.addEventListener("touchend", function (event) {
 	        captureP = false;
-          if(canidrawP == true){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY);};
+          if(canidrawP == true && event.targetTouches.length < 2){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY);};
           canidrawP = true;
           scaling = false;
         }, false);
