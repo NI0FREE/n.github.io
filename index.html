@@ -107,8 +107,9 @@
         var captureP = false, cxP = 0, cyP = 0,canidrawP=0;
         let levent;
         document.addEventListener("touchend", function (event) {
+          touchcouts = touchcouts-1;
 	        captureP = false;
-          if(canidrawP == true && event.targetTouches.length != 1){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY);};
+          if(canidrawP == true && touchcouts == 0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY);};
           canidrawP = true;
           scaling = false;
         }, false);
@@ -118,7 +119,9 @@
          
          }
         //////
+        var touchcouts=0;
         document.addEventListener("touchstart", function (event) {
+          touchcouts = touchcouts+1;
           levent = event;
           captureP = true;
 	            x = event.touches[0].clientX;
