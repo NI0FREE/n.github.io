@@ -376,37 +376,7 @@
             canidrawP = true;
             scaling = false;
         }, false);
-            function distance (p1, p2) {
-             return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
-            }
-        }
-        // Модуль ответственный за отрисовку пикселей
-        let path1 = new Path2D();
-        let perspc = 10;
-        function draw(cx,cy,evx,evy){
-          var dx, dy, idd;
-          dx = evx - cx;
-          dy = evy - cy;
-          
-          
-          console.log(perspc);
-          dx = Math.trunc(dx / perspc);
-          dy = Math.trunc(dy / perspc);
 
-          idd = dx + dy * 200;
-          var o = pixlb[idd];
-          dtx.fillStyle = "red";
-          path1.rect(o.x , o.y, 1, 1);
-          dtx.fill(path1);
-          ctx.drawImage(lcanv, 0, 0, 2000, 2000);
-        };
-        // Управление зумом через ползунок 
-        // Генератор рандомных чисел
-        function randomInteger(min, max) {
-          let rand = min + Math.random() * (max + 1 - min);
-          return Math.floor(rand);
-        }
-        // // // // // // // // // // // // // // // //
         let mincntr = document.getElementById('min');
         let maxcntr = document.getElementById('pls');
         let dot     = document.getElementById('colorline0');  
@@ -479,5 +449,38 @@
                         
                     };
             }
+            
+            function distance (p1, p2) {
+             return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
+            }
+        }
+        // Модуль ответственный за отрисовку пикселей
+        let path1 = new Path2D();
+        let perspc = 10;
+        function draw(cx,cy,evx,evy){
+          var dx, dy, idd;
+          dx = evx - cx;
+          dy = evy - cy;
+          
+          
+          console.log(perspc);
+          dx = Math.trunc(dx / perspc);
+          dy = Math.trunc(dy / perspc);
+
+          idd = dx + dy * 200;
+          var o = pixlb[idd];
+          dtx.fillStyle = "red";
+          path1.rect(o.x , o.y, 1, 1);
+          dtx.fill(path1);
+          ctx.drawImage(lcanv, 0, 0, 2000, 2000);
+        };
+        
+        // Генератор рандомных чисел
+        function randomInteger(min, max) {
+          let rand = min + Math.random() * (max + 1 - min);
+          return Math.floor(rand);
+        }
+        // // // // // // // // // // // // // // // //
+
     </script>
     </body></html>
