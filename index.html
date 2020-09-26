@@ -153,7 +153,7 @@
             iphone = true;
             
         } 
-        document.getElementById("gas").innerHTML = "Game ver: 1.3a " + '&nbsp;&nbsp;&nbsp;' + "I play on phone? : " + iphone;
+        document.getElementById("gas").innerHTML = "Game ver: 1.4 " + '&nbsp;&nbsp;&nbsp;' + "I play on phone? : " + iphone;
         // Генерация тестового стенда canvas
         var x = 0, y =0; let pixlb = [];
         wallOfPixelsGen();
@@ -339,19 +339,20 @@
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
-                    document.getElementById("gas").innerHTML = "Game ver: 1.3a " + '&nbsp;&nbsp;&nbsp;' + "I play on phone? : " + scale;
+                   
                     if (false !=canidrawP) {canidrawP = false;};   
                     if (scaling) {  
                         curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                         if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
                             if(curr_scale > 0 && scale < 6000){
-                                scalePhoneControlMinus()
+                                
+                                scalePhoneControlPlus()
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                                 
                             }
                             else if(scale > 500)
                             {
-                                scalePhoneControlPlus()
+                                scalePhoneControlMinus()
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                             }
                             randscale = curr_scale;
