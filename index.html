@@ -437,10 +437,10 @@
                 xcxc = event.touches[0].clientX;
                 rxfsb = xfsb - xcxc;
                 console.log(rxfsb)
-                if(rxfsb < -3 ){ 
+                if(rxfsb < -1 ){ 
                     xfsb = xcxc;
                     scalePhoneControlPlus()
-                }else if (rxfsb > 3){
+                }else if (rxfsb > 1){
                     xfsb = xcxc;
                     
                     scalePhoneControlMinus()
@@ -451,7 +451,7 @@
         }, false);
 
         function scalePhoneControlPlus(){
-            if (scale <= 6000)
+            if (scale < 6000)
                 {   
                     dotscale = dotscale + 3.1;
                     line.style.width = dotscale + "%";
@@ -465,7 +465,7 @@
                 }    
             }
             function scalePhoneControlMinus(){
-                if(scale >= 500) 
+                if(scale > 500) 
                     {   
                         dotscale = dotscale - 3.1;
                         
