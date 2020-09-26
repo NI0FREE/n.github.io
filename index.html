@@ -30,10 +30,7 @@
         <canvas id="largecanv" width="2000" height="2000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
       </div>
-    
-
-	<script>
-	//	window.onload = function(){
+      <script>
         let bcanv = document.getElementById('largecanv');
         let lcanv = document.getElementById('littlcanv');
         let camer = document.getElementById('layer2');
@@ -41,16 +38,15 @@
         let dtx   = lcanv.getContext('2d', { alpha: false });
         document.getElementById('littlcanv').remove();
         //Убираем размытие
-        ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;dtx.mozImageSmoothingEnabled = false;dtx.webkitImageSmoothingEnabled = false;dtx.msImageSmoothingEnabled = false;dtx.imageSmoothingEnabled = false;
-        //
+            ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;dtx.mozImageSmoothingEnabled = false;dtx.webkitImageSmoothingEnabled = false;dtx.msImageSmoothingEnabled = false;dtx.imageSmoothingEnabled = false;
         //Определение телефон ли это
-        var iphone = 0;
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-
-          iphone = 1;
-
+        var iphone = false;
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {   
+            iphone = true;
+            document.getElementById("gas").innerText = "I play on phone? : " + iphone;  
         } 
-        //
+        document.getElementById("gas").innerText = "Game ver: 1.3a " + '\n' + "I play on phone? : " + iphone;
+        // Генерация тестового стенда canvas
         var x = 0, y =0; let pixlb = [];
         wallOfPixelsGen();
         function wallOfPixelsGen(){
@@ -75,115 +71,137 @@
         //Навигация по большому канвасу (PC)
         var capture = false, cx = 0, cy = 0,canidraw=0;
         var sz=1,sxx=1,syy=1;
-        if(iphone!=1){
-      
-        document.addEventListener('mouseup', function () {
-	        capture = false;
-	        bcanv.style.cursor = 'default';
-          if(canidraw == true){draw(cx,cy,event.clientX,event.clientY); }
-          canidraw = true;
-        }, false);
+        if(iphone == false){
+            document.addEventListener('mouseup', function () {
+            capture = false;
+            bcanv.style.cursor = 'default';
+            if(canidraw == true){draw(cx,cy,event.clientX,event.clientY); }
+            canidraw = true;
+            }, false);
 
-        document.addEventListener('mousedown', function (event) {
-          capture = true;
-	            x = event.clientX;
-	            y = event.clientY;
-              
-        }, false);
-
-        document.addEventListener('mousemove', function (event) {
-          
-	        if (capture) {
-            if (false !=canidraw) {canidraw = false};
-		        cx -= x - event.clientX, cy -= y - event.clientY;
-           
-            bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+            document.addEventListener('mousedown', function (event) {
+            capture = true;
             x = event.clientX;
-		        y = event.clientY;	
-	        }
-        }, false);
+            y = event.clientY;
+                
+            }, false);
+
+            document.addEventListener('mousemove', function (event) {
+                if (capture) {
+                    if (false !=canidraw) {canidraw = false};
+                    cx -= x - event.clientX, cy -= y - event.clientY;
+                    bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                    x = event.clientX;
+                    y = event.clientY;	
+                }
+            }, false);
+            
+                function addOnWheel(elem, handler) {
+                    if (elem.addEventListener) {
+                    if ('onwheel' in document) {
+                        elem.addEventListener("wheel", handler);
+                    } else if ('onmousewheel' in document) {
+                        elem.addEventListener("mousewheel", handler);
+                    } else {
+                        elem.addEventListener("MozMousePixelScroll", handler);
+                    }
+                    } else {
+                    text.attachEvent("onmousewheel", handler);
+                }
+            }
+            var scale = 2000; var tsx,tsy,deltel = 50;
+            addOnWheel(bcanv, function(e) {
+                dx = event.clientX - cx;
+                dy = event.clientY - cy;
+                dx = Math.trunc(dx);
+                dy = Math.trunc(dy);
+                var delta = e.deltaY || e.detail || e.wheelDelta;
+                
+                if (delta > 0){
+                    if (scale < 2500)
+                    {
+                        scale = scale + 60;
+                        perspc = ((scale)/2)/100;
+                        cy = cy - 30;
+                        cx = cx - 30;
+                        bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                        console.log(cy)
+                    }
+                }
+                else if(scale != 500) 
+                {
+                    scale = scale - 60;
+                    perspc = ((scale)/2)/100;
+                    cy = cy + 30;
+                    cx = cx + 30;  
+                    bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                    console.log(cy);
+                };
+                e.preventDefault();
+            });            
         }
-        //Навигация по большому канвасу (PHONE)
-        var captureP = false, cxP = 0, cyP = 0,canidrawP=0;
-        let levent;
-        document.addEventListener("touchend", function (event) {
-          touchcouts = touchcouts-1;
-	        captureP = false;
-         
-          if(canidrawP == true && drawscalecontrol ==0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); };
-          if(touchcouts==0){drawscalecontrol = 0;}
-          canidrawP = true;
-          scaling = false;
-        }, false);
-        //////
-         function distance (p1, p2) {
-          return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
-         
-         }
-        //////
-        var touchcouts=0;
-        document.addEventListener("touchstart", function (event) {
-          touchcouts = touchcouts+1;
-          levent = event;
-          captureP = true;
+        else //Навигация по большому канвасу (PHONE)
+        {
+            var scaling = false;
+            var dist = 0;
+            var curr_scale = 1.0;
+            var captureP = false, cxP = 0, cyP = 0,canidrawP=0;
+            let levent;var touchcouts=0;var randscale=0;var drawscalecontrol=0;
+            document.addEventListener("touchstart", function (event) {
+                touchcouts = touchcouts+1;
+                levent = event;
+                captureP = true;
 	            x = event.touches[0].clientX;
-              y = event.touches[0].clientY;
-             
-        //
-                  if (event.targetTouches.length >= 2) {
+                y = event.touches[0].clientY;
+                if (event.targetTouches.length >= 2) {
                   dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                   scaling = true;
-                 
-                } else {
+                } 
+                else 
+                {
                   scaling = false;
+                } 
+            }, false); 
+
+            document.addEventListener("touchmove", function (event) {
+                if(drawscalecontrol != 1){drawscalecontrol = 1;}
+                if (captureP) {
+                    if (false !=canidrawP) {canidrawP = false;};   
+                    if (scaling) {  
+                        curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
+                        if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
+                            if(curr_scale > 0 && scale < 2500){
+                                scale = scale + 120;
+                                perspc = ((scale)/2)/100;
+                                cyP = cyP - 60;
+                                cxP = cxP - 60;
+                                bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                                dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
+                            }
+                            else if(scale > 500)
+                            {
+                                scale = scale - 120;
+                                perspc = ((scale)/2)/100;
+                                cyP = cyP + 60;
+                                cxP = cxP + 60;  
+                                bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                                dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
+                            }
+                            randscale = curr_scale;
+                        }
+                        
+                    }
+                    else
+                    {
+                        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
+                        bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                    }
+                    x = event.touches[0].clientX;
+                    y = event.touches[0].clientY;	
                 }
-        //
-           
         }, false);
-        var randscale=0;var drawscalecontrol=0;
-        document.addEventListener("touchmove", function (event) {
-          if(drawscalecontrol != 1){drawscalecontrol = 1;}
-	        if (captureP) {
-            if (false !=canidrawP) {canidrawP = false;canidraw = false;};
-		        
-            //cxP = cxP-20;cyP = cyP - 20;
-            
-           //    
-            if (scaling) {
-                
-                 curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
-                 if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
-                 if(curr_scale > 0 && scale < 2500){
-                  canidrawP = false;canidraw = false;
-                  scale = scale + 90;
-                  perspc = ((scale)/2)/100;
-                  cyP = cyP - 45;
-                  cxP = cxP - 45;
-                  bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                  dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
-                 }else if( scale > 500){
-                  canidrawP = false;canidraw = false;
-                  scale = scale - 90;
-                   perspc = ((scale)/2)/100;
-                  cyP = cyP + 45;
-                  cxP = cxP + 45;  
-                  bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                  dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
-                 }randscale = curr_scale;}
-                 //document.getElementById("gas").innerText = curr_scale;  
-            }else{cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
-              bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";}
-         //
-            x = event.touches[0].clientX;
-		        y = event.touches[0].clientY;	
-            
-	        }
-        }, false);
-
-
-
-        //
-
+        }
+        // Модуль ответственный за отрисовку пикселей
         let path1 = new Path2D();
         let perspc = 10;
         function draw(cx,cy,evx,evy){
@@ -203,115 +221,10 @@
           dtx.fill(path1);
           ctx.drawImage(lcanv, 0, 0, 2000, 2000);
         };
-
-        //Увеличение колесиком мыши
-        
-        function addOnWheel(elem, handler) {
-          if (elem.addEventListener) {
-            if ('onwheel' in document) {
-              elem.addEventListener("wheel", handler);
-            } else if ('onmousewheel' in document) {
-              elem.addEventListener("mousewheel", handler);
-            } else {
-              elem.addEventListener("MozMousePixelScroll", handler);
-            }
-          } else {
-            text.attachEvent("onmousewheel", handler);
-          }
-        }
-        var scale = 2000; var tsx,tsy,deltel = 50;
-        addOnWheel(bcanv, function(e) {
-          dx = event.clientX - cx;
-          dy = event.clientY - cy;
-          dx = Math.trunc(dx);
-          dy = Math.trunc(dy);
-          var delta = e.deltaY || e.detail || e.wheelDelta;
-          
-          if (delta > 0){
-            if (scale < 2500){
-            scale = scale + 60;
-            perspc = ((scale)/2)/100;
-            cy = cy - 30;
-            cx = cx - 30;
-            bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-            console.log(cy)
-            }
-          }
-          else if(scale != 500) {
-            scale = scale - 60;
-            perspc = ((scale)/2)/100;
-            cy = cy + 30;
-            cx = cx + 30;  
-            bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-            console.log(cy);
-          };
-          e.preventDefault();
-        });
-        //
-        // Зум телефон 
-        /*Определяем некоторые переменные*/
-        var objzoom = bcanv;
-        var scaling = false;
-        var dist = 0;
-        var scale_factor = 1.0;
-        var curr_scale = 1.0;
-        var max_zoom = 8.0;
-        var min_zoom = 0.5
-//         /*Пишем функцию, которая определяет расстояние меж пальцами*/
-//         function distance (p1, p2) {
-//          return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
-         
-//         }
-//         /*Ловим начало косания*/
-//         objzoom.addEventListener('touchstart', function(evt) {
-//           evt.preventDefault();
-//           var tt = evt.targetTouches;
-//           if (tt.length >= 2) {
-//           dist = distance(tt[0], tt[1]);
-//           scaling = true;
-//         } else {
-//           scaling = false;
-//         }
-//         }, false);
-//         /*Ловим зумирование*/
-//         objzoom.addEventListener('touchmove', function(evt) {
-//         evt.preventDefault();
-//         var tt = evt.targetTouches;
-//         if (scaling) {
-          
-//           curr_scale = distance(tt[0], tt[1]) / dist * scale_factor;
-//           objzoom.style.WebkitTransform = "scale(" + curr_scale + ", " + curr_scale + ")";
-//           document.getElementById("gas").innerText = curr_scale;
-//         }
-//         }, false);
-//         /*Ловим конец косания*/
-//         objzoom.addEventListener('touchend', function(evt) {
-//         var tt = evt.targetTouches;
-//         if (tt.length < 2) {
-//          scaling = false;
-//         if (curr_scale < min_zoom) {
-//           scale_factor = min_zoom;
-//         } else {
-//         if (curr_scale > max_zoom) {
-//          scale_factor = max_zoom;
-//         } else {
-//          scale_factor = curr_scale;
-//         }
-//         }
-//          objzoom.style.WebkitTransform = "scale(" + scale_factor + ", " + scale_factor + ")";
-//         } else {
-//          scaling = true;
-//         }
-//         }, false);
-// //
-    //}
+        // Генератор рандомных чисел
         function randomInteger(min, max) {
-  // случайное число от min до (max+1)
-           let rand = min + Math.random() * (max + 1 - min);
+          let rand = min + Math.random() * (max + 1 - min);
           return Math.floor(rand);
         }
-
-      </script>
-    
-
-</body></html>
+    </script>
+    </body></html>
