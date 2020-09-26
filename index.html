@@ -43,7 +43,7 @@
         var iphone = false;
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {   
             iphone = true;
-            document.getElementById("gas").innerText = "I play on phone? : " + iphone;  
+            
         } 
         document.getElementById("gas").innerText = "Game ver: 1.3a " + '\n' + "I play on phone? : " + iphone;
         // Генерация тестового стенда canvas
@@ -177,6 +177,7 @@
                                 cxP = cxP - 60;
                                 bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
+                                document.getElementById("gas").innerText = "Game ver: 1.3a " + '\n' + "I play on phone? : " + iphone + '\n' + "Par 1 : " + scale;
                             }
                             else if(scale > 500)
                             {
