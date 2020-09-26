@@ -200,6 +200,9 @@
                     y = event.touches[0].clientY;	
                 }
         }, false);
+            function distance (p1, p2) {
+             return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
+            }
         }
         // Модуль ответственный за отрисовку пикселей
         let path1 = new Path2D();
