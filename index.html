@@ -88,8 +88,8 @@
         height: 4px;
         border-radius: 2px;
         position: absolute;
-        left: 35px;
-        top: 13px;
+        left: 31px;
+        top: 12px;
     }
     .slfzoom-cont {
         width: 135px;
@@ -112,6 +112,7 @@
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     </head>
+    <link rel="SHORTCUT ICON" href="/favicon.png" type="image/x-icon">
     <body>
         <div class="slfzoom">
             <div class="minus_control"  id="min">
@@ -121,9 +122,9 @@
             </div>
             <div class="slfzoom-cont"id ="fsaclecon" >
                 <div class="slfzoom-in">
-                    <div class="slfzoom-lin" ></div>
-                    <div class="slfzoom-bl"  id="colorline1" style="width: 18.4%;"></div>
-                    <div class="slfzoom-posX"  id="colorline0" style="left: 18.4%;"></div>
+      
+                    <input type="range" id="cowbell" class= 'slfzoom-lin' name="cowbell" 
+                    min="0" max="100" value="25" step="5">
                 </div>
             </div>
             <div class="pluss_control" id="pls">
@@ -153,7 +154,7 @@
             iphone = true;
             
         } 
-        document.getElementById("gas").innerHTML = "Game ver: 1.4 " + '&nbsp;&nbsp;&nbsp;' + "I play on phone? : " + iphone;
+        //document.getElementById("gas").innerHTML = "Game ver: 1.4 " + '&nbsp;&nbsp;&nbsp;' + "I play on phone? : " + iphone;
         // Генерация тестового стенда canvas
         var x = 0, y =0; let pixlb = [];
         wallOfPixelsGen();
@@ -231,63 +232,52 @@
                 if (delta > 0){
                     if (scale < 6000)
                     {
+                        dotscalechange(5)
                         scalePcControlPlus()
                     }
                 }
                 else if(scale != 500) 
                 {
+                    dotscalechange(-5)
                     scalePcControlMinus()
                 };
                 e.preventDefault();
             });            
             let mincntr = document.getElementById('min');
         let maxcntr = document.getElementById('pls');
-        let dot     = document.getElementById('colorline0');  
-        let line    = document.getElementById('colorline1');  
-        var fsc     = document.getElementById('fsaclecon'); 
-        var dotscale = 18.4,caniscale = false, xfsb;
+        let dot     = document.getElementById('cowbell');  
+        var dotscale = Number(dot.value),caniscale = false, xfsb;
         mincntr.addEventListener('mousedown', function () {
-            scalePcControlMinus()
+            scalePcControlMinus();
+            dotscalechange(-5);
+            console.log(dot.value)
         }, false);
         maxcntr.addEventListener('mousedown', function () {
             scalePcControlPlus();
+            dotscalechange(5);
+            console.log(dot.value)
         }, false);
-
-        document.addEventListener('mouseup', function () {
-            caniscale = false;
-        }, false);
-
-        fsc.addEventListener('mousedown', function (event) {
-            caniscale = true;
-            xfsb = event.clientX;
+        var lock15=0;
+        dot.addEventListener('input', function () {
             
-                
-        }, false);
+            if((dotscale - Number(dot.value))<0 ){scalePcControlPlus();}else{scalePcControlMinus();}
+            dotscale = Number(dot.value);
+            
+            
+            
+        });
 
-        fsc.addEventListener('mousemove', function (event) {
-            if (caniscale) {
-                var rxfsb, xcxc;
-                xcxc = event.clientX;
-                rxfsb = xfsb - xcxc;
-                console.log(rxfsb)
-                if(rxfsb < -3 ){ 
-                    xfsb = xcxc;
-                    scalePcControlPlus()
-                }else if (rxfsb > 3){
-                    xfsb = xcxc;
-                    scalePcControlMinus()
-                }
-                
-                
-            }
-        }, false);
+        function dotscalechange(int){
+            dot.value = Number(dot.value) + int;
+        }
+
+
 
         function scalePcControlPlus(){
             if (scale < 6000)
                 {   
-                    dotscale = dotscale + 3.1;
-                    line.style.width = dotscale + "%";
-                    dot.style.left = dotscale + "%";
+                    
+                    
                     scale = scale + 300;
                     perspc = ((scale)/2)/100;
                     cy = cy - 150;
@@ -299,10 +289,8 @@
             function scalePcControlMinus(){
                 if(scale > 500) 
                     {   
-                        dotscale = dotscale - 3.1;
                         
-                        line.style.width = dotscale + "%";
-                        dot.style.left = dotscale + "%";
+                        
                         scale = scale - 300;
                         perspc = ((scale)/2)/100;
                         cy = cy + 150;
@@ -345,13 +333,13 @@
                         curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                         if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
                             if(curr_scale > 0 && scale < 6000){
-                                
+                                dotscalechange(5);
                                 scalePhoneControlPlus()
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                                 
                             }
                             else if(scale > 500)
-                            {
+                            {dotscalechange(-5);
                                 scalePhoneControlMinus()
                                 dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                             }
@@ -379,57 +367,43 @@
 
         let mincntr = document.getElementById('min');
         let maxcntr = document.getElementById('pls');
-        let dot     = document.getElementById('colorline0');  
-        let line    = document.getElementById('colorline1');  
-        var fsc     = document.getElementById('fsaclecon'); 
-        var dotscale = 18.4,caniscale = false, xfsb;
-        mincntr.addEventListener('click', function () {
-            scalePhoneControlMinus()
+        let dot     = document.getElementById('cowbell');  
+        var dotscale = Number(dot.value),caniscale = false, xfsb;
+        mincntr.addEventListener('mousedown', function () {
+            scalePhoneControlMinus();
+            dotscalechange(-5);
+            console.log(dot.value)
         }, false);
-        maxcntr.addEventListener('click', function () {
-            scalePhoneControlPlus()
+        maxcntr.addEventListener('mousedown', function () {
+            scalePhoneControlPlus();
+            dotscalechange(5);
+            console.log(dot.value)
         }, false);
-
-        document.addEventListener('touchend', function () {
-            caniscale = false;
-        }, false);
-
-        fsc.addEventListener('touchstart', function (event) {
-            caniscale = true;
-            xfsb = event.touches[0].clientX;
+        var lock15=0;
+        dot.addEventListener('input', function () {
             
-                
-        }, false);
+            if((dotscale - Number(dot.value))<0 ){scalePhoneControlPlus();}else{scalePhoneControlMinus();}
+            dotscale = Number(dot.value);
+            
+            
+            
+        });
 
-        fsc.addEventListener('touchmove', function (event) {
-            if (caniscale) {
-                var rxfsb, xcxc;
-                xcxc = event.touches[0].clientX;
-                rxfsb = xfsb - xcxc;
-                console.log(rxfsb)
-                if(rxfsb < -1 ){ 
-                    xfsb = xcxc;
-                    scalePhoneControlPlus()
-                }else if (rxfsb > 1){
-                    xfsb = xcxc;
-                    
-                    scalePhoneControlMinus()
-                }
-                
-                
-            }
-        }, false);
+        function dotscalechange(int){
+            dot.value = Number(dot.value) + int;
+        }
+
+
 
         function scalePhoneControlPlus(){
             if (scale < 6000)
                 {   
-                    dotscale = dotscale + 3.1;
-                    line.style.width = dotscale + "%";
-                    dot.style.left = dotscale + "%";
+                    
+                    
                     scale = scale + 300;
                     perspc = ((scale)/2)/100;
                     cyP = cyP - 150;
-                    cxP = cxP - 150; ;  
+                    cxP = cxP - 150;
                     bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                     
                 }    
@@ -437,10 +411,8 @@
             function scalePhoneControlMinus(){
                 if(scale > 500) 
                     {   
-                        dotscale = dotscale - 3.1;
                         
-                        line.style.width = dotscale + "%";
-                        dot.style.left = dotscale + "%";
+                        
                         scale = scale - 300;
                         perspc = ((scale)/2)/100;
                         cyP = cyP + 150;
@@ -449,7 +421,7 @@
                         
                     };
             }
-            
+        
             function distance (p1, p2) {
              return (Math.sqrt(Math.pow((p1.clientX - p2.clientX), 2) + Math.pow((p1.clientY - p2.clientY), 2)));
             }
