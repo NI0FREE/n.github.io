@@ -260,11 +260,23 @@
         var lock15=0;
         dot.addEventListener('input', function () {
             
-            if((dotscale - Number(dot.value))<0 ){scalePcControlPlus();}else{scalePcControlMinus();}
+            
+            
+            lock15 = Math.trunc((lock15/5)-(Number(dot.value)/5));
+            if(lock15<0){lock15 = lock15*-1}
+            if((dotscale - Number(dot.value))<0 )
+            {
+                for(var i = 0; i<lock15; i ++ ){
+                    scalePcControlPlus();
+                }
+            }else
+            {
+                for(var i = 0; i<lock15; i ++ ){
+                    scalePcControlMinus();
+                }
+            }
             dotscale = Number(dot.value);
-            
-            
-            
+            lock15 = Number(dot.value);
         });
 
         function dotscalechange(int){
@@ -382,9 +394,23 @@
         var lock15=0;
         dot.addEventListener('input', function () {
             
-            if((dotscale - Number(dot.value))<0 ){scalePhoneControlPlus();}else{scalePhoneControlMinus();}
-            dotscale = Number(dot.value);
+         
             
+            lock15 = Math.trunc((lock15/5)-(Number(dot.value)/5));
+            if(lock15<0){lock15 = lock15*-1}
+            if((dotscale - Number(dot.value))<0 )
+            {
+                for(var i = 0; i<lock15; i ++ ){
+                    scalePhoneControlPlus();
+                }
+            }else
+            {
+                for(var i = 0; i<lock15; i ++ ){
+                    scalePhoneControlMinus();
+                }
+            }
+            dotscale = Number(dot.value);
+            lock15 = Number(dot.value);
             
             
         });
