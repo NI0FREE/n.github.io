@@ -213,8 +213,8 @@ window.onload = function() {
             y = event.clientY;
             zcx = VH-cx;
             zcy = HT-cy;
-            ctrlY = Math.trunc((250/scale)*zcy);
-            ctrlX = Math.trunc((250/scale)*zcx);
+            ctrlY = Math.trunc((300/scale)*zcy);
+            ctrlX = Math.trunc((300/scale)*zcx);
             console.log(zcx,zcy)	
                 }
             }, false);
@@ -299,7 +299,7 @@ window.onload = function() {
         function scalePcControlPlus(){
             if (scale < 6000)
                 {   
-                    scale = scale + 250;
+                    scale = scale + 300;
                     perspc = ((scale)/2)/100;
                     cy = cy - ctrlY;
                     cx = cx - ctrlX;
@@ -311,7 +311,7 @@ window.onload = function() {
             function scalePcControlMinus(){
                 if(scale > 500) 
                     {   
-                        scale = scale - 250;
+                        scale = scale - 300;
                         perspc = ((scale)/2)/100;
                         cy = cy + ctrlY;
                         cx = cx + ctrlX;  
@@ -381,8 +381,8 @@ window.onload = function() {
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                         zcx = VH-cxP;
                         zcy = HT-cyP;
-                        ctrlY = Math.trunc((250/scale)*zcy);
-                        ctrlX = Math.trunc((250/scale)*zcx);
+                        ctrlY = Math.trunc((300/scale)*zcy);
+                        ctrlX = Math.trunc((300/scale)*zcx);
                     }
                     x = event.touches[0].clientX;
                     y = event.touches[0].clientY;	
@@ -446,7 +446,7 @@ window.onload = function() {
                 {   
                     
                     
-                    scale = scale + 250;
+                    scale = scale + 300;
                     perspc = ((scale)/2)/100;
                     cyP = cyP - ctrlY;
                     cxP = cxP - ctrlX;
@@ -459,7 +459,7 @@ window.onload = function() {
                     {   
                         
                         
-                        scale = scale - 250;
+                        scale = scale - 300;
                         perspc = ((scale)/2)/100;
                         cyP = cyP + ctrlY;
                         cxP = cxP + ctrlX;  
