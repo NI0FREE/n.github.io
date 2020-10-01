@@ -135,7 +135,7 @@
         </div>
       <div id="window">
         <div id="gas"></div>
-        <canvas id="largecanv" width="2000" height="2000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
+        <canvas id="largecanv" width="4000" height="4000" style="transform: translateX(1x); top: 1px; left: 1px;"></canvas>
         <canvas id="littlcanv" width="200" height="200"></canvas>
         
       </div>
@@ -179,7 +179,7 @@ window.onload = function() {
             dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
             x = x + 1;
             };
-            ctx.drawImage(lcanv, 0, 0, 2000, 2000);
+            ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         }
         //Навигация по большому канвасу (PC)
         var capture = false, cx = 0, cy = 0,canidraw=0;
@@ -232,7 +232,7 @@ window.onload = function() {
                     text.attachEvent("onmousewheel", handler);
                 }
             }
-            var scale = 2000; var tsx,tsy,deltel = 50;
+            var scale = 4000; var tsx,tsy,deltel = 50;
             addOnWheel(bcanv, function(e) {
                 dx = event.clientX - cx;
                 dy = event.clientY - cy;
@@ -325,7 +325,7 @@ window.onload = function() {
         }
         else //Навигация по большому канвасу (PHONE)
         {
-            var scale = 2000; var tsx,tsy,deltel = 50;
+            var scale = 4000; var tsx,tsy,deltel = 50;
             var scaling = false;
             var dist = 0;
             var curr_scale = 1.0;
@@ -490,7 +490,7 @@ window.onload = function() {
           dtx.fillStyle = "red";
           path1.rect(o.x , o.y, 1, 1);
           dtx.fill(path1);
-          ctx.drawImage(lcanv, 0, 0, 2000, 2000);
+          ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         };
         
         // Генератор рандомных чисел
