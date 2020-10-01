@@ -140,6 +140,7 @@
         
       </div>
       <script>
+window.onload = function() {
         let bcanv = document.getElementById('largecanv');
         let lcanv = document.getElementById('littlcanv');
         let windowP = document.getElementById('window');
@@ -171,9 +172,9 @@
               'id': i+1,
 	          });
                 if(y >= (x)){
-		        dtx.fillStyle = "rgb("+randomInteger(x, 100)+","+randomInteger(x, 100)+","+randomInteger(250, 255)+")";
+		        dtx.fillStyle = "rgb("+randomInteger(30, 40)+","+randomInteger(50, 60)+","+randomInteger(1,10 )+")";
                 }else{
-                    dtx.fillStyle = "rgb("+randomInteger(x, 100)+","+randomInteger(x, 100)+","+randomInteger(250, 255)+")";  
+                    dtx.fillStyle = "rgb("+randomInteger(30, 40)+","+randomInteger(50, 60)+","+randomInteger(1,10 )+")";  
                 }
             dtx.fillRect(pixlb[i].x, pixlb[i].y, 1, 1);
             x = x + 1;
@@ -182,7 +183,7 @@
         }
         //Навигация по большому канвасу (PC)
         var capture = false, cx = 0, cy = 0,canidraw=0;
-        var sz=1,sxx=1,syy=1;
+        var sz=1,sxx=1,syy=1; 
         if(iphone == false){
             windowP.addEventListener('mouseup', function () {
             capture = false;
@@ -197,14 +198,24 @@
             y = event.clientY;
                 
             }, false);
-
+            var zcx=0,zcy=0;
+            var ctrlX=1,ctrlY=1;
+            var VH = Math.trunc(document.documentElement.clientWidth/2);
+            var HT = Math.trunc(document.documentElement.clientHeight/2);
+            zcx = VH-0;
+            zcy = HT-0;
             windowP.addEventListener('mousemove', function (event) {
                 if (capture) {
                     if (false !=canidraw) {canidraw = false};
                     cx -= x - event.clientX, cy -= y - event.clientY;
                     bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                    x = event.clientX;
-                    y = event.clientY;	
+            x = event.clientX;
+            y = event.clientY;
+            zcx = VH-cx;
+            zcy = HT-cy;
+            ctrlY = Math.trunc((250/scale)*zcy);
+            ctrlX = Math.trunc((250/scale)*zcx);
+            console.log(zcx,zcy)	
                 }
             }, false);
             
@@ -284,16 +295,15 @@
         }
 
 
-
+       
         function scalePcControlPlus(){
             if (scale < 6000)
                 {   
-                    
-                    
-                    scale = scale + 300;
+                    scale = scale + 250;
                     perspc = ((scale)/2)/100;
-                    cy = cy - 150;
-                    cx = cx - 150;
+                    cy = cy - ctrlY;
+                    cx = cx - ctrlX;
+                    console.log(cx,cy)
                     bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                     
                 }    
@@ -301,16 +311,17 @@
             function scalePcControlMinus(){
                 if(scale > 500) 
                     {   
-                        
-                        
-                        scale = scale - 300;
+                        scale = scale - 250;
                         perspc = ((scale)/2)/100;
-                        cy = cy + 150;
-                        cx = cx + 150;  
+                        cy = cy + ctrlY;
+                        cx = cx + ctrlX;  
+                        console.log(cx,cy)
                         bcanv.style = "top: "+cy+"px; left: "+cx+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                         
                     };
             }
+           
+
         }
         else //Навигация по большому канвасу (PHONE)
         {
@@ -335,7 +346,12 @@
                   scaling = false;
                 } 
             }, false); 
-
+            var zcx=0,zcy=0;
+            var ctrlX=1,ctrlY=1;
+            var VH = Math.trunc(document.documentElement.clientWidth/2);
+            var HT = Math.trunc(document.documentElement.clientHeight/2);
+            zcx = VH-0;
+            zcy = HT-0;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
@@ -363,6 +379,10 @@
                     {
                         cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                        zcx = VH-cxP;
+                        zcy = HT-cyP;
+                        ctrlY = Math.trunc((250/scale)*zcy);
+                        ctrlX = Math.trunc((250/scale)*zcx);
                     }
                     x = event.touches[0].clientX;
                     y = event.touches[0].clientY;	
@@ -426,10 +446,10 @@
                 {   
                     
                     
-                    scale = scale + 300;
+                    scale = scale + 250;
                     perspc = ((scale)/2)/100;
-                    cyP = cyP - 150;
-                    cxP = cxP - 150;
+                    cyP = cyP - ctrlY;
+                    cxP = cxP - ctrlX;
                     bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                     
                 }    
@@ -439,10 +459,10 @@
                     {   
                         
                         
-                        scale = scale - 300;
+                        scale = scale - 250;
                         perspc = ((scale)/2)/100;
-                        cyP = cyP + 150;
-                        cxP = cxP + 150;  
+                        cyP = cyP + ctrlY;
+                        cxP = cxP + ctrlX;  
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                         
                     };
@@ -478,6 +498,7 @@
           let rand = min + Math.random() * (max + 1 - min);
           return Math.floor(rand);
         }
+    };
         // // // // // // // // // // // // // // // //
 
     </script>
