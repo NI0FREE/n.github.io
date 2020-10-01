@@ -473,9 +473,10 @@ window.onload = function() {
             }
         }
         // Модуль ответственный за отрисовку пикселей
-        let path1 = new Path2D();
+        
         let perspc = 10;
         function draw(cx,cy,evx,evy){
+            let path1 = new Path2D();
           var dx, dy, idd;
           dx = evx - cx;
           dy = evy - cy;
@@ -493,6 +494,17 @@ window.onload = function() {
           ctx.drawImage(lcanv, 0, 0, 4000, 4000);
         };
         
+        setInterval(FAKEPLACE,100)
+        var fp=0;
+        function FAKEPLACE(){
+            let path1 = new Path2D();
+        var o = pixlb[fp];
+          dtx.fillStyle = "rgb("+randomInteger(100, 110)+","+randomInteger(50, 130)+","+randomInteger(140,150 )+")";
+          path1.rect(o.x , o.y, 1, 1);
+          dtx.fill(path1);
+          ctx.drawImage(lcanv, 0, 0, 4000, 4000);
+          fp=fp+1;
+        }
         // Генератор рандомных чисел
         function randomInteger(min, max) {
           let rand = min + Math.random() * (max + 1 - min);
