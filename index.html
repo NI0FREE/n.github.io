@@ -362,7 +362,7 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
-            var razn=0,raznsum=0;costillock=true,TWO = 1,srazn=0;
+            var razn=0,raznsum=0;costillock=true,TWO = 8,srazn=0,finwork=true,cxPFAKE=0;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
@@ -388,26 +388,31 @@ window.onload = function() {
                     }
                     else
                     {
-                        srazn = cxP;
-                        cxP -=  Math.trunc(x - event.touches[0].clientX), cyP =0;//-=  Math.trunc(y - event.touches[0].clientY);
-                        srazn = srazn - cxP;
-                        
+                        srazn = cxPFAKE;
+                        cxPFAKE -=  Math.trunc(x - event.touches[0].clientX), cyP =0;//-=  Math.trunc(y - event.touches[0].clientY);
+                        srazn = srazn - cxPFAKE;
                         if(srazn < 0){srazn =srazn * -1;if(TWO>0){TWO=TWO*-1}}else{if(TWO<0){TWO=TWO*-1}}
+                        srazn = srazn *100;
+                        srazn =  Math.trunc(srazn/8);
+                        srazn = srazn /100;
                         razn = razn + srazn;
                         
                        // document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
-                        
+                       
                             costillock = true;
+                            if(finwork){finwork=false;
+                               
                             (function myLoop (i) {if(razn >0){      
                                 setTimeout(function () {   
                                     razn=razn - 1;
                                     cxP = cxP - TWO;
+                                   
                                     bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                                     //document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;             
-                                    if(costillock&&i>0){if (--i) myLoop(i);};      //  пока i >0
-                                }, 10)}
+                                     if(--i && costillock && i>0){ myLoop(i);}else{finwork=true;}      //  пока i >0
+                                }, 1)}else{finwork=true;}
                             })(razn);   
-                         
+                            }
                     }
                     x = event.touches[0].clientX;
                     y = event.touches[0].clientY;	
