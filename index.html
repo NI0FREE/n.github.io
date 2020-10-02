@@ -112,6 +112,12 @@
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     </head>
+        <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+ 
+        <script>
+             // Sends event to client
+         vkBridge.send('VKWebAppInit');
+        </script> 
     <link rel="shortcut icon" type="image/png" href="./favicon.ico"/>
     <body>
         <div class="slfzoom">
