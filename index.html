@@ -19,7 +19,7 @@
         position: absolute;
         top: 0px;
         left: 0px;
-        transition: all 0ms linear 0s;
+        transition: all 100ms linear 0s;
     
     }
     .i-on-all{
@@ -362,11 +362,10 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
-            var razn=0,raznsum=0;costillock=true,TWO = 8,srazn=0,finwork=true,cxPFAKE=0;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
-                    
+                   
                     if (false !=canidrawP) {canidrawP = false;};   
                     if (scaling) {  
                         curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
@@ -388,47 +387,22 @@ window.onload = function() {
                     }
                     else
                     {
-                        srazn = cxPFAKE;
-                        cxPFAKE -=  Math.trunc(x - event.touches[0].clientX), cyP =0;//-=  Math.trunc(y - event.touches[0].clientY);
-                        srazn = srazn - cxPFAKE;
-                        if(srazn < 0){srazn =srazn * -1;if(TWO>0){TWO=TWO*-1}}else{if(TWO<0){TWO=TWO*-1}}
-                        srazn = srazn *100;
-                        srazn =  Math.trunc(srazn/8);
-                        srazn = srazn /100;
-                        razn = razn + srazn;
-                        
-                       // document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
-                       
-                            costillock = true;
-                            if(finwork){finwork=false;
-                               
-                            (function myLoop (i) {if(razn >0){      
-                                setTimeout(function () {   
-                                    razn=razn - 1;
-                                    cxP = cxP - TWO;
-                                   
-                                    bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                                    //document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;             
-                                     if(--i && costillock && i>0){ myLoop(i);}else{finwork=true;razn=0}      //  пока i >0
-                                }, 10)}else{finwork=true;}
-                            })(razn);   
-                            }
+                        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
+                        bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                        zcx = VH-cxP;
+                        zcy = HT-cyP;
+                        ctrlY = Math.trunc((300/scale)*zcy);
+                        ctrlX = Math.trunc((300/scale)*zcx);
                     }
                     x = event.touches[0].clientX;
                     y = event.touches[0].clientY;	
                 }
-        }, false);
-
+        }, event.preventDefault());
         windowP.addEventListener("touchend", function (event) {
-            costillock = false;
             touchcouts = touchcouts-1;
 	        captureP = false;
             if(canidrawP == true && drawscalecontrol ==0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); };
             if(touchcouts==0){drawscalecontrol = 0;}
-            zcx = VH-cxP;
-            zcy = HT-cyP;
-            ctrlY = Math.trunc((300/scale)*zcy);
-            ctrlX = Math.trunc((300/scale)*zcx);
             canidrawP = true;
             scaling = false;
         }, false);
