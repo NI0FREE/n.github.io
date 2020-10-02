@@ -362,6 +362,7 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
+            var razn=0;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
@@ -387,8 +388,10 @@ window.onload = function() {
                     }
                     else
                     {
+                        razn = cxP;
                         cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
-                        document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + cxP;
+                        razn = razn - cxP;
+                        document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;
                         
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                     }
@@ -396,6 +399,7 @@ window.onload = function() {
                     y = event.touches[0].clientY;	
                 }
         }, false);
+
         windowP.addEventListener("touchend", function (event) {
             touchcouts = touchcouts-1;
 	        captureP = false;
