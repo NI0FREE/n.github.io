@@ -396,14 +396,14 @@ window.onload = function() {
                        // document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
                         
                             costillock = true;
-                            (function myLoop (i) {          
+                            (function myLoop (i) {if(razn >0){      
                                 setTimeout(function () {   
                                     cxP = cxP - TWO;
                                     bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                                    document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;             
-                                    if(costillock&&i>0){if (--i) myLoop(i);console.log(i)};      //  пока i >0
-                                }, 2)
-                            })(razn+1);   
+                                    //document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;             
+                                    if(costillock&&i>0){if (--i) myLoop(i);};      //  пока i >0
+                                }, 10)}
+                            })(razn);   
                          
                     }
                     x = event.touches[0].clientX;
