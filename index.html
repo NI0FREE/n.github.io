@@ -389,7 +389,7 @@ window.onload = function() {
                     else
                     {
                         razn = cxP;
-                        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
+                        cxP -=  Math.trunc(x - event.touches[0].clientX), cyP -=  Math.trunc(y - event.touches[0].clientY);
                         razn = razn - cxP;
                         document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;
                         
