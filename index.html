@@ -362,11 +362,11 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
-            var razn=0,raznsum=0;;
+            var razn=0,raznsum=0;costillock=true;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
-                   
+                    costillock = false;
                     if (false !=canidrawP) {canidrawP = false;};   
                     if (scaling) {  
                         curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
@@ -394,13 +394,13 @@ window.onload = function() {
                         raznsum = Math.trunc(razn / 2);
                         document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
                         if(razn>0){
-
+                            costillock = true;
                             (function myLoop (i) {          
                                 setTimeout(function () {   
                                     cxP = cxP - 2;
                                     bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                                     document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + cxP;             
-                                    if (--i) myLoop(i);      //  пока i >0
+                                    if(costillock){if (--i) myLoop(i)};      //  пока i >0
                                 }, 10)
                             })(razn);   
                          }else{
@@ -413,6 +413,7 @@ window.onload = function() {
         }, false);
 
         windowP.addEventListener("touchend", function (event) {
+            costillock = false;
             touchcouts = touchcouts-1;
 	        captureP = false;
             if(canidrawP == true && drawscalecontrol ==0){draw(cxP,cyP,levent.touches[0].clientX,levent.touches[0].clientY); };
