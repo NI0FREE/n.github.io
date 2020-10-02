@@ -362,7 +362,7 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
-            var razn=0,raznsum=0;costillock=true,TWO = 1;
+            var razn=0,raznsum=0;costillock=true,TWO = 2;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
@@ -403,7 +403,7 @@ window.onload = function() {
                                     //document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;             
                                     if(costillock&&i>0){if (--i) myLoop(i);};      //  пока i >0
                                 }, 1)}
-                            })(razn);   
+                            })(raznsum);   
                          
                     }
                     x = event.touches[0].clientX;
