@@ -397,7 +397,7 @@ window.onload = function() {
                     x = event.touches[0].clientX;
                     y = event.touches[0].clientY;	
                 }
-        }, event.preventDefault());
+        }, event.preventDefault(), event.stopPropagation());
         windowP.addEventListener("touchend", function (event) {
             touchcouts = touchcouts-1;
 	        captureP = false;
