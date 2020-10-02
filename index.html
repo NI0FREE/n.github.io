@@ -389,10 +389,10 @@ window.onload = function() {
                     else
                     {
                         razn = cxP;
-                        cxP -=  Math.trunc(x - event.touches[0].clientX), cyP =0;//-=  Math.trunc(y - event.touches[0].clientY);
+                        cxP -=  x - event.touches[0].clientX, cyP =0;//-=  Math.trunc(y - event.touches[0].clientY);
                         razn = razn - cxP;
                         if(razn < 0){razn =razn * -1;if(TWO>0){TWO=TWO*-1}}else{if(TWO<0){TWO=TWO*-1}}
-                        raznsum = Math.trunc(razn / 2);
+                        raznsum = razn / 2;
                         document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
                         
                             costillock = true;
