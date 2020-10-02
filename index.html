@@ -362,7 +362,7 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
-            var razn=0,raznsum=0;costillock=true,TWO = 2,srazn=0;
+            var razn=0,raznsum=0;costillock=true,TWO = 1,srazn=0;
             windowP.addEventListener("touchmove", function (event) {
                 if(drawscalecontrol != 1){drawscalecontrol = 1;}
                 if (captureP) {
@@ -390,7 +390,7 @@ window.onload = function() {
                     {
                         srazn = cxP;
                         cxP -=  Math.trunc(x - event.touches[0].clientX), cyP =0;//-=  Math.trunc(y - event.touches[0].clientY);
-                        razn = srazn - cxP;
+                        razn = razn = (srazn - cxP);
                         if(razn < 0){razn =razn * -1;if(TWO>0){TWO=TWO*-1}}else{if(TWO<0){TWO=TWO*-1}}
                         raznsum = Math.trunc(razn / 2);
                        // document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
@@ -398,6 +398,7 @@ window.onload = function() {
                             costillock = true;
                             (function myLoop (i) {if(razn >0){      
                                 setTimeout(function () {   
+                                    razn - 1;
                                     cxP = cxP - TWO;
                                     bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                                     //document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + razn;             
