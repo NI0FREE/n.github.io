@@ -394,11 +394,16 @@ window.onload = function() {
                         raznsum = Math.trunc(razn / 2);
                         document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
                         if(razn>0){
-                         for(var iz =0; iz < razn; iz=iz+2){
-                             cxP = cxP - 2;
-                             bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
-                             document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + cxP;
-                         }}else{
+
+                            (function myLoop (i) {          
+                                setTimeout(function () {   
+                                    cxP = cxP - 2;
+                                    bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                                    document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + cxP;             
+                                    if (--i) myLoop(i);      //  пока i >0
+                                }, 10)
+                            })(razn);   
+                         }else{
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                          }
                     }
