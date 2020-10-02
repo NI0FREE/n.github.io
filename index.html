@@ -391,11 +391,11 @@ window.onload = function() {
                         razn = cxP;
                         cxP -=  Math.trunc(x - event.touches[0].clientX), cyP -=  Math.trunc(y - event.touches[0].clientY);
                         razn = razn - cxP;
-                        raznsum = Math.trunc(razn / 3);
+                        raznsum = Math.trunc(razn / 2);
                         document.getElementById("gas").innerHTML = "PX" + '&nbsp;&nbsp;&nbsp;' + raznsum;
                         if(razn>0){
-                         for(var iz =0; iz < razn; iz=iz+3){
-                             cxP = cxP - 3;
+                         for(var iz =0; iz < razn; iz=iz+2){
+                             cxP = cxP - 2;
                              bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                          }}else{
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
