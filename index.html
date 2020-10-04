@@ -489,15 +489,16 @@ window.onload = function() {
                     }
                     else
                     {
-                        cxP -= x - event.touches[0].clientX, cyP -= y - event.touches[0].clientY;
+
+                        cxP -= x - parseInt(event.touches[0].clientX), cyP -= y - parseInt(event.touches[0].clientY);
                         bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
                         zcx = VH-cxP;
                         zcy = HT-cyP;
                         ctrlY = Math.trunc((300/scale)*zcy);
                         ctrlX = Math.trunc((300/scale)*zcx);
                     }
-                    x = event.touches[0].clientX;
-                    y = event.touches[0].clientY;	
+                    x = parseInt(event.touches[0].clientX);
+                    y = parseInt(event.touches[0].clientY);	
                 }
         }, event.preventDefault());
         windowP.addEventListener("touchend", function (event) {
