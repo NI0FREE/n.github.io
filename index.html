@@ -484,7 +484,7 @@ window.onload = function() {
                     touchobj = event.changedTouches[0];
                     if (false !=canidrawP) {canidrawP = false;};   
                     if (scaling) {  
-                        document.getElementById("gas").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Game ver: 1.4 " + '&nbsp;&nbsp;&nbsp;' + "DEV-INFO 0 : " + scale;
+                        
                         curr_scale = Math.trunc((distance(event.targetTouches[0], event.targetTouches[1])- dist)/10) ;
                         if(randscale != curr_scale && randscale != curr_scale+1 && randscale != curr_scale-1 && curr_scale !=0){
                             if(curr_scale > 0 && scale < 6000){
@@ -572,7 +572,7 @@ window.onload = function() {
 
 
         function scalePhoneControlPlus(){
-            if (scale < 6000)
+            if (1)
                 {   
                     
                     
@@ -585,7 +585,7 @@ window.onload = function() {
                 }    
             }
             function scalePhoneControlMinus(){
-                if(scale > 500) 
+                if(1) 
                     {   
                         
                         
