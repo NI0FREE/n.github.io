@@ -465,18 +465,20 @@ window.onload = function() {
             var HT = Math.trunc(document.documentElement.clientHeight/2);
             zcx = VH-0;
             zcy = HT-0;
-            windowP.addEventListener("touchmove", function (event) {
 
-                    touchobj = event.changedTouches[0];
 
-                        cxP -= x - touchobj.clientX, cyP -= y - touchobj.clientY;
-                        bcanv.style.left = cxP+ "px";
-                       
-                    
-                    x = touchobj.clientX;
-                    y = touchobj.clientY;	
-                
-        }, event.preventDefault());
+        bcanv.addEventListener('touchmove', function(e){
+            touchobj = event.changedTouches[0];
+
+cxP -= x - touchobj.clientX, cyP -= y - touchobj.clientY;
+bcanv.style.left = +cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+
+
+x = touchobj.clientX;
+y = touchobj.clientY;	
+            e.preventDefault()
+        }, false)
+
         windowP.addEventListener("touchend", function (event) {
             touchcouts = touchcouts-1;
 	        captureP = false;
