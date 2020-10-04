@@ -457,6 +457,7 @@ window.onload = function() {
                 {
                   scaling = false;
                 } 
+                event.preventDefault();
             }, false); 
             var zcx=0,zcy=0;
             var ctrlX=1,ctrlY=1;
@@ -501,7 +502,8 @@ window.onload = function() {
                     x = parseInt(touchobj.clientX);
                     y = parseInt(touchobj.clientY);	
                 }
-        }, event.preventDefault());
+                event.preventDefault()
+        }, false);
         windowP.addEventListener("touchend", function (event) {
             touchcouts = touchcouts-1;
 	        captureP = false;
