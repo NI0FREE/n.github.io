@@ -470,7 +470,7 @@ window.onload = function() {
                     touchobj = event.changedTouches[0];
 
                         cxP -= x - touchobj.clientX, cyP -= y - touchobj.clientY;
-                        bcanv.style = "top: "+cyP+"px; left: "+cxP+"px;" + " width: "+scale+"px; height:"+scale+"px;";
+                        bcanv.style.left = cxP+ "px";
                        
                     
                     x = touchobj.clientX;
