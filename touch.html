@@ -1,0 +1,128 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Javascript touch события. Часть 2. Перемещение объектов.</title>
+    <script>
+    function isContained(m, e){
+        var e=e||window.event
+        var c=/(click)|(mousedown)|(mouseup)/i.test(e.type)? e.target : ( e.relatedTarget || ((e.type=="mouseover")? e.fromElement : e.toElement) )
+        while (c && c!=m)try {c=c.parentNode} catch(e){c=m}
+        if (c==m)
+            return true
+        else
+            return false
+    }
+    
+    // Demo 2:
+    window.addEventListener('load', function(){
+    
+        var box2 = document.getElementById('box2'),
+                detecttouch = !!('ontouchstart' in window) || !!('ontouchstart' in document.documentElement) || !!window.ontouchstart || !!window.Touch || !!window.onmsgesturechange || (window.DocumentTouch && window.document instanceof window.DocumentTouch),
+                boxleft, // left position of moving box
+                startx, // starting x coordinate of touch point
+                dist = 0, // distance traveled by touch point
+                touchobj = null, // Touch object holder
+                ismousedown = false
+        
+        box2.addEventListener('touchstart', function(e){
+            touchobj = e.changedTouches[0] // reference first touch point
+            boxleft = parseInt(box2.style.left) // get left position of box
+            startx = parseInt(touchobj.clientX) // get x coord of touch point
+            e.preventDefault() // prevent default click behavior
+        }, false)
+        
+        box2.addEventListener('touchmove', function(e){
+            touchobj = e.changedTouches[0] // reference first touch point for this event
+            var dist = parseInt(touchobj.clientX) - startx // calculate dist traveled by touch point
+            // move box according to starting pos plus dist, with lower limit 0 and upper limit 380 so it doesn't move outside track
+            box2.style.left = ( (boxleft + dist > 800)? 800 : (boxleft + dist < 0)? 0 : boxleft + dist ) + 'px'
+            e.preventDefault()
+        }, false)
+        
+        if (!detecttouch){
+            document.body.addEventListener('mousedown', function(e){
+                if ( isContained(box2, e) ){
+                    touchobj = e // reference first touch point
+                    boxleft = parseInt(box2.style.left) // get left position of box
+                    startx = parseInt(touchobj.clientX) // get x coord of touch point
+                    ismousedown = true
+                    e.preventDefault() // prevent default click behavior
+                }
+            }, false)
+            
+            document.body.addEventListener('mousemove', function(e){
+                if (ismousedown){
+                    touchobj = e // reference first touch point for this event
+                    var dist = parseInt(touchobj.clientX) - startx // calculate dist traveled by touch point
+                    // move box according to starting pos plus dist, with lower limit 0 and upper limit 380 so it doesn't move outside track
+                    box2.style.left = ( (boxleft + dist > 800)? 800 : (boxleft + dist < 0)? 0 : boxleft + dist ) + 'px'
+                    e.preventDefault()
+                }
+            }, false)
+            
+            document.body.addEventListener('mouseup', function(e){
+                if (ismousedown){
+                    touchobj = e // reference first touch point
+                    boxleft = parseInt(box2.style.left) // get left position of box
+                    startx = parseInt(touchobj.clientX) // get x coord of touch point
+                    ismousedown = false
+                    e.preventDefault() // prevent default click behavior
+                }
+            }, false)
+        }
+    
+    }, false)
+    </script>
+    
+    <style>
+    
+    #box2{
+    width: 100px;
+    height: 50px;
+    font-size:1.4em;
+    border: 1px solid orange;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: lightyellow;
+    position: absolute;
+    padding-top: 10px;
+    -moz-box-shadow: 0 0 5px gray;
+    box-shadow: 0 0 5px gray;
+    text-align: center;
+    line-height: 1;
+    cursor:pointer
+    }
+    
+    .track{
+    width:480px;
+    height: 55px;
+    position: relative;
+    overflow: hidden;
+    }
+    
+    .track:after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: black;
+    position: absolute;
+    top: 49%;
+    z-index: -1;
+    }
+    </style>
+    
+    </head>
+    <body>
+    
+    <p>В данном примере так же добавленная симуляция для курсора мыши, для устройств без сенсора.</p>
+    
+    <div class="track" id="track">
+
+   
+    </div>
+    
+    <canvas id="box2" class="box" width="4000" height="4000" style="top: -517px; left: -151px; width: 1900px; height: 1900px;"></canvas>
+    
+    
+    </body></html>
