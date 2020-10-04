@@ -502,7 +502,7 @@ window.onload = function() {
                     x = parseInt(touchobj.clientX);
                     y = parseInt(touchobj.clientY);	
                 }
-                event.preventDefault()
+                event.preventDefault();
         }, false);
         windowP.addEventListener("touchend", function (event) {
             touchcouts = touchcouts-1;
@@ -511,6 +511,7 @@ window.onload = function() {
             if(touchcouts==0){drawscalecontrol = 0;}
             canidrawP = true;
             scaling = false;
+            event.preventDefault();
         }, false);
 
         let mincntr = document.getElementById('min');
