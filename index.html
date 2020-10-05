@@ -488,7 +488,7 @@ window.onload = function() {
                                     dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
                                     
                                 }
-                                else if(curr_scale > 0 &&scale > 500)
+                                else if(curr_scale < 0 &&scale > 500)
                                 {dotscalechange(-5);
                                     scalePhoneControlMinus()
                                     dist = Math.trunc(distance(event.targetTouches[0], event.targetTouches[1]));
