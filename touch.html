@@ -109,6 +109,14 @@
 
     </style>
  <body>
+      <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+        <script>
+            let myinfo = 0;
+         vkBridge.send('VKWebAppInit');
+        vkBridge.send("VKWebAppGetUserInfo").then(result => {
+            myinfo = result;})
+        </script> 
     <div class="timerZone"><p>02:32</p></div>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
