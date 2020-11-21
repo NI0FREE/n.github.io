@@ -8,10 +8,10 @@
         </style>
     </head>
 <body>
-    <script src="https://ni0free.github.io/n.github.io/fabric.min%20(1).js"></script>
+    <script src="file:///C:/Users/vasin/Desktop/helloworld/fabric.min%20(1).js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div class="intro">
-    <p id="LOG">00</p>
+    
     <canvas id="largecanv" ></canvas>
 </div>
                 
@@ -19,106 +19,96 @@
 <script>
     
  let canvcanv = document.getElementById('largecanv');
-
+ var ctx = canvcanv.getContext('2d');
  canvcanv.width=window.outerWidth;
  canvcanv.height=window.outerHeight;
  (function() {
-        var canvcanvcanvcanv = canvcanv
-        context = canvcanvcanvcanv.getContext('2d');
-        canvcanvcanvcanv.width = window.innerWidth;
-        canvcanvcanvcanv.height = window.innerHeight;
+       
+        context = canvcanv.getContext('2d');
+        canvcanv.width = window.innerWidth;
+        canvcanv.height = window.innerHeight;
  })();
-// create a wrapper around native canvas element (with id="c")
-var canvas = new fabric.Canvas('largecanv');
 
-// create a rectangle object
-var rect = new fabric.Rect({
-  left: 100,
-  top: 100,
-  fill: 'red',
-  width: 100,
-  height: 100,
-  selectable: false,
-  hasControls: false,
-  hasBorders: false,
-  hasRotatingPoint: false,
-  selectable: false,
-  evented: false,
-  transparentCorners: false,
-  centeredScaling: false,
-  centeredRotation: false,
-  padding: false,
-  cornerSize: false,
-  rotatingPointOffset: false,
-  borderColor: false,
-  cornerColor: false,
-  cornerStrokeColor: false,
-  cornerStyle1: false,
-  cornerStyle2: false
-});
+ function draw(size){
+    ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
+    ctx.fillStyle = "red";
+
+    ctx.fillRect(gameX,gameY,size,size);
+}
 
 
 // "add" rectangle onto canvas
-canvas.add(rect);
-let costilcanvas = document.getElementsByClassName('upper-canvas')[0];
-costilcanvas.addEventListener('mouseup', function () {
-    canvas.setViewportTransform(canvas.viewportTransform);
-    canvas.isDragging = false;
-    canvas.selection = true;
+
+let gSize = 25,gameX=window.innerWidth/2,gameY=window.innerHeight/2,lastX=0,lastY=0;
+let canvasDr = false;
+draw(gSize)
+canvcanv.addEventListener('mousedown', function (event) {
+    canvasDr = true;
+
+}, false);
+canvcanv.addEventListener('mousemove', function (event) {
+    if(canvasDr){
+       gameX += event.clientX - lastX
+       gameY += event.clientY - lastY
+       
+       draw(gSize)
+    }
+    lastX = event.clientX
+    lastY = event.clientY
+
+}, false);
+canvcanv.addEventListener('mouseup', function () {
+    canvasDr = false;
 }, false);
 
-costilcanvas.addEventListener('mousedown', function (event) {
-    var evt = event;
-    canvas.isDragging = true;
-    canvas.selection = false;
-    canvas.lastPosX = evt.clientX;
-    canvas.lastPosY = evt.clientY;       
-}, false);
-costilcanvas.addEventListener('mousemove', function (event) {
-    if (canvas.isDragging) {
-    var e = event;
-    var vpt = canvas.viewportTransform;
-    vpt[4] += e.clientX - canvas.lastPosX;
-    vpt[5] += e.clientY - canvas.lastPosY;
+function addOnWheel(elem, handler) {if (elem.addEventListener) {if ('onwheel' in document) {elem.addEventListener("wheel", handler);} else if ('onmousewheel' in document) {elem.addEventListener("mousewheel", handler);} else {elem.addEventListener("MozMousePixelScroll", handler);}}else{text.attachEvent("onmousewheel", handler);}}
+
+addOnWheel(canvcanv, function(e) {
+    let zoomP = 25;
     
-    canvas.requestRenderAll();
-    canvas.lastPosX = e.clientX;
-    canvas.lastPosY = e.clientY;
-  }
-}, false);
+    let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
+    let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
+    console.log("X: "+xxx+" Y: "+yyy)
+    if(e.deltaY<0){//zoom
+        gSize = gSize+zoomP;
+        gameX = gameX-xxx;
+        gameY = gameY-yyy;
+        draw(gSize)
+        
+    }else
+    if(gSize/zoomP>1){         //back
+        gSize = gSize-zoomP;
+        gameX = gameX+xxx;
+        gameY = gameY+yyy;
+        draw(gSize)
+        
+    }
+    
+    e.preventDefault();
+});   
 ///////////////////////////////////////////////////phone
-        costilcanvas.addEventListener("touchstart", function (event) {
-            var evt = event;
-            canvas.isDragging = true;
-            canvas.selection = false;
-            canvas.lastPosX = Math.trunc(evt.touches[0].clientX)
-            canvas.lastPosY = Math.trunc(evt.touches[0].clientY)
-           
-
-                event.preventDefault();
+        canvcanv.addEventListener("touchstart", function (event) {
+            canvasDr = true;
+            lastX = event.touches[0].clientX
+            lastY = event.touches[0].clientY
+            event.preventDefault();
         }, false); 
 
-        costilcanvas.addEventListener("touchmove", function (event) {
-            if (canvas.isDragging) {
-                var e = event;
-                let ex = Math.trunc(e.touches[0].clientX)
-                let ey = Math.trunc(e.touches[0].clientY)
-                var vpt = canvas.viewportTransform;
-                vpt[4] += ex - canvas.lastPosX;
-                vpt[5] += ey - canvas.lastPosY;
-                canvas.requestRenderAll();
-                canvas.lastPosX = ex
-                canvas.lastPosY = ey
-                
-                
+        canvcanv.addEventListener("touchmove", function (event) {
+
+            if(canvasDr){
+                gameX += event.touches[0].clientX - lastX
+                gameY += event.touches[0].clientY - lastY
+                console.log("X: "+gameX+" Y: "+gameY)
+                draw(gSize)
             }
+            lastX = event.touches[0].clientX
+            lastY = event.touches[0].clientY
+
             event.preventDefault();
         }, false,{passive: false});
-        costilcanvas.addEventListener("touchend", function (event) {
-            canvas.setViewportTransform(canvas.viewportTransform);
-            canvas.isDragging = false;
-            canvas.selection = true;
-            
+        canvcanv.addEventListener("touchend", function (event) {
+            canvasDr = false;
             
             event.preventDefault();
         }, false);
@@ -127,16 +117,7 @@ costilcanvas.addEventListener('mousemove', function (event) {
 
 
 //////////////////////////////////////////////////////
-canvas.on('mouse:wheel', function(opt) {
-  var delta = opt.e.deltaY;
-  var zoom = canvas.getZoom();
-  zoom *= 0.999 ** delta;
-  if (zoom > 20) zoom = 20;
-  if (zoom < 0.01) zoom = 0.01;
-  canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
-  opt.e.preventDefault();
-  opt.e.stopPropagation();
-});
+
 
 // document.getElementsByClassName('canvas-container')[0].style.top= "-8px";
 // document.getElementsByClassName('canvas-container')[0].style.left= "-8px";
