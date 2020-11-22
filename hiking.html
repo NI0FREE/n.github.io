@@ -147,8 +147,8 @@ let lastRazn = 0;
                  y2 =  two.pageY;
             }
             log.innerHTML = "////////////////// 3"
-            let touchCenterX = (x2/2)+x1
-            let touchCenterY = (y2/2)+y1
+            let touchCenterX = ((x2-x1)/2)+x1
+            let touchCenterY = ((y2-y1)/2)+y1
 
             log.innerHTML = "////////////////// 4"
             log.innerHTML = "//////////////////  "+touchCenterX+" ////// "+touchCenterY
