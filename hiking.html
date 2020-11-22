@@ -165,15 +165,15 @@ let lastRazn = 0;
                 let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP)*1000)/1000
                 if(raznrazn<0){         //zoom
                     gSize = gSize+zoomP;
-                    gameX = gameX-zoomP;
-                    gameY = gameY-zoomP;
+                    gameX = gameX-xxx;
+                    gameY = gameY-yyy;
                     draw(gSize)
                     
                 }else
                 if(raznrazn>1){         //back
                     gSize = gSize-zoomP;
-                    gameX = gameX+zoomP;
-                    gameY = gameY+zoomP;
+                    gameX = gameX+xxx;
+                    gameY = gameY+yyy;
                     draw(gSize)
                 }
     
