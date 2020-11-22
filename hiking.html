@@ -104,7 +104,9 @@ let log = document.getElementById('log')
                 draw(gSize)
             } else 
             if (allTouches == 2){
-                log.innerHTML = "one: "+event.touches[0].clientX+" two: "+event.touches[1].clientX;
+                
+
+                phoneZoom(event.touches[0],event.touches[1])
             }
             
             lastX = event.touches[0].clientX
@@ -117,7 +119,12 @@ let log = document.getElementById('log')
             
             event.preventDefault();
         }, false);
+        function phoneZoom(one,two){
 
+            let razn
+            log.innerHTML = "one: "+one+" two: "+two;
+
+        }
 
 
 
