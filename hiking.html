@@ -121,8 +121,9 @@ let log = document.getElementById('log')
         }, false);
         function phoneZoom(one,two){
 
-            let razn
-            log.innerHTML = "one: "+one+" two: "+two;
+            let raznX = one.clientX-two.clientX;
+            let raznY = one.clientY-two.clientY;
+            log.innerHTML = "one: "+raznX+" two: "+raznY;
 
         }
 
