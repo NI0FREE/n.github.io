@@ -21,10 +21,11 @@
  window.onload = function() {
  let canvcanv = document.getElementById('largecanv');
  var ctx = canvcanv.getContext('2d');
+ littlecanv.width = 1000;
+ littlecanv.height = 1000;
  let lcanv = document.getElementById('littlecanv');
- var gtx = lcanv.getContext('2d');
+ var gtx = lcanv.getContext('2d', { alpha: false });
  document.getElementById('littlecanv').remove();
-
  let pix = [];
  for(let i = 0;i<1000;i++){
      for(let z = 0;z<1000;z++){
