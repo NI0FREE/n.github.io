@@ -113,15 +113,16 @@ addOnWheel(canvcanv, function(e) {
     
     let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
     let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
-    console.log("X: "+xxx+" Y: "+yyy)
-    if(e.deltaY<0){//zoom
+    
+    if(e.deltaY<0 && zoomP<1315){//zoom
         gSize = gSize+zoomP;
         gameX = gameX-xxx;
         gameY = gameY-yyy;
         draw(gSize)
         zoomP = zoomP + 30;
+        console.log("X: "+zoomP)
     }else
-    if(gSize/zoomP>1){         //back
+    if(gSize/zoomP>1 && e.deltaY>0 ){         //back
         gSize = gSize-zoomP;
         gameX = gameX+xxx;
         gameY = gameY+yyy;
@@ -211,7 +212,7 @@ let lastRazn = 0;
                 let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
                 let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))
 
-                if(raznrazn<0){         //zoom
+                if(raznrazn<0&& zoomP<1315){         //zoom
                     gSize = gSize+zoomP;
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
