@@ -107,9 +107,9 @@ canvcanv.addEventListener('mouseup', function (e) {
 }, false);
 
 function addOnWheel(elem, handler) {if (elem.addEventListener) {if ('onwheel' in document) {elem.addEventListener("wheel", handler);} else if ('onmousewheel' in document) {elem.addEventListener("mousewheel", handler);} else {elem.addEventListener("MozMousePixelScroll", handler);}}else{text.attachEvent("onmousewheel", handler);}}
-
+let zoomP = 25;
 addOnWheel(canvcanv, function(e) {
-    let zoomP = 25;
+    
     
     let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
     let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
@@ -119,14 +119,14 @@ addOnWheel(canvcanv, function(e) {
         gameX = gameX-xxx;
         gameY = gameY-yyy;
         draw(gSize)
-        
+        zoomP = zoomP + 30;
     }else
     if(gSize/zoomP>1){         //back
         gSize = gSize-zoomP;
         gameX = gameX+xxx;
         gameY = gameY+yyy;
         draw(gSize)
-        
+        zoomP = zoomP - 30;
     }
     
     e.preventDefault();
@@ -207,7 +207,7 @@ let lastRazn = 0;
                 
 
 
-                let zoomP = 30;
+                
                 let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
                 let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))
 
@@ -216,13 +216,14 @@ let lastRazn = 0;
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
                     draw(gSize)
-                    
+                    zoomP = zoomP + 20
                 }else
                 if(raznrazn>1){         //back
                     gSize = gSize-zoomP;
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
                     draw(gSize)
+                    zoomP = zoomP + 20;
                 }
     
 
