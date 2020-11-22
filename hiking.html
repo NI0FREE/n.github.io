@@ -88,11 +88,14 @@ addOnWheel(canvcanv, function(e) {
 });   
 ///////////////////////////////////////////////////phone
 let log = document.getElementById('log')
+let lastRaznX=0,lastRaznY=0;
         canvcanv.addEventListener("touchstart", function (event) {
             canvasDr = true;
             lastX = event.touches[0].clientX
             lastY = event.touches[0].clientY
             event.preventDefault();
+            lastRaznX = 0;
+            lastRaznY = 0;
         }, false); 
 
         canvcanv.addEventListener("touchmove", function (event) {
@@ -120,7 +123,7 @@ let log = document.getElementById('log')
             event.preventDefault();
         }, false);
 
-        let lastRaznX=0,lastRaznY=0;
+        
         function phoneZoom(one,two){
             let xZoomPH;
             let yZoomPH;
@@ -133,8 +136,12 @@ let log = document.getElementById('log')
 
                 xZoomPH = lastRaznX-raznX; 
                 yZoomPH = lastRaznY-raznY;
+
+                yZoomPH = Math.floor(yZoomPH * 10)/10
+                xZoomPH = Math.floor(xZoomPH * 10)/10
+
                 ZoomPH = xZoomPH+yZoomPH;
-                log.innerHTML = "one: "+ZoomPH;
+                log.innerHTML = "one: "+xZoomPH+" two: "+yZoomPH;
 
                 lastRaznX = raznX;
                 lastRaznY = raznY;
