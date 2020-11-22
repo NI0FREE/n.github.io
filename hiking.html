@@ -139,14 +139,13 @@ let lastRaznX=0,lastRaznY=0;
 
                 yZoomPH = Math.floor(yZoomPH * 10)/10
                 xZoomPH = Math.floor(xZoomPH * 10)/10
-
-                log.innerHTML = "one: "+xZoomPH+" two: "+yZoomPH;
+                zoomInit(yZoomPH,xZoomPH)
 
                 lastRaznX = raznX;
                 lastRaznY = raznY;
             }
 
-            zoomInit(x,y){
+            function zoomInit(x,y){
                 let xl=x, yl=y;
                 let cotrolscale;
                 if(xl<0){xl=xl*-1;}
