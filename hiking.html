@@ -13,13 +13,32 @@
 <div class="intro">
     <p id="log" style="position: absolute;">no logs</p>
     <canvas id="largecanv" ></canvas>
+    <canvas id="littlecanv" ></canvas>
 </div>
                 
 </body>
 <script>
-    
+ window.onload = function() {
  let canvcanv = document.getElementById('largecanv');
  var ctx = canvcanv.getContext('2d');
+ let lcanv = document.getElementById('littlecanv');
+ var gtx = lcanv.getContext('2d');
+ document.getElementById('littlecanv').remove();
+
+ let pix = [];
+ for(let i = 0;i<1000;i++){
+     for(let z = 0;z<1000;z++){
+         let id = (i*1000)+z;
+         let color = "red";
+         if(i%2!=0){if(id%2!=0){color = "blue"}}else{if(id%2!=0){color = "red"}}
+         
+         pix.push({id:id,color:color})
+         gtx.fillStyle = color;
+         gtx.fillRect(z,i,1,1);
+     }
+ }
+ 
+ console.log(pix)
  canvcanv.width=window.outerWidth;
  canvcanv.height=window.outerHeight;
  (function() {
@@ -31,9 +50,10 @@
 
  function draw(size){
     ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
-    ctx.fillStyle = "red";
-
-    ctx.fillRect(gameX,gameY,size,size);
+    ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;gtx.mozImageSmoothingEnabled = false;gtx.webkitImageSmoothingEnabled = false;gtx.msImageSmoothingEnabled = false;gtx.imageSmoothingEnabled = false;
+ 
+    ctx.drawImage(lcanv, gameX, gameY, size, size);
+    //ctx.fillRect(gameX,gameY,size,size);
 }
 
 
@@ -125,7 +145,7 @@ let lastRazn = 0;
 
         
         function phoneZoom(one,two){
-            log.innerHTML = "////////////////// 1"
+           
             var dist = Math.hypot(
                 one.pageX - two.pageX,
                 one.pageY - two.pageY);
@@ -137,7 +157,7 @@ let lastRazn = 0;
                  x1 =  one.pageX;
                  x2 =  two.pageX;
             }
-            log.innerHTML = "////////////////// 2"
+           
             let y1, y2;
             if(one.pageY > two.pageY){
                  y1 =  two.pageY;
@@ -146,11 +166,11 @@ let lastRazn = 0;
                  y1 =  one.pageY;
                  y2 =  two.pageY;
             }
-            log.innerHTML = "////////////////// 3"
+            
             let touchCenterX = ((x2-x1)/2)+x1
             let touchCenterY = ((y2-y1)/2)+y1
 
-            log.innerHTML = "////////////////// 4"
+          
             log.innerHTML = "//////////////////  "+touchCenterX+" ////// "+touchCenterY
            
             if(lastRazn == 0){
@@ -186,7 +206,7 @@ let lastRazn = 0;
         }
 
 
-
+    }
 //////////////////////////////////////////////////////
 
 
