@@ -125,6 +125,7 @@ let lastRazn = 0;
 
         
         function phoneZoom(one,two){
+            log.innerHTML = "////////////////// 1"
             var dist = Math.hypot(
                 one.pageX - two.pageX,
                 one.pageY - two.pageY);
@@ -136,6 +137,7 @@ let lastRazn = 0;
                  x1 =  one.pageX;
                  x2 =  two.pageX;
             }
+            log.innerHTML = "////////////////// 2"
             let y1, y2;
             if(one.pageY > two.pageY){
                  y1 =  two.pageY;
@@ -144,11 +146,11 @@ let lastRazn = 0;
                  y1 =  one.pageY;
                  y2 =  two.pageY;
             }
-
+            log.innerHTML = "////////////////// 3"
             let touchCenterX = (x2/2)+x1
             let touchCenterY = (y2/2)+y1
 
-
+            log.innerHTML = "////////////////// 4"
             log.innerHTML = "//////////////////  "+touchCenterX+" ////// "+touchCenterY
            
             if(lastRazn == 0){
