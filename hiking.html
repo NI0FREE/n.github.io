@@ -105,11 +105,6 @@ let lastRaznX=0,lastRaznY=0;
                 gameY += event.touches[0].clientY - lastY
                 console.log("X: "+gameX+" Y: "+gameY)
                 draw(gSize)
-            } else 
-            if (allTouches == 2){
-                
-
-                phoneZoom(event.touches[0],event.touches[1])
             }
             
             lastX = event.touches[0].clientX
@@ -124,46 +119,14 @@ let lastRaznX=0,lastRaznY=0;
         }, false);
 
         
-        function phoneZoom(one,two){
-            let xZoomPH;
-            let yZoomPH;
-            let raznX = one.clientX-two.clientX;
-            let raznY = one.clientY-two.clientY;
-            if( lastRaznX == 0 && lastRaznY ==0){
-                lastRaznX = raznX;
-                lastRaznY = raznY;
-            }else{
-
-                xZoomPH = lastRaznX-raznX; 
-                yZoomPH = lastRaznY-raznY;
-
-                yZoomPH = Math.floor(yZoomPH * 10)/10
-                xZoomPH = Math.floor(xZoomPH * 10)/10
-                zoomInit(yZoomPH,xZoomPH)
-
-                lastRaznX = raznX;
-                lastRaznY = raznY;
+        canvcanv.addEventListener('gestureend', function(e) {
+            if (e.scale < 1.0) {
+                log.innerHTML= "+++++"
+            } else if (e.scale > 1.0) {
+                log.innerHTML= "-----"
             }
-
-            function zoomInit(x,y){
-                let xl=x, yl=y;
-                let cotrolscale;
-                if(xl<0){xl=xl*-1;}
-                if(yl<0){yl=yl*-1;}
-                if(xl>yl){
-                    cotrolscale = x
-                }else{
-                    cotrolscale = y
-                }
-                if(cotrolscale>0){
-                    log.innerHTML = "--------------------------";
-                }else{
-                    log.innerHTML = "++++++++++++++++++++++++++";
-                }
-            }
-            
-        }
-
+            e.preventDefault();
+        }, false,{passive: false});
 
 
 //////////////////////////////////////////////////////
