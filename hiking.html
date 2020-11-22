@@ -136,8 +136,20 @@ let lastRazn = 0;
                  x1 =  one.pageX;
                  x2 =  two.pageX;
             }
+            let y1, y2;
+            if(one.pageY > two.pageY){
+                 y1 =  two.pageY;
+                 y2 =  one.pageY;
+            }else{
+                 y1 =  one.pageY;
+                 y2 =  two.pageY;
+            }
 
-            let touchCenter = (x2/2)+x1
+            let touchCenterX = (x2/2)+x1
+            let touchCenterY = (y2/2)+y1
+
+            let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP)*1000)/1000
+            let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP)*1000)/1000
             log.innerHTML = "//////////////////  "+touchCenter
            
             if(lastRazn == 0){
@@ -151,15 +163,15 @@ let lastRazn = 0;
                
                 if(raznrazn<0){         //zoom
                     gSize = gSize+zoomP;
-                    gameX = gameX-zoomP;
-                    gameY = gameY-zoomP;
+                    gameX = gameX-xxx;
+                    gameY = gameY-yyy;
                     draw(gSize)
                     
                 }else
                 if(raznrazn>1){         //back
                     gSize = gSize-zoomP;
-                    gameX = gameX+zoomP;
-                    gameY = gameY+zoomP;
+                    gameX = gameX+xxx;
+                    gameY = gameY+yyy;
                     draw(gSize)
                 }
     
