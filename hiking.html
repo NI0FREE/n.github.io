@@ -133,7 +133,8 @@ let log = document.getElementById('log')
 
                 xZoomPH = lastRaznX-raznX; 
                 yZoomPH = lastRaznY-raznY;
-                log.innerHTML = "one: "+xZoomPH+" two: "+yZoomPH;
+                ZoomPH = xZoomPH+yZoomPH;
+                log.innerHTML = "one: "+ZoomPH;
 
                 lastRaznX = raznX;
                 lastRaznY = raznY;
