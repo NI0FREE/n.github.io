@@ -11,7 +11,7 @@
     <script src="file:///C:/Users/vasin/Desktop/helloworld/fabric.min%20(1).js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div class="intro">
-    
+    <p id="log" style="position: absolute;">no logs</p>
     <canvas id="largecanv" ></canvas>
 </div>
                 
@@ -87,6 +87,7 @@ addOnWheel(canvcanv, function(e) {
     e.preventDefault();
 });   
 ///////////////////////////////////////////////////phone
+let log = document.getElementById('log')
         canvcanv.addEventListener("touchstart", function (event) {
             canvasDr = true;
             lastX = event.touches[0].clientX
@@ -95,8 +96,8 @@ addOnWheel(canvcanv, function(e) {
         }, false); 
 
         canvcanv.addEventListener("touchmove", function (event) {
-
-            if(canvasDr){
+            let allTouches = event.touches.length;
+            if(canvasDr && allTouches == 1){
                 gameX += event.touches[0].clientX - lastX
                 gameY += event.touches[0].clientY - lastY
                 console.log("X: "+gameX+" Y: "+gameY)
