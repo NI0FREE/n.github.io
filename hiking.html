@@ -8,6 +8,14 @@
         </style>
     </head>
 <body>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+    <script>
+        let myinfo = 0;
+     vkBridge.send('VKWebAppInit');
+    vkBridge.send("VKWebAppGetUserInfo").then(result => {
+        myinfo = result;})
+    </script> 
     <script src="file:///C:/Users/vasin/Desktop/helloworld/fabric.min%20(1).js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div class="intro">
