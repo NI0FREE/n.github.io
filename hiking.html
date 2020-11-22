@@ -149,7 +149,7 @@ let lastRazn = 0;
             let touchCenterY = (y2/2)+y1
 
 
-            log.innerHTML = "//////////////////  "+touchCenter
+            log.innerHTML = "//////////////////  "+touchCenter+" ////// "+touchCenterY
            
             if(lastRazn == 0){
                 lastRazn = dist;
@@ -159,19 +159,19 @@ let lastRazn = 0;
 
 
                 let zoomP = 25;
-                let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP)*1000)/1000
-                let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP)*1000)/1000
+                //let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP)*1000)/1000
+                //let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP)*1000)/1000
                 if(raznrazn<0){         //zoom
                     gSize = gSize+zoomP;
-                    gameX = gameX-xxx;
-                    gameY = gameY-yyy;
+                    gameX = gameX-zoomP;
+                    gameY = gameY-zoomP;
                     draw(gSize)
                     
                 }else
                 if(raznrazn>1){         //back
                     gSize = gSize-zoomP;
-                    gameX = gameX+xxx;
-                    gameY = gameY+yyy;
+                    gameX = gameX+zoomP;
+                    gameY = gameY+zoomP;
                     draw(gSize)
                 }
     
