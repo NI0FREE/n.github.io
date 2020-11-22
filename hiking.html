@@ -105,6 +105,11 @@ let lastRaznX=0,lastRaznY=0;
                 gameY += event.touches[0].clientY - lastY
                 console.log("X: "+gameX+" Y: "+gameY)
                 draw(gSize)
+            } else 
+            if (allTouches == 2){
+                
+
+                phoneZoom(event.touches[0],event.touches[1])
             }
             
             lastX = event.touches[0].clientX
@@ -119,14 +124,13 @@ let lastRaznX=0,lastRaznY=0;
         }, false);
 
         
-        canvcanv.addEventListener('gestureend', function(e) {
-            if (e.scale < 1.0) {
-                log.innerHTML= "+++++"
-            } else if (e.scale > 1.0) {
-                log.innerHTML= "-----"
-            }
-            e.preventDefault();
-        }, false,{passive: false});
+        function phoneZoom(one,two){
+            var dist = Math.hypot(
+                one.pageX - two.pageX,
+                one.pageY - two.pageY);
+            log.innerHTML = " / / / / /  "+dist;
+        }
+
 
 
 //////////////////////////////////////////////////////
