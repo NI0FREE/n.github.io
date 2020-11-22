@@ -161,8 +161,9 @@ let lastRazn = 0;
 
 
                 let zoomP = 25;
-                let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP)*1000)/1000
-                let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP)*1000)/1000
+                let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
+                let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))
+                
                 if(raznrazn<0){         //zoom
                     gSize = gSize+zoomP;
                     gameX = gameX-xxx;
