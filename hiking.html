@@ -133,7 +133,28 @@ let lastRazn = 0;
                 lastRazn = dist;
             }else{
                 let raznrazn = lastRazn - dist;
-            log.innerHTML = " / / / / /  "+raznrazn;
+                
+
+
+                let zoomP = 25;
+               
+                if(raznrazn<0){         //zoom
+                    gSize = gSize+zoomP;
+                    gameX = gameX-zoomP;
+                    gameY = gameY-zoomP;
+                    draw(gSize)
+                    
+                }else
+                if(raznrazn>1){         //back
+                    gSize = gSize-zoomP;
+                    gameX = gameX+zoomP;
+                    gameY = gameY+zoomP;
+                    draw(gSize)
+                }
+    
+
+
+
                 lastRazn = dist;
             }
         }
