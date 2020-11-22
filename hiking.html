@@ -140,14 +140,28 @@ let lastRaznX=0,lastRaznY=0;
                 yZoomPH = Math.floor(yZoomPH * 10)/10
                 xZoomPH = Math.floor(xZoomPH * 10)/10
 
-                ZoomPH = xZoomPH+yZoomPH;
                 log.innerHTML = "one: "+xZoomPH+" two: "+yZoomPH;
 
                 lastRaznX = raznX;
                 lastRaznY = raznY;
             }
 
-            
+            zoomInit(x,y){
+                let xl=x, yl=y;
+                let cotrolscale;
+                if(xl<0){xl=xl*-1;}
+                if(yl<0){yl=yl*-1;}
+                if(xl>yl){
+                    cotrolscale = x
+                }else{
+                    cotrolscale = y
+                }
+                if(cotrolscale>0){
+                    log.innerHTML = "-";
+                }else{
+                    log.innerHTML = "+";
+                }
+            }
             
         }
 
