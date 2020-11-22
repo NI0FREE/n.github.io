@@ -128,7 +128,17 @@ let lastRazn = 0;
             var dist = Math.hypot(
                 one.pageX - two.pageX,
                 one.pageY - two.pageY);
-            
+            if(one.pageX > two.pageX){
+                let x1 =  two.pageX;
+                let x2 =  one.pageX;
+            }else{
+                let x1 =  one.pageX;
+                let x2 =  two.pageX;
+            }
+
+            let touchCenter = (x2/2)+x1
+            log.innerHTML = "//////////////////  "+touchCenter
+           
             if(lastRazn == 0){
                 lastRazn = dist;
             }else{
