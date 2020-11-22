@@ -40,9 +40,9 @@
      
      for(let z = 0;z<301;z++){
          let id = (i*300)+z;
-         let color = "red";
-         if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
-        
+         let color = "rgb("+randomInteger(0, 254)+","+randomInteger(0, 254)+","+randomInteger(0, 254)+")";
+         //if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
+         
          
          //pix.push({id:id,color:color})
          gtx.fillStyle = color;
@@ -77,7 +77,11 @@ function draw(size){
     ctx.drawImage(lcanv, gameX, gameY, size, size);
     //ctx.fillRect(gameX,gameY,size,size);
 }
+function randomInteger(min, max) {
 
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+}
 
 // "add" rectangle onto canvas
 
@@ -110,24 +114,27 @@ function addOnWheel(elem, handler) {if (elem.addEventListener) {if ('onwheel' in
 let zoomP = 25;
 addOnWheel(canvcanv, function(e) {
     
-    
-    let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
-    let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
-    
     if(e.deltaY<0 && zoomP<1315){//zoom
+        zoomP = zoomP + 30;
+        let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
+        let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
         gSize = gSize+zoomP;
         gameX = gameX-xxx;
         gameY = gameY-yyy;
         draw(gSize)
-        zoomP = zoomP + 30;
-        console.log("X: "+zoomP)
+        
+        
     }else
-    if(gSize/zoomP>1 && e.deltaY>0 ){         //back
+    if( e.deltaY>0 && gSize > 505){ //back
+           
+        
+        let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
+        let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
         gSize = gSize-zoomP;
         gameX = gameX+xxx;
         gameY = gameY+yyy;
         draw(gSize)
-        zoomP = zoomP - 30;
+        if(zoomP<60){}else{ zoomP = zoomP - 30;}  
     }
     
     e.preventDefault();
@@ -209,17 +216,21 @@ let lastRazn = 0;
 
 
                 
-                let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
-                let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))
+               
 
-                if(raznrazn<0&& zoomP<500){         //zoom
+                if(raznrazn<0&& zoomP<1315){
+                    zoomP = zoomP + 5;
+                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
+                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))         //zoom
                     gSize = gSize+zoomP;
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
                     draw(gSize)
-                    zoomP = zoomP + 5;
+                    
                 }else
-                if(raznrazn>1&&gSize>250){         //back
+                if(raznrazn>1&&gSize>250){  
+                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
+                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))       //back
                     gSize = gSize-zoomP;
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
