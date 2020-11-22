@@ -29,17 +29,17 @@
  window.onload = function() {
  let canvcanv = document.getElementById('largecanv');
  var ctx = canvcanv.getContext('2d');
- littlecanv.width = 2000;
- littlecanv.height = 2000;
+ littlecanv.width = 300;
+ littlecanv.height = 300;
  let lcanv = document.getElementById('littlecanv');
  var gtx = lcanv.getContext('2d', { alpha: false });
  document.getElementById('littlecanv').remove();
  let pix = [];let bool = 0;
- for(let i = 0;i<2000;i++){
+ for(let i = 0;i<300;i++){
      
      
-     for(let z = 0;z<2001;z++){
-         let id = (i*2000)+z;
+     for(let z = 0;z<301;z++){
+         let id = (i*300)+z;
          let color = "red";
          if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
         
@@ -59,8 +59,18 @@
         canvcanv.width = window.innerWidth;
         canvcanv.height = window.innerHeight;
  })();
-
- function draw(size){
+function placePix(e){
+    console.log(e)
+  let pixLenght = gSize/300
+  let Xx=Math.floor((e.clientX-gameX)/pixLenght)
+  let Yy=Math.floor((e.clientY-gameY)/pixLenght)
+  let  ID = Yy*300+Xx;
+  console.log(ID)
+  gtx.fillStyle = "white";
+  gtx.fillRect(Xx,Yy,1,1);
+  draw(gSize)
+}
+function draw(size){
     ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
     ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;gtx.mozImageSmoothingEnabled = false;gtx.webkitImageSmoothingEnabled = false;gtx.msImageSmoothingEnabled = false;gtx.imageSmoothingEnabled = false;
  
@@ -71,8 +81,8 @@
 
 // "add" rectangle onto canvas
 
-let gSize = 25,gameX=window.innerWidth/2,gameY=window.innerHeight/2,lastX=0,lastY=0;
-let canvasDr = false;
+let gSize = 1000,gameX=window.innerWidth/2,gameY=window.innerHeight/2,lastX=0,lastY=0;
+let canvasDr = false,candraw = true;
 draw(gSize)
 canvcanv.addEventListener('mousedown', function (event) {
     canvasDr = true;
@@ -80,6 +90,7 @@ canvcanv.addEventListener('mousedown', function (event) {
 }, false);
 canvcanv.addEventListener('mousemove', function (event) {
     if(canvasDr){
+       candraw = false;
        gameX += event.clientX - lastX
        gameY += event.clientY - lastY
        
@@ -89,8 +100,10 @@ canvcanv.addEventListener('mousemove', function (event) {
     lastY = event.clientY
 
 }, false);
-canvcanv.addEventListener('mouseup', function () {
+canvcanv.addEventListener('mouseup', function (e) {
+    if (candraw){placePix(e)}
     canvasDr = false;
+    candraw = true;
 }, false);
 
 function addOnWheel(elem, handler) {if (elem.addEventListener) {if ('onwheel' in document) {elem.addEventListener("wheel", handler);} else if ('onmousewheel' in document) {elem.addEventListener("mousewheel", handler);} else {elem.addEventListener("MozMousePixelScroll", handler);}}else{text.attachEvent("onmousewheel", handler);}}
@@ -133,6 +146,7 @@ let lastRazn = 0;
         canvcanv.addEventListener("touchmove", function (event) {
             let allTouches = event.touches.length;
             if(canvasDr && allTouches == 1){
+                candraw = false;
                 gameX += event.touches[0].clientX - lastX
                 gameY += event.touches[0].clientY - lastY
                 console.log("X: "+gameX+" Y: "+gameY)
@@ -151,7 +165,8 @@ let lastRazn = 0;
         }, false,{passive: false});
         canvcanv.addEventListener("touchend", function (event) {
             canvasDr = false;
-            
+            if (candraw){placePix(event.changedTouches[0])}
+            candraw = true;
             event.preventDefault();
         }, false);
 
