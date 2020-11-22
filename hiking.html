@@ -29,19 +29,22 @@
  window.onload = function() {
  let canvcanv = document.getElementById('largecanv');
  var ctx = canvcanv.getContext('2d');
- littlecanv.width = 1000;
- littlecanv.height = 1000;
+ littlecanv.width = 2000;
+ littlecanv.height = 2000;
  let lcanv = document.getElementById('littlecanv');
  var gtx = lcanv.getContext('2d', { alpha: false });
  document.getElementById('littlecanv').remove();
- let pix = [];
- for(let i = 0;i<1000;i++){
-     for(let z = 0;z<1000;z++){
-         let id = (i*1000)+z;
+ let pix = [];let bool = 0;
+ for(let i = 0;i<2000;i++){
+     
+     
+     for(let z = 0;z<2001;z++){
+         let id = (i*2000)+z;
          let color = "red";
-         if(i%2!=0){if(id%2!=0){color = "blue"}}else{if(id%2!=0){color = "red"}}
+         if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
+        
          
-         pix.push({id:id,color:color})
+         //pix.push({id:id,color:color})
          gtx.fillStyle = color;
          gtx.fillRect(z,i,1,1);
      }
@@ -189,7 +192,7 @@ let lastRazn = 0;
                 
 
 
-                let zoomP = 17;
+                let zoomP = 30;
                 let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
                 let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))
 
