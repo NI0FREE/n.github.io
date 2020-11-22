@@ -119,12 +119,28 @@ let log = document.getElementById('log')
             
             event.preventDefault();
         }, false);
-        function phoneZoom(one,two){
 
+        let lastRaznX=0,lastRaznY=0;
+        function phoneZoom(one,two){
+            let xZoomPH;
+            let yZoomPH;
             let raznX = one.clientX-two.clientX;
             let raznY = one.clientY-two.clientY;
-            log.innerHTML = "one: "+raznX+" two: "+raznY;
+            if( lastRaznX == 0 && lastRaznY ==0){
+                lastRaznX = raznX;
+                lastRaznY = raznY;
+            }else{
 
+                xZoomPH = lastRaznX-raznX; 
+                yZoomPH = lastRaznY-raznY;
+                log.innerHTML = "one: "+xZoomPH+" two: "+yZoomPH;
+
+                lastRaznX = raznX;
+                lastRaznY = raznY;
+            }
+
+            
+            
         }
 
 
