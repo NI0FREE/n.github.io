@@ -218,9 +218,9 @@ let lastRazn = 0;
 
                 
                
-                log.innerHTML = zoomP;
+                log.innerHTML = zoomP+" / "+gSize;
                 if(raznrazn<0&& zoomP<515&&strPress>0.1){
-                    zoomP = zoomP + 0.1;
+                    zoomP = zoomP + strPress;
                     let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))*100)/100
                     let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))*100)/100         //zoom
                     gSize = gSize+(zoomP*strPress);
@@ -236,7 +236,7 @@ let lastRazn = 0;
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
                     draw(gSize)
-                    if(zoomP>15){zoomP = zoomP - 0.1 ;}
+                    if(zoomP>1){zoomP = zoomP - 0.1 ;}
                     
                 }
     
