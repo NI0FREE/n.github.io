@@ -219,20 +219,20 @@ let lastRazn = 0;
                 
                
                 log.innerHTML = strPress;
-                if(raznrazn<0&& zoomP<515&&strPress>0.2){
+                if(raznrazn<0&& zoomP<515&&strPress>0.1){
                     //zoomP = zoomP + 5;
-                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP*strPress))
-                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP*strPress))         //zoom
-                    gSize = gSize+zoomP*strPress;
+                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))
+                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))         //zoom
+                    gSize = gSize+(zoomP*strPress);
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
                     draw(gSize)
                     
                 }else
-                if(raznrazn>1&&gSize>250&&strPress>0.2){  
-                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP*strPress))
-                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP*strPress))       //back
-                    gSize = gSize-zoomP*strPress;
+                if(raznrazn>1&&gSize>250&&strPress>0.1){  
+                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))
+                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))       //back
+                    gSize = gSize-(zoomP*strPress);
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
                     draw(gSize)
