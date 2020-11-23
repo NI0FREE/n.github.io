@@ -175,7 +175,7 @@ let lastRazn = 0;
         canvcanv.addEventListener("touchend", function (event) {
             canvasDr = false;
             if (candraw){placePix(event.changedTouches[0])}
-            if (event.changedTouches.length == 1){candraw = true;log.innerHTML = event.changedTouches.length}
+            if (event.touches.length == 0){candraw = true;console.log(event)}
            
             event.preventDefault();
         }, false);
