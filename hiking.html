@@ -152,6 +152,7 @@ let lastRazn = 0, touches =0;;
             //
             touches = touches + 1;
             //
+            log.innerHTML = touches
         }, false); 
 
         canvcanv.addEventListener("touchmove", function (event) {
@@ -171,7 +172,7 @@ let lastRazn = 0, touches =0;;
             
             lastX = event.touches[0].clientX
             lastY = event.touches[0].clientY
-
+            log.innerHTML = touches
             event.preventDefault();
         }, false,{passive: false});
         canvcanv.addEventListener("touchend", function (event) {
