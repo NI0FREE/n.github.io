@@ -175,7 +175,8 @@ let lastRazn = 0;
         canvcanv.addEventListener("touchend", function (event) {
             canvasDr = false;
             if (candraw){placePix(event.changedTouches[0])}
-            candraw = true;
+            if (event.changedTouches.length == 1){candraw = true;}
+            
             event.preventDefault();
         }, false);
 
@@ -217,9 +218,9 @@ let lastRazn = 0;
                 if(strPress<0){strPress=strPress*-1};
 
                 
-                COSTIL()
+                
                 log.innerHTML = zoomP+" / "+gSize;
-                function COSTIL(){
+                
                     if(raznrazn<0&& gSize<10000&&strPress>0.1){
                         //if(phoneZoomFix < 10){phoneZoomFix=phoneZoomFix+1;}
                         zoomP = zoomP + 10*strPress;
@@ -242,7 +243,7 @@ let lastRazn = 0;
                         //if(phoneZoomFix > 1){phoneZoomFix=phoneZoomFix-0.1;}
                         
                     }
-                }
+                
 
 
 
