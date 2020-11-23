@@ -142,14 +142,16 @@ addOnWheel(canvcanv, function(e) {
 });   
 ///////////////////////////////////////////////////phone
 let log = document.getElementById('log')
-let lastRazn = 0;
+let lastRazn = 0, touches =0;;
         canvcanv.addEventListener("touchstart", function (event) {
             canvasDr = true;
             lastX = event.touches[0].clientX
             lastY = event.touches[0].clientY
             event.preventDefault();
             lastRazn = 0;
-            
+            //
+            touches = touches + 1;
+            //
         }, false); 
 
         canvcanv.addEventListener("touchmove", function (event) {
@@ -175,8 +177,8 @@ let lastRazn = 0;
         canvcanv.addEventListener("touchend", function (event) {
             canvasDr = false;
             if (candraw){placePix(event.changedTouches[0])}
-            if (event.touches.length == 0){candraw = true;console.log(event)}
-           
+            if (touches == 0){candraw = true;}
+            touches = touches = 1;
             event.preventDefault();
         }, false);
 
