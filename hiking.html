@@ -220,8 +220,8 @@ let lastRazn = 0;
                 COSTIL()
                 log.innerHTML = zoomP+" / "+gSize;
                 function COSTIL(){
-                    if(raznrazn<0&& zoomP<515&&strPress>0.1){
-                        zoomP = zoomP + 2*strPress;
+                    if(raznrazn<0&& gSize<10000&&strPress>0.1){
+                        zoomP = zoomP + 3*strPress;
                         let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
                         let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP)))*100)/100         //zoom
                         gSize = gSize+(zoomP);
@@ -230,8 +230,8 @@ let lastRazn = 0;
                         draw(gSize)
                         
                     }else
-                    if(raznrazn>1&&zoomP>2&&strPress>0.1){  
-                        if(zoomP>1){zoomP = zoomP + 2*strPress;}
+                    if(raznrazn>1&&gSize>250&&strPress>0.1){  
+                        if(zoomP>1){zoomP = zoomP + 3*strPress;}
                         let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
                         let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP)))*100)/100           //back
                         gSize = gSize-(zoomP);
