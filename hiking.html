@@ -40,7 +40,7 @@
      
      for(let z = 0;z<301;z++){
          let id = (i*300)+z;
-         let color = "rgb("+randomInteger(0, 254)+","+randomInteger(0, 254)+","+randomInteger(0, 254)+")";
+         let color = "rgb("+randomInteger(0, 25)+","+randomInteger(0, 25)+","+randomInteger(0, 25)+")";
          //if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
          
          
@@ -66,15 +66,16 @@ function placePix(e){
   let Yy=Math.floor((e.clientY-gameY)/pixLenght)
   let  ID = Yy*300+Xx;
   console.log(ID)
-  gtx.fillStyle = "white";
+  gtx.fillStyle = "rgb("+randomInteger(195, 254)+","+randomInteger(195, 254)+","+randomInteger(195, 254)+")";;
   gtx.fillRect(Xx,Yy,1,1);
   draw(gSize)
 }
-function draw(size){
+function draw(size,X){
+    if(!X){X = 1;}
     ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
     ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;gtx.mozImageSmoothingEnabled = false;gtx.webkitImageSmoothingEnabled = false;gtx.msImageSmoothingEnabled = false;gtx.imageSmoothingEnabled = false;
  
-    ctx.drawImage(lcanv, gameX, gameY, size, size);
+    ctx.drawImage(lcanv, gameX*X, gameY*X, size, size);
     //ctx.fillRect(gameX,gameY,size,size);
 }
 function randomInteger(min, max) {
@@ -111,11 +112,11 @@ canvcanv.addEventListener('mouseup', function (e) {
 }, false);
 
 function addOnWheel(elem, handler) {if (elem.addEventListener) {if ('onwheel' in document) {elem.addEventListener("wheel", handler);} else if ('onmousewheel' in document) {elem.addEventListener("mousewheel", handler);} else {elem.addEventListener("MozMousePixelScroll", handler);}}else{text.attachEvent("onmousewheel", handler);}}
-let zoomP = 25;
+let zoomP = 70;
 addOnWheel(canvcanv, function(e) {
     
     if(e.deltaY<0 && zoomP<1315){//zoom
-        zoomP = zoomP + 30;
+        zoomP = zoomP + 70;
         let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
         let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
         gSize = gSize+zoomP;
@@ -134,7 +135,7 @@ addOnWheel(canvcanv, function(e) {
         gameX = gameX+xxx;
         gameY = gameY+yyy;
         draw(gSize)
-        if(zoomP<60){}else{ zoomP = zoomP - 30;}  
+        if(zoomP<140){}else{ zoomP = zoomP - 70;}  
     }
     
     e.preventDefault();
@@ -206,7 +207,7 @@ let lastRazn = 0;
             let touchCenterY = ((y2-y1)/2)+y1
 
           
-            log.innerHTML = zoomP;
+            
            
             if(lastRazn == 0){
                 lastRazn = dist;
@@ -217,7 +218,7 @@ let lastRazn = 0;
 
                 
                
-
+                log.innerHTML = raznrazn;
                 if(raznrazn<0&& zoomP<515){
                     zoomP = zoomP + 5;
                     let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
