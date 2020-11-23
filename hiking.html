@@ -175,8 +175,8 @@ let lastRazn = 0;
         canvcanv.addEventListener("touchend", function (event) {
             canvasDr = false;
             if (candraw){placePix(event.changedTouches[0])}
-            if (event.changedTouches.length == 1){candraw = true;}
-            
+            if (event.changedTouches.length == 1){candraw = true;log.innerHTML = event.changedTouches.length}
+           
             event.preventDefault();
         }, false);
 
@@ -219,7 +219,7 @@ let lastRazn = 0;
 
                 
                 
-                log.innerHTML = zoomP+" / "+gSize;
+                
                 
                     if(raznrazn<0&& gSize<10000&&strPress>0.1){
                         //if(phoneZoomFix < 10){phoneZoomFix=phoneZoomFix+1;}
