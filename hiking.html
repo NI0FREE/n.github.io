@@ -220,23 +220,23 @@ let lastRazn = 0;
                
                 log.innerHTML = zoomP+" / "+gSize;
                 if(raznrazn<0&& zoomP<515&&strPress>0.1){
-                    zoomP = zoomP + 1*strPress;
-                    let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))*100)/100
-                    let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))*100)/100         //zoom
-                    gSize = gSize+(zoomP*strPress);
+                    zoomP = zoomP + 1;
+                    let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
+                    let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP)))*100)/100         //zoom
+                    gSize = gSize+(zoomP);
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
                     draw(gSize)
                     
                 }else
                 if(raznrazn>1&&zoomP>2&&strPress>0.1){  
-                    let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))*100)/100
-                    let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))*100)/100           //back
-                    gSize = gSize-(zoomP*strPress);
+                    let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
+                    let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP)))*100)/100           //back
+                    gSize = gSize-(zoomP);
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
                     draw(gSize)
-                    if(zoomP>1){zoomP = zoomP - 1*strPress;}
+                    if(zoomP>1){zoomP = zoomP - 1;}
                     
                 }
     
