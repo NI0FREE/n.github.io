@@ -220,23 +220,23 @@ let lastRazn = 0;
                
                 log.innerHTML = strPress;
                 if(raznrazn<0&& zoomP<515&&strPress>0.2){
-                    zoomP = zoomP + 5;
-                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
-                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))         //zoom
-                    gSize = gSize+zoomP;
+                    //zoomP = zoomP + 5;
+                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP*strPress))
+                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP*strPress))         //zoom
+                    gSize = gSize+zoomP*strPress;
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
                     draw(gSize)
                     
                 }else
                 if(raznrazn>1&&gSize>250&&strPress>0.2){  
-                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP))
-                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP))       //back
-                    gSize = gSize-zoomP;
+                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/zoomP*strPress))
+                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/zoomP*strPress))       //back
+                    gSize = gSize-zoomP*strPress;
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
                     draw(gSize)
-                    if(zoomP>15){zoomP = zoomP - 5 ;}
+                    //if(zoomP>15){zoomP = zoomP - 5 ;}
                     
                 }
     
@@ -256,4 +256,3 @@ let lastRazn = 0;
 // document.getElementsByClassName('canvas-container')[0].style.left= "-8px";
 </script>
 </html
-
