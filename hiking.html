@@ -66,7 +66,7 @@ function placePix(e){
   let Yy=Math.floor((e.clientY-gameY)/pixLenght)
   let  ID = Yy*300+Xx;
   console.log(ID)
-  gtx.fillStyle = "rgb("+randomInteger(195, 254)+","+randomInteger(195, 254)+","+randomInteger(195, 254)+")";;
+  gtx.fillStyle = "rgb("+randomInteger(250, 254)+","+randomInteger(0, 20)+","+randomInteger(0, 20)+")";;
   gtx.fillRect(Xx,Yy,1,1);
   draw(gSize)
 }
