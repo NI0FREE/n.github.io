@@ -179,6 +179,7 @@ let lastRazn = 0, touches =0;;
             if (candraw){placePix(event.changedTouches[0])}
             if (touches == 1){candraw = true;}
             touches = touches - 1;
+            log.innerHTML = touches
             event.preventDefault();
         }, false);
 
