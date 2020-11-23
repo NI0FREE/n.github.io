@@ -231,7 +231,7 @@ let lastRazn = 0;
                         
                     }else
                     if(raznrazn>1&&zoomP>2&&strPress>0.1){  
-                        if(zoomP>1){zoomP = zoomP - 1*strPress;}
+                        if(zoomP>1){zoomP = zoomP + 1*strPress;}
                         let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
                         let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP)))*100)/100           //back
                         gSize = gSize-(zoomP);
