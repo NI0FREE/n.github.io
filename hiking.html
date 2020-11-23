@@ -221,8 +221,8 @@ let lastRazn = 0;
                 log.innerHTML = strPress;
                 if(raznrazn<0&& zoomP<515&&strPress>0.1){
                     //zoomP = zoomP + 5;
-                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))
-                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))         //zoom
+                    let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))*100)/100
+                    let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))*100)/100         //zoom
                     gSize = gSize+(zoomP*strPress);
                     gameX = gameX-xxx;
                     gameY = gameY-yyy;
@@ -230,8 +230,8 @@ let lastRazn = 0;
                     
                 }else
                 if(raznrazn>1&&gSize>250&&strPress>0.1){  
-                    let xxx = Math.trunc(((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))
-                    let yyy = Math.trunc(((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))       //back
+                    let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP*strPress)))*100)/100
+                    let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP*strPress)))*100)/100           //back
                     gSize = gSize-(zoomP*strPress);
                     gameX = gameX+xxx;
                     gameY = gameY+yyy;
