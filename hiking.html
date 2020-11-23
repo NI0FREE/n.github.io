@@ -179,9 +179,9 @@ let lastRazn = 0;
             event.preventDefault();
         }, false);
 
-        zoomP = 2;
+        
         function phoneZoom(one,two){
-           
+            zoomP = 3;
             var dist = Math.hypot(
                 one.pageX - two.pageX,
                 one.pageY - two.pageY);
