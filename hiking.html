@@ -72,13 +72,14 @@
  let lcanv = document.getElementById('littlecanv');
  var gtx = lcanv.getContext('2d', { alpha: false });
  document.getElementById('littlecanv').remove();
- let pix = [];let bool = 0;
+ let pix = [];let bool = 0;let color= "red"
  for(let i = 0;i<1500;i++){
      
      
      for(let z = 0;z<1501;z++){
          let id = (i*1500)+z;
-         let color = "rgb("+randomInteger(0, 25)+","+randomInteger(0, 25)+","+randomInteger(0, 25)+")";
+         
+         if(color == "red"){color="red"}else{color="blue"}
          //if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
          
          
