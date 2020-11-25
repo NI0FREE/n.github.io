@@ -67,17 +67,17 @@
  window.onload = function() {
  let canvcanv = document.getElementById('largecanv');
  var ctx = canvcanv.getContext('2d');
- littlecanv.width = 300;
- littlecanv.height = 300;
+ littlecanv.width = 600;
+ littlecanv.height = 600;
  let lcanv = document.getElementById('littlecanv');
  var gtx = lcanv.getContext('2d', { alpha: false });
  document.getElementById('littlecanv').remove();
  let pix = [];let bool = 0;
- for(let i = 0;i<300;i++){
+ for(let i = 0;i<600;i++){
      
      
-     for(let z = 0;z<301;z++){
-         let id = (i*300)+z;
+     for(let z = 0;z<601;z++){
+         let id = (i*600)+z;
          let color = "rgb("+randomInteger(0, 25)+","+randomInteger(0, 25)+","+randomInteger(0, 25)+")";
          //if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
          
@@ -99,7 +99,7 @@
  })();
 function placePix(e){
     console.log(e)
-  let pixLenght = gSize/300
+  let pixLenght = gSize/600
   let Xx=Math.floor((e.clientX-gameX)/pixLenght)
   let Yy=Math.floor((e.clientY-gameY)/pixLenght)
   let  ID = Yy*300+Xx;
