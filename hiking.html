@@ -173,6 +173,7 @@ addOnWheel(canvcanv, function(e) {
 ///////////////////////////////////////////////////phone
 let log = document.getElementById('log')
 let lastRazn = 0;
+var movecount=0;
         canvcanv.addEventListener("touchstart", function (event) {
             canvasDr = true;
             lastX = event.touches[0].clientX
@@ -186,26 +187,28 @@ let lastRazn = 0;
         }, false); 
 
         canvcanv.addEventListener("touchmove", function (event) {
-            let allTouches = event.touches.length;
-            if(canvasDr && allTouches == 1){
-                candraw = false;
-                gameX += event.touches[0].clientX - lastX
-                gameY += event.touches[0].clientY - lastY
-                console.log("X: "+gameX+" Y: "+gameY)
-                draw(gSize)
-            } else 
-            if (allTouches == 2){
-                candraw = false;
+            if(movecount>2){
+                let allTouches = event.touches.length;
+                if(canvasDr && allTouches == 1){
+                    candraw = false;
+                    gameX += event.touches[0].clientX - lastX
+                    gameY += event.touches[0].clientY - lastY
+                    console.log("X: "+gameX+" Y: "+gameY)
+                    draw(gSize)
+                } else 
+                if (allTouches == 2){
+                    candraw = false;
 
-                phoneZoom(event.touches[0],event.touches[1])
-            }
-            
-            lastX = event.touches[0].clientX
-            lastY = event.touches[0].clientY
-            
+                    phoneZoom(event.touches[0],event.touches[1])
+                }
+                
+                lastX = event.touches[0].clientX
+                lastY = event.touches[0].clientY
+            }else{movecount = movecount + 1;}
             event.preventDefault();
         }, false,{passive: false});
         canvcanv.addEventListener("touchend", function (event) {
+            movecount = 0;
             canvasDr = false;
             if (candraw){placePix(event.changedTouches[0])}
             if (event.touches.length == 0){candraw = true;}
