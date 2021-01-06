@@ -263,7 +263,10 @@ let lastRazn = 0;
                         gSize = gSize+(zoomP);
                         gameX = gameX-xxx;
                         gameY = gameY-yyy;
-                        draw(gSize)
+                        
+                        if(gSize<10000){
+                            draw(gSize)
+                        }
                         
                     }else
                     if(raznrazn>1&&gSize>250&&strPress>0.1){  
@@ -273,7 +276,9 @@ let lastRazn = 0;
                         gSize = gSize-(zoomP);
                         gameX = gameX+xxx;
                         gameY = gameY+yyy;
-                        draw(gSize)
+                        if(gSize>250){
+                            draw(gSize)
+                        }
                         //if(phoneZoomFix > 1){phoneZoomFix=phoneZoomFix-0.1;}
                         
                     }
