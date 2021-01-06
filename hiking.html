@@ -252,10 +252,14 @@ let lastRazn = 0;
                 if(strPress<0){strPress=strPress*-1};
 
                 
-                
-                
-                
-                    if(raznrazn<0&& gSize<10000&&strPress>0.1){
+                ///
+                var FZP = zoomP; 
+                var FZP1 = zoomP; 
+                var FGS1 = gSize + (FZP + 7*strPress)
+                if(FZP1>1){FZP1 = FZP1 + 7*strPress;}
+                var FGS2 = gSize - FZP1;
+                ///
+                    if(raznrazn<0&& FGS1<10000&&strPress>0.1){
                         //if(phoneZoomFix < 10){phoneZoomFix=phoneZoomFix+1;}
                         zoomP = zoomP + 7*strPress;
                         let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
@@ -264,21 +268,21 @@ let lastRazn = 0;
                         gameX = gameX-xxx;
                         gameY = gameY-yyy;
                         
-                        if(gSize<10000){
+                        
                             draw(gSize)
-                        }
+                        
                         
                     }else
-                    if(raznrazn>1&&gSize>250&&strPress>0.1){  
+                    if(raznrazn>1&&FGS2>250&&strPress>0.1){  
                         if(zoomP>1){zoomP = zoomP + 7*strPress;}
                         let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
                         let yyy = Math.trunc((((gameY-touchCenterY)*-1)/(gSize/(zoomP)))*100)/100           //back
                         gSize = gSize-(zoomP);
                         gameX = gameX+xxx;
                         gameY = gameY+yyy;
-                        if(gSize>250){
+                        
                             draw(gSize)
-                        }
+                        
                         //if(phoneZoomFix > 1){phoneZoomFix=phoneZoomFix-0.1;}
                         
                     }
