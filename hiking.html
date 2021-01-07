@@ -48,14 +48,36 @@
     <script src="file:///C:/Users/vasin/Desktop/helloworld/fabric.min%20(1).js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div class="intro">
-
+    <p id="log" style="position: absolute;">-</p>
     <canvas id="largecanv" ></canvas>
+    <canvas id="scanv" ></canvas>
     <canvas id="littlecanv" ></canvas>
 </div>
                 
 </body>
 <script>
  window.onload = function() {
+     //
+     var scanv = document.getElementById('scanv');
+     scanv.width = 9000;
+     scanv.height = 9000;
+     document.getElementById('scanv').remove();
+     var scanvx = scanv.getContext('2d');
+     scanvx.lineWidth = 1;
+    for (var xl = 0; xl < 9000; xl += 30) {
+        scanvx.moveTo(xl, 0);
+        scanvx.lineTo(xl, 9000);
+    }
+
+    for (var yl = 0; yl < 9000; yl += 30) {
+        scanvx.moveTo(0, yl);
+        scanvx.lineTo(9000, yl);
+    }
+
+    scanvx.strokeStyle = "#black";
+    scanvx.stroke();
+     //
+     
  let canvcanv = document.getElementById('largecanv');
  var ctx = canvcanv.getContext('2d');
  littlecanv.width = 300;
@@ -104,8 +126,12 @@ function draw(size,X){
     if(!X){X = 1;}
     ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
     ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;gtx.mozImageSmoothingEnabled = false;gtx.webkitImageSmoothingEnabled = false;gtx.msImageSmoothingEnabled = false;gtx.imageSmoothingEnabled = false;
- 
+   
+    
     ctx.drawImage(lcanv, gameX*X, gameY*X, size, size);
+    if(size>4500){
+      ctx.drawImage(scanv, gameX*X, gameY*X, size, size);
+    }
     //ctx.fillRect(gameX,gameY,size,size);
 }
 function randomInteger(min, max) {
@@ -136,7 +162,7 @@ canvcanv.addEventListener('mousemove', function (event) {
 
 }, false);
 canvcanv.addEventListener('mouseup', function (e) {
-    if (candraw){placePix(e)}
+    if (candraw){if(gSize>4500){placePix(e)}}
     canvasDr = false;
     candraw = true;
 }, false);
@@ -172,6 +198,7 @@ addOnWheel(canvcanv, function(e) {
 });   
 ///////////////////////////////////////////////////phone
 let log = document.getElementById('log')
+function loglog(logg){log.innerHTML = "VER 21.01.06.01 / "+ logg;}
 let lastRazn = 0;
 var movecount=0;
         canvcanv.addEventListener("touchstart", function (event) {
@@ -187,6 +214,7 @@ var movecount=0;
         }, false); 
 
         canvcanv.addEventListener("touchmove", function (event) {
+            
             if(movecount>1){
                 let allTouches = event.touches.length;
                 if(canvasDr && allTouches == 1){
@@ -195,6 +223,7 @@ var movecount=0;
                     gameY += event.touches[0].clientY - lastY
                     console.log("X: "+gameX+" Y: "+gameY)
                     draw(gSize)
+                    loglog(gSize);
                 } else 
                 if (allTouches == 2){
                     candraw = false;
