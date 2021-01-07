@@ -239,7 +239,7 @@ var movecount=0;
         canvcanv.addEventListener("touchend", function (event) {
             movecount = 0;
             canvasDr = false;
-            if (candraw){placePix(event.changedTouches[0])}
+            if (candraw){if(gSize>4500){placePix(event.changedTouches[0])}}
             if (event.touches.length == 0){candraw = true;}
             console.log(event)
             
@@ -291,7 +291,7 @@ var movecount=0;
                 if(FZP1>1){FZP1 = FZP1 + 7*strPress;}
                 var FGS2 = gSize - FZP1;
                 ///
-                    if(raznrazn<0&& FGS1<10000&&strPress>0.1){
+                    if(raznrazn<0&& FGS1<13000&&strPress>0.1){
                         //if(phoneZoomFix < 10){phoneZoomFix=phoneZoomFix+1;}
                         zoomP = zoomP + 7*strPress;
                         let xxx = Math.trunc((((gameX-touchCenterX)*-1)/(gSize/(zoomP)))*100)/100
