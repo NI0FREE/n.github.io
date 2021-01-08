@@ -129,9 +129,9 @@
     //sendPix(ID)
     gtx.fillStyle = colordecode[randomInteger(0, 9)];
     gtx.fillRect(Xx,Yy,1,1);
-    socket.emit('log',{l:"drawS"})
+   
     draw(gSize)
-    socket.emit('log',{l:"drawEND"})
+ 
     }
     function draw(size,X){
         if(!X){X = 1;}
@@ -155,9 +155,9 @@
 
     let gSize = 500,gameX=(window.innerWidth/2),gameY=(window.innerHeight/2),lastX=0,lastY=0;
     let canvasDr = false,candraw = true;
-    socket.emit('log',{l:"drawS"})
+    
     draw(gSize)
-    socket.emit('log',{l:"drawE"})
+  
     canvcanv.addEventListener('mousedown', function (event) {
         canvasDr = true;
 
