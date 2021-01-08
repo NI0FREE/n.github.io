@@ -58,24 +58,23 @@
 </body>
 <script>
  window.onload = function() {
-     //
-     var socket = 0;
-     console.log(socket)
-     setTimeout(tryconn(),2500)
-     function tryconn(){
-        socket = io.connect('http://now-you-will-get-banned-in-my-app.glitch.me');
-     }
-     if(socket){
-        socket.emit('n1'); 
-        socket.on('n2', function(data) {
-        console.log(data.gg);
-        gameGameGame(data.gg); 
-        });  
-     }else{console.log("What?"); setTimeout(tryconn(),5000)}
+     gameGameGame(1)
+    // var socket = 0;
+    //// setTimeout(tryconn(),2500)
+     //function tryconn(){
+        //socket = io.connect('http://now-you-will-get-banned-in-my-app.glitch.me');
+   //  }
+     //if(socket){
+      //  socket.emit('n1'); 
+      //  socket.on('n2', function(data) {
+      //  console.log(data.gg);
+      //  gameGameGame(data.gg); 
+      //  });  
+    // }else{console.log("What?"); setTimeout(tryconn(),5000)}
      function gameGameGame(that90k){
         var colordecode = ["red","green","blue","white","black","#641c00","#f6d4c7","#9e94de","#b86b8d","#ea28ab"];
         
-        console.log(that90k[0].c)
+       // console.log(that90k[0].c)
         var scanv = document.getElementById('scanv');
         scanv.width = 9000;
         scanv.height = 9000;
@@ -110,7 +109,7 @@
         for(let z = 0;z<300;z++){
             let id = (i*300)+z;
             //console.log(id)
-            color = colordecode[that90k[id].c]
+            color = "red";
             
             //if(bool == 1){bool = 0; color = "red";}else{bool = 1; color = "blue"}
             
