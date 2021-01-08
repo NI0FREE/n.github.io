@@ -67,7 +67,7 @@
         var scanv = document.getElementById('scanv');
         scanv.width = 9000;
         scanv.height = 9000;
-        document.getElementById('scanv').remove();
+       
         var scanvx = scanv.getContext('2d');
         //scanvx.lineWidth = 1;
         for (var xl = 0; xl < 9000; xl += 30) {
@@ -92,6 +92,7 @@
     var gtx = lcanv.getContext('2d', { alpha: false });
     document.getElementById('littlecanv').remove();
     let pix = [];let bool = 0;let color= "red"
+     document.getElementById('scanv').remove();
     for(let i = 0;i<300;i++){
         
         
