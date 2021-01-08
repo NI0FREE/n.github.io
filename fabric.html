@@ -62,10 +62,19 @@
       
         var colordecode = ["red","green","blue","white","black","#641c00","#f6d4c7","#9e94de","#b86b8d","#ea28ab"];
         
-       
-       
-        var scanv = document.getElementById('scanv');
-      alert(scanv);
+        var scanv = 0;
+        var scanvx;
+        checkM()
+        function checkM(){
+          if(scanv){
+           scanvx = scanv.getContext('2d');
+          }else{
+           scanv = document.getElementById('scanv');
+           checkM();   
+          }
+        }
+        
+      
         var scanvx = scanv.getContext('2d');
         scanv.width = 9000;
         scanv.height = 9000;
