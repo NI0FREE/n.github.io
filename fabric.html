@@ -56,7 +56,9 @@
 </body>
 <script>
  window.onload = function() {
-  
+    window.onerror = function(message, url, line, col, errorObj) {
+  alert(`${message}\n${url}, ${line}:${col}`);
+};
       
         var colordecode = ["red","green","blue","white","black","#641c00","#f6d4c7","#9e94de","#b86b8d","#ea28ab"];
         
