@@ -65,10 +65,12 @@
        
        
         var scanv = document.getElementById('scanv');
+      alert(scanv);
+        var scanvx = scanv.getContext('2d');
         scanv.width = 9000;
         scanv.height = 9000;
        
-        var scanvx = scanv.getContext('2d');
+        
         scanvx.fillRect(2,2,1,1);
         scanvx.beginPath();
         //scanvx.lineWidth = 1;
