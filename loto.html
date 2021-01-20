@@ -141,7 +141,8 @@ console.log(e.offsetY)
 	y=e.offsetY;		
 	removearrea(x, y);
 	
-});
+    event.preventDefault();
+            }, false,{passive: false});
 function toprogress()
 {
 	cou=0;
@@ -164,19 +165,21 @@ mousedown=true;
 x=e.offsetX;
 y=e.offsetY;		
 removearrea(x, y);
-}, false);
+event.preventDefault();
+            }, false,{passive: false});
 	
 dcos.addEventListener('mouseup', function(){
 	mousedown=false;
 	
-});
+    event.preventDefault();
+            }, false,{passive: false});
 	
 dcos.addEventListener('touchend', function(e) {
 e.preventDefault();
 e.stopPropagation();
 mousedown=false;
-}, false);
-	
+event.preventDefault();
+            }, false,{passive: false});
 dcos.addEventListener('mousemove', function(e){
 	if(mousedown)
 	{
@@ -185,14 +188,16 @@ dcos.addEventListener('mousemove', function(e){
 		removearrea(x, y);
 	}
 	
-});
+    event.preventDefault();
+            }, false,{passive: false});
 dcos.addEventListener('touchmove', function(e) {
 e.preventDefault();
 e.stopPropagation();
 x=e.offsetX;
 y=e.offsetY;
 removearrea(x, y);
-}, false);
+event.preventDefault();
+            }, false,{passive: false});
 
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
