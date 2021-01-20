@@ -141,7 +141,7 @@ console.log(e.offsetY)
 	y=e.offsetY;		
 	removearrea(x, y);
 	
-    event.preventDefault();
+    e.preventDefault();
             }, false,{passive: false});
 function toprogress()
 {
@@ -165,7 +165,7 @@ mousedown=true;
 x=e.offsetX;
 y=e.offsetY;		
 removearrea(x, y);
-event.preventDefault();
+e.preventDefault();
             }, false,{passive: false});
 	
 dcos.addEventListener('mouseup', function(){
@@ -178,7 +178,7 @@ dcos.addEventListener('touchend', function(e) {
 e.preventDefault();
 e.stopPropagation();
 mousedown=false;
-event.preventDefault();
+e.preventDefault();
             }, false,{passive: false});
 dcos.addEventListener('mousemove', function(e){
 	if(mousedown)
@@ -188,7 +188,7 @@ dcos.addEventListener('mousemove', function(e){
 		removearrea(x, y);
 	}
 	
-    event.preventDefault();
+    e.preventDefault();
             }, false,{passive: false});
 dcos.addEventListener('touchmove', function(e) {
 e.preventDefault();
@@ -196,7 +196,7 @@ e.stopPropagation();
 x=e.offsetX;
 y=e.offsetY;
 removearrea(x, y);
-event.preventDefault();
+e.preventDefault();
             }, false,{passive: false});
 
 function randomInteger(min, max) {
