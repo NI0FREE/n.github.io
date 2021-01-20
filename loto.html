@@ -1,0 +1,203 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>* {box-sizing:border-box;}
+   /* .wrap {
+    height: 200px;
+    padding: 25px;
+    }
+    .gradient {
+        height: 150px;
+    width: 50%;
+    margin: 0 auto;
+    border: 6px solid transparent;
+    border-image: 10 repeating-linear-gradient(45deg, #fde539, #fbff22 21px, transparent 10px, transparent 3px, #f9f20f 0px, #dcde1c 35px,transparent 25px, transparent 35px);}
+    */</style></head>
+
+<body>
+<div id="lottopage">
+    <canvas id="sscanv" class="gradient" style="width: 300px;height: 150px;color: #635353;display: block;margin-left: auto;margin-right: auto;margin-top: 40vh;" width="300" height="150"></canvas>
+    <canvas id="scanv15248" ></canvas>
+    <canvas id="scanv" ></canvas>
+</div>
+
+<script>
+window.onload = function() {
+var r = 12;
+var costilctx =0;
+var img;
+ var lcanv = document.getElementById('scanv');
+ var ctx = lcanv.getContext('2d');
+ var coscanv = document.getElementById('scanv15248');
+ var gtx = coscanv.getContext('2d');
+ var dcos = document.getElementById('sscanv');
+ var ssgtx = dcos.getContext('2d');
+
+ coscanv.width = 300;
+ coscanv.height = 150;
+ gtx.font = '20px Arial'
+ gtx.fillText("30.000 ", 110, 80);
+ genPatPhon(300,150)
+function genPatPhon(cnw,cnh){
+    lcanv.width = cnw;
+    lcanv.height = cnh;
+    ctx.fillText("30.000", 105, 80);
+    img = lcanv;
+    
+    ctx.beginPath();
+    ctx.rect(0, 0, cnw, cnh);
+    ctx.fillStyle = "#E7E7E7";
+    ctx.fill();
+    gradient = ctx.createLinearGradient(0, 0, 300, 150);
+            gradient.addColorStop(0, "#bfbfbf");
+            gradient.addColorStop(0.2, "#e6e6e6");
+            gradient.addColorStop(0.4, "#d1d1d1");
+            gradient.addColorStop(0.6, "#f5f5f5");
+            gradient.addColorStop(0.8, "#c7c7c7");
+            gradient.addColorStop(1, "#E7E7E7");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 300, 150);
+            ctx.strokeRect(0, 0, 300, 150)
+    ctx.fillStyle = "#635353";
+
+    for(let i = 0; i < 200; i++){
+        ctx.fillRect(randomInteger(0, cnw),randomInteger(0, cnh),0.5,0.5);
+    }
+  
+
+    ctx.font = '10px Arial'
+    ctx.fillText("SIMPLE ECONOMY", 105, 80);
+    ctx.font = '25px Arial'
+    var strr = "";
+    function resetrand(){ strr = "";
+    for(let i =0;i<28;i++){if(randomInteger(0, 1)){strr = strr + "☆"}else{strr = strr + "★"}}
+    }
+    resetrand();
+    ctx.fillText(strr, -1, 20);
+    resetrand();
+    ctx.fillText(strr, -1, 44);
+    ctx.fillText('★★★☆★             ★★☆★☆☆☆★☆★☆★☆★☆★☆★☆★☆★☆', 0, 68);
+
+    ctx.fillText('★☆☆☆☆             ★☆☆☆★☆★☆★☆★☆★☆★☆★☆★☆★☆', 0, 20+80);
+    resetrand();
+    ctx.fillText(strr, -1, 44+80);
+    resetrand();
+    ctx.fillText(strr, -1, 68+80);
+
+
+    ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;    
+    ctx.drawImage(lcanv, 0, 0);
+    document.getElementById('scanv15248').remove();
+    document.getElementById('scanv').remove();
+    ssgtx.clearRect(0, 0, 300, 150);
+        ssgtx.drawImage(coscanv, 0, 0, 300, 150);
+        ssgtx.drawImage(lcanv, 0, 0, 300, 150);
+}
+
+function removearrea(x, y)
+{
+
+ var
+  x = x,
+  y = y;
+	
+  dn = 1/r;
+  x1 = x-r; y1 = y-r;
+  x2 = x+r; y2 = y+r; 
+  x0 = x;
+  y0 = y;
+  a =	r;
+  b =r;
+  
+	for(x=x1; x<=x2; x++)
+		{
+			for(y=y1; y<=y2; y++)
+				{
+					bln = Math.pow(((x - x0) / a), 2) + Math.pow(((y - y0) / b), 2);
+					if(bln<=1){
+						var imgData = ctx.getImageData(x, y, 1, 1);
+                        imgData.data[3] = 0;
+                       
+                        
+                        ctx.putImageData(imgData, x, y);
+					}
+						
+
+				}
+        }
+        ssgtx.clearRect(0, 0, 300, 150);
+        ssgtx.drawImage(coscanv, 0, 0, 300, 150);
+        ssgtx.drawImage(lcanv, 0, 0, 300, 150);
+}
+
+mousedown=false;
+dcos.addEventListener('mousedown', function(e){
+    console.log(e.offsetX)
+console.log(e.offsetY)
+	mousedown=true;
+	x=e.offsetX;
+	y=e.offsetY;		
+	removearrea(x, y);
+	
+});
+function toprogress()
+{
+	cou=0;
+	var imgData = ctx.getImageData(0, 0, c.width, c.height);
+	for (i = 0; i < lengthpix; i += 4) {
+		if(imgData.data[i+3] == 0)
+			cou++;		
+    }
+	parcent=(cou*100)/(lengthpix/4);
+	if(parcent>=parceinit)
+	{
+		console.log(1)
+	}
+}
+dcos.addEventListener('touchstart', function(e) {
+
+e.preventDefault();
+e.stopPropagation();
+mousedown=true;
+x=e.offsetX;
+y=e.offsetY;		
+removearrea(x, y);
+}, false);
+	
+dcos.addEventListener('mouseup', function(){
+	mousedown=false;
+	
+});
+	
+dcos.addEventListener('touchend', function(e) {
+e.preventDefault();
+e.stopPropagation();
+mousedown=false;
+}, false);
+	
+dcos.addEventListener('mousemove', function(e){
+	if(mousedown)
+	{
+		x=e.offsetX;
+		y=e.offsetY;
+		removearrea(x, y);
+	}
+	
+});
+dcos.addEventListener('touchmove', function(e) {
+e.preventDefault();
+e.stopPropagation();
+x=e.offsetX;
+y=e.offsetY;
+removearrea(x, y);
+}, false);
+
+function randomInteger(min, max) {
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  return Math.round(rand);
+}
+}
+</script>
+
+</body></html>
