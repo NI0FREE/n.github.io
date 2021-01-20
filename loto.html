@@ -24,7 +24,7 @@
 </div>
 
 <script>
-window.onload = function() {
+//window.onload = function() {
 var r = 12;
 var costilctx =0;
 var img;
@@ -132,17 +132,6 @@ function removearrea(x, y)
         ssgtx.drawImage(lcanv, 0, 0, 300, 150);
 }
 
-mousedown=false;
-dcos.addEventListener('mousedown', function(e){
-    console.log(e.offsetX)
-console.log(e.offsetY)
-	mousedown=true;
-	x=e.offsetX;
-	y=e.offsetY;		
-	removearrea(x, y);
-	
-    e.preventDefault();
-            }, false,{passive: false});
 function toprogress()
 {
 	cou=0;
@@ -157,53 +146,50 @@ function toprogress()
 		console.log(1)
 	}
 }
-dcos.addEventListener('touchstart', function(e) {
+///////    
+            var control = false;
+            dcos.addEventListener("touchstart", function (event) {
+                control = true;
+                event.preventDefault();
+            }, false); 
 
-e.preventDefault();
-e.stopPropagation();
-mousedown=true;
-x=e.offsetX;
-y=e.offsetY;		
-removearrea(x, y);
-e.preventDefault();
+            dcos.addEventListener("touchmove", function (event) {
+                if(control){
+                    var rect = event.target.getBoundingClientRect();
+                    var x = event.targetTouches[0].pageX - rect.left;
+                    var y = event.targetTouches[0].pageY - rect.top;
+                removearrea(x, y)
+                }
+                event.preventDefault();
             }, false,{passive: false});
-	
-dcos.addEventListener('mouseup', function(){
-	mousedown=false;
-	
-    event.preventDefault();
-            }, false,{passive: false});
-	
-dcos.addEventListener('touchend', function(e) {
-e.preventDefault();
-e.stopPropagation();
-mousedown=false;
-e.preventDefault();
-            }, false,{passive: false});
-dcos.addEventListener('mousemove', function(e){console.log(2)
-	if(mousedown)
-	{       console.log(3)
-		x=e.offsetX;
-		y=e.offsetY;
-		removearrea(x, y);
-	}
-	
-    e.preventDefault();
-            }, false,{passive: false});
-dcos.addEventListener('touchmove', function(e) {
-e.preventDefault();
-e.stopPropagation();
-x=e.offsetX;
-y=e.offsetY;
-removearrea(x, y);
-e.preventDefault();
-            }, false,{passive: false});
+
+            dcos.addEventListener("touchend", function (event) {
+               control = false;
+               event.preventDefault();
+            }, false);
+///////
+///////
+            dcos.addEventListener('mousedown', function (event) {
+                control = true;
+            }, false);
+            dcos.addEventListener('mousemove', function (event) {
+                if(control){
+                    
+                    removearrea(event.layerX, event.layerY)
+                }
+            }, false);
+            dcos.addEventListener('mouseup', function (e) {
+
+                control = false;
+                e.preventDefault();
+            });   
+///////
 
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
-}
+//}
 </script>
 
 </body></html>
