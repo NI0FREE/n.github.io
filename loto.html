@@ -180,9 +180,9 @@ e.stopPropagation();
 mousedown=false;
 e.preventDefault();
             }, false,{passive: false});
-dcos.addEventListener('mousemove', function(e){
+dcos.addEventListener('mousemove', function(e){console.log(2)
 	if(mousedown)
-	{       console.log(1)
+	{       console.log(3)
 		x=e.offsetX;
 		y=e.offsetY;
 		removearrea(x, y);
