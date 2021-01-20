@@ -182,7 +182,7 @@ e.preventDefault();
             }, false,{passive: false});
 dcos.addEventListener('mousemove', function(e){
 	if(mousedown)
-	{
+	{       console.log(1)
 		x=e.offsetX;
 		y=e.offsetY;
 		removearrea(x, y);
