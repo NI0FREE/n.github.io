@@ -1,0 +1,154 @@
+<html>
+<body>
+<style>
+    * {  margin: -100; }
+    canvas {display: block; margin: 0 auto; }
+</style>
+<canvas id="canvas"></canvas>
+<canvas id="canvas2" style="background: #eee"></canvas>
+</body>
+<script>
+var canvas = document.getElementById("canvas");
+var canvas2 = document.getElementById("canvas2");
+var ctx = canvas.getContext("2d");
+var ctx2 = canvas2.getContext("2d");
+var h = canvas.height = 450;
+var w = canvas.width = 600;
+var h2 = canvas2.height = 100;
+var w2 = canvas2.width = 200;
+ 
+var draggin = false; // В режиме перемещения  
+var dragX = 0; // Центр канваса, относительно которого будем считать поворот
+var dragY = 0;
+var dragPhi = 0; // Угол маятника при нажатии
+var dragKsy = 0; // Начальный угол при mousedown
+ 
+ctx.translate(w / 2, h / 2);
+ctx2.translate(0, h2 / 2);
+ctx2.beginPath();
+ctx2.moveTo(0, 0);
+ 
+var initPhi = Math.PI * 0.2;
+var L = 200;
+var dt = 1 / 60;
+var g = 1500;
+var t = 0;
+ 
+bob = {
+  phi: initPhi,
+  v: 0,
+  a: 0
+};
+ 
+//getPos - определение позиции относительно центра элемента
+function getPos(el) {
+  var rect = el.getBoundingClientRect();
+  return {
+    x: rect.left + rect.width / 2.0,
+    y: rect.top + rect.height / 2.0
+  };
+}
+ 
+// Определяем угол поворота относительно центра канваса
+function calcKsy(evt) {
+  var deltaX = evt.clientX - dragX;
+  var deltaY = evt.clientY - dragY;
+  var Ksy = Math.atan2(deltaY, deltaX);
+  return Ksy;
+}
+ 
+// Обрабатываем событие нажатия на левую кнопку мыши
+canvas.addEventListener("mousedown", function(evt) {
+  var gpc = getPos(canvas);
+  dragX = gpc.x;
+  dragY = gpc.y;
+  draggin = true;
+  dragPhi = bob.phi;
+  dragKsy = calcKsy(evt);
+});
+ 
+// Поворачиваем маятник на угол между начальным углом при mousedown
+// и текущим после перемещения курсора
+canvas.addEventListener("mousemove", function(evt) {
+  if(draggin){
+     var Ksy = calcKsy(evt);
+     bob.phi = dragPhi - Ksy + dragKsy;
+  }
+});
+ 
+// Обрабатываем событие отжатия левой кнопки мыши
+canvas.addEventListener("mouseup", function(evt) {
+  draggin = false;
+  bob.v = 0;
+  bob.a = 0;
+});
+ 
+////////////
+canvas.addEventListener("touchstart", function(event) {
+    var gpc = getPos(canvas);
+    dragX = gpc.x;
+    dragY = gpc.y;
+    draggin = true;
+    dragPhi = bob.phi;
+    dragKsy = calcKsyPhone(event);
+}, false);
+
+canvas.addEventListener("touchmove", function(event) {
+    if(draggin){
+     var Ksy = calcKsyPhone(event);
+     bob.phi = dragPhi - Ksy + dragKsy;
+    }
+    event.preventDefault();
+}, false, {
+    passive: false
+});
+canvas.addEventListener("touchend", function(event) {
+    draggin = false;
+    bob.v = 0;
+    bob.a = 0;
+    console.log(event)
+    event.preventDefault();
+}, false);
+
+function calcKsyPhone(evt) {
+  var deltaX = evt.touches[0].clientX - dragX;
+  var deltaY = evt.touches[0].clientY - dragY;
+  var Ksy = Math.atan2(deltaY, deltaX);
+  return Ksy;
+}
+/////////////
+function drawPendulum() {
+  ctx.beginPath()
+  ctx.arc(Math.sin(bob.phi) * L, Math.cos(bob.phi) * L, 10, 0, 2 * Math.PI)
+  ctx.fill()
+  ctx.moveTo(0, 0)
+  ctx.lineTo(Math.sin(bob.phi) * L, Math.cos(bob.phi) * L)
+  ctx.stroke()
+}
+ 
+function update() {
+  bob.a = -(g / L) * Math.sin(bob.phi)
+  bob.v += bob.a * dt
+  bob.phi += bob.v * dt
+  t += dt
+}
+ 
+function drawGraph() {
+  ctx2.lineTo(t * 20, (bob.phi % Math.PI) * 20)
+  ctx2.stroke()
+}
+ 
+function draw() {
+  ctx.clearRect(-w / 2, -h / 2, w, h)
+  drawPendulum()
+  // Если мы не в режиме перетаскивания, то качаем маятник
+  if (draggin === false) {
+    update()
+  }
+  drawGraph()
+  requestAnimationFrame(draw)
+}
+ 
+draw()
+</script>
+</html>
