@@ -23,7 +23,7 @@
     function makeCounter(){
         gRctx.beginPath();
         gRctx.lineWidth = lineWidth; // bottom line drawing
-        gRctx.strokeStyle = "rgb(77, 81, 83)"
+        gRctx.strokeStyle = "rgb(0, 140, 255)"
         gRctx.moveTo((marginWidth + lineWidth), grafHeight - (lineWidth + marginWidth)); 
         gRctx.lineTo(grafWidth, grafHeight - (lineWidth + marginWidth)); 
         gRctx.stroke();
@@ -54,7 +54,7 @@
         if(!(pos-of)){ magrinTopText =  Math.round(9*window.devicePixelRatio)}
         if(!(pos)){ magrinTopText =  Math.round(-1*window.devicePixelRatio)}
         if(pos>8){ startx = startx -  Math.round(4*window.devicePixelRatio)}
-        gRctx.fillStyle = "rgb(94, 95, 96)";
+        gRctx.fillStyle = "rgb(0, 140, 255)";
         gRctx.font = Math.round(textSize*window.devicePixelRatio)+"px TTCommons,OpenSans,sans-serif";
         x = x + 1;
         gRctx.fillText(x+"x", startx - Math.round(16*window.devicePixelRatio), yPos+ magrinTopText);
@@ -69,13 +69,13 @@
         if(!pos){xPos = xPos + Math.round(5*window.devicePixelRatio);}
         
         var magrinRightText =  Math.round(3*window.devicePixelRatio)
-        gRctx.fillStyle = "rgb(94, 95, 96)";
+        gRctx.fillStyle = "rgb(0, 140, 255)";
         gRctx.font = Math.round(textSize*window.devicePixelRatio)+"px TTCommons,OpenSans,sans-serif";
         gRctx.fillText(x+nameS, xPos, YPOS);
       }
 
       function rgDraw(yPoss,mnoz){
-        ReGRctx.strokeStyle =   "rgb(51, 131, 116)";
+        ReGRctx.strokeStyle =  "rgb(0, 140, 255)";
         yPoss = yPoss + mnoz;
         let y = grafHeight - yPoss;
         ReGRctx.moveTo(spx, spy); 
