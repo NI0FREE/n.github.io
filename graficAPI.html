@@ -120,7 +120,7 @@
       color: #fff;
       padding: 0px;
       /* Styling */
-      background: #20303e;
+      background: #e6eaee;
      
       text-align: center;
       vertical-align: center;
@@ -165,13 +165,36 @@
     </div>
     <div class="inApp" id="menu" style="display: '';">
 
-      <canvas id="grafic" style="width: calc(100% - 1px);height: 200px;margin-top: 30px;margin-left: -3px;" width="1122" height="600"></canvas>
+      <div id="11">
+        <div class="box ratio1_1" id="nope" style="width: 95.5%;height: 25px;">
+           <div class="content" style="border-radius: 0px;/* background: radial-gradient(#55ddff00, #222b2f); */">
+               <span style="width: 100%;height: 74%;">
+                   <table style="width: 100%;/* height: 100%; */height: -26px;">
+                       <tbody>
+                           <tr> 
+                               <td style="vertical-align:middle;text-align:center;">
+                                   <h1 class="nf vk-info-border" style="
+       font-size: 16px;
+       color: #008cff;
+       margin-block-start: -0.33em;
+       text-align: center;
+   ">Отжимания</h1>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </span>
+           </div>
+       </div>
+       
+       
+       <canvas id="grafic" style="width: calc(100% - 1px);height: 200px;margin-top: 0px;margin-left: -3px;" width="754" height="400"></canvas></div>
     </div>
 
     <script>
       
     makeGRAF(
-    5,       //stroks count
+    10,       //stroks count
     30,      //stolbs count
     1,       //one step mnozitel
     8,//text size
@@ -212,10 +235,10 @@
         var magrinTopText =  Math.round(3*window.devicePixelRatio)
         if(!(pos-of)){ magrinTopText =  Math.round(9*window.devicePixelRatio)}
         if(!(pos)){ magrinTopText =  Math.round(-1*window.devicePixelRatio)}
-        if(pos>8){ startx = startx -  Math.round(4*window.devicePixelRatio)}
+        if(pos>9){ startx = startx -  Math.round(4*window.devicePixelRatio)}
         gRctx.fillStyle = "rgb(0, 140, 255)";
         gRctx.font = Math.round(textSize*window.devicePixelRatio)+"px TTCommons,OpenSans,sans-serif";
-        x = x + 1;
+        x = x * 10 ;
         gRctx.fillText(x+"x", startx - Math.round(16*window.devicePixelRatio), yPos+ magrinTopText);
       }
 
