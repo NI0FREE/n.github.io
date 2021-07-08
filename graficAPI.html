@@ -4,13 +4,172 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>grafs</title>
+    <title>Summer</title>
 </head>
+<style>
+    .nf{
+    
+        font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    
+    }
+    .nf2 {
+        font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto;
+    }
+    .noselect {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;   
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        -khtml-user-select: none;
+    }
+    .toCn:active{
+        background-position-y:25px;  
+    }
+    .stripe-1 {
+      
+      color: #ffffff;
+      background: repeating-linear-gradient(
+      45deg,
+      #2c3e50,
+      #2c3e50 10px,
+      #34495f 10px,
+      #34495f 20px
+      
+    );
+    
+    -webkit-transition: background 2s ease-out;  
+        -moz-transition: background 2s ease-out;  
+        -o-transition: background 2s ease-out;  
+        transition: background 2s ease-out; 
+        background-size: 84px 28px;
+    }
+    .vkInpt{
+    
+        margin: 15px;
+        width: calc(100% - 30px);
+        display: block;
+        box-sizing: border-box;
+        height: 44px;
+        font-size: 16px;
+        color: aliceblue;
+        position: relative;
+        z-index: 2;
+        border-radius: 5px;
+        border-style: none;
+        background-color: #2c3e50;
+        outline: aliceblue;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #223344;
+    
+    }:focus {
+         border: 1px solid #005d79; /* Параметры рамки */
+       }
+    .txt1{
+        margin-left: 15px;
+        color: aliceblue;
+        margin-top: 15px;
+    }
+    section.examples {
+      border: 3px dashed #333;
+      padding: 20px;
+      position: relative;
+    }
+    section.examples:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    /* Important part */
+    .box {
+        position: relative;
+        width: 30.333333%;
+        margin: 2.2222222% 0% 0% 2.2222222%;
+        float: left;
+        font-size: 12px;
+       
+    }
+    .box:before {
+      content: "";
+      display: block;
+      margin-top: 100%; /* initial ratio of 1:1*/
+    }
+    
+    /* Other ratios */
+    .ratio2_1:before {
+      margin-top: 50%;
+    }
+    .ratio1_2:before {
+      margin-top: 200%;
+    }
+    .ratio4_3:before {
+      margin-top: 75%;
+    }
+    .ratio16_9:before {
+      margin-top: 56.25%;
+    }
+    .content {
+      /* Positioning */
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      color: #fff;
+      padding: 0px;
+      /* Styling */
+      background: #20303e;
+     
+      text-align: center;
+      vertical-align: center;
+      text-transform: uppercase;
+    }
+    .content span {
+      font-weight: bold;
+      font-size: 10px;
+      display: block;
+    }
+    
+    
+    
+        </style>
+        <style>
+       .inApp{     
+        width: 100%;
+        height: calc(100vh - 56px );
+        overflow: auto;
+        overflow-x: hidden;
+        }
+       body {
+          overflow: hidden;
+          margin: 0;
+          background:#e6eaee;
+          position: relative;
+      }
+        .vk-header{height: 55px; z-index:999;width:100%;background-color:#f1f4f8;text-align:left;top:0px;overflow:hidden;position:-webkit-sticky;position:sticky;}
+      .vk-header h5{
+        color:white;margin: 17px;font-size: 16px; opacity: 1;
+        font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+        font-weight: 500;
+        color: rgb(7, 7, 7);
+        float: left;
+        margin-inline-end: 7px;}
+    
+        </style>
 <body>
-    <canvas id = "grafic" style="width: calc(100% - -15px);height: 200px;margin-top: 90px;margin-left: -12px;"></canvas>
 
+    <div class="vk-header" id="HEAD">
+        <h5 id="vkHeaderText" >Твоя статистика..</h5>
+    </div>
+    <div class="inApp" id="menu" style="display: '';">
 
-<script>
+      <canvas id="grafic" style="width: calc(100% - -4px);height: 200px;margin-top: 30px;margin-left: -4px;" width="1122" height="600"></canvas>
+    </div>
+
+    <script>
+      
     makeGRAF(
     5,       //stroks count
     30,      //stolbs count
@@ -127,14 +286,13 @@
       var gRctx = target.getContext('2d');
       lineWidth = Math.round(2*window.devicePixelRatio);
       gRctx.lineWidth = lineWidth;
-      gRctx.fillStyle = 'white';
+      gRctx.fillStyle = '#e6eaee';
       gRctx.fillRect(0,0,target.width, target.height);
       makeCounter();
       drawStr(strok);
       drawStolb(stolbs)
     }
-</script>
-
+    </script>
 
 </body>
 </html>
