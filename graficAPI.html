@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grafs</title>
+</head>
+<body>
+    <canvas id = "grafic" style="width: calc(100% - 0px);height: 290px;margin-top: 90px;"></canvas>
+
+
+<script>
+    makeGRAF(
+    5,       //stroks count
+    30,      //stolbs count
+    1,       //one step mnozitel
+    8,//text size
+    ""       //stolbs name
+    )
+    //Functions Block
+    function makeGRAF(strok,stolbs,stepMn,textSize,nameS){
+    function makeCounter(){
+        gRctx.beginPath();
+        gRctx.lineWidth = lineWidth; // bottom line drawing
+        gRctx.strokeStyle = "rgb(77, 81, 83)"
+        gRctx.moveTo((marginWidth + lineWidth), grafHeight - (lineWidth + marginWidth)); 
+        gRctx.lineTo(grafWidth, grafHeight - (lineWidth + marginWidth)); 
+        gRctx.stroke();
+        gRctx.beginPath();
+        gRctx.lineWidth = lineWidth; // left line drawing
+        gRctx.moveTo((marginWidth + lineWidth), grafHeight - (lineWidth + marginWidth)); 
+        gRctx.lineTo((marginWidth + lineWidth), 0); 
+        gRctx.stroke();
+    }
+
+    function drawXline(x,pos,of,yy){
+        yy =  Math.round(yy*window.devicePixelRatio)
+        var ingrafH = grafHeight-marginWidth
+        var startx = (marginWidth + lineWidth);
+        var lineY = Math.round((ingrafH/of)*pos);
+        var yPos = (ingrafH - Math.round( (lineY-(lineWidth)+Math.round(1*window.devicePixelRatio))));
+        yPos = yPos + yy;
+        if(yPos%2!=0){yPos = yPos - 1;}
+        if(yPos<0){ }
+        gRctx.beginPath();
+        if(pos){
+        gRctx.moveTo((startx), yPos); 
+        gRctx.lineTo(grafWidth, yPos); 
+        
+        }
+        gRctx.stroke();
+        var magrinTopText =  Math.round(3*window.devicePixelRatio)
+        if(!(pos-of)){ magrinTopText =  Math.round(9*window.devicePixelRatio)}
+        if(!(pos)){ magrinTopText =  Math.round(-1*window.devicePixelRatio)}
+        if(pos>8){ startx = startx -  Math.round(4*window.devicePixelRatio)}
+        gRctx.fillStyle = "rgb(94, 95, 96)";
+        gRctx.font = Math.round(textSize*window.devicePixelRatio)+"px TTCommons,OpenSans,sans-serif";
+        x = x + 1;
+        gRctx.fillText(x+"x", startx - Math.round(16*window.devicePixelRatio), yPos+ magrinTopText);
+      }
+
+      function drawYline(x,pos,of,yy){
+        var ingrafW = grafWidth-marginWidth; 
+        var YPOS = (grafHeight - marginWidth)+Math.round(14*window.devicePixelRatio);
+        var lineX = Math.round((ingrafW/of)*pos)+Math.round(8*window.devicePixelRatio);
+        var xPos = (lineX);
+        if(xPos%2!=0){xPos = xPos - 1;}
+        if(!pos){xPos = xPos + Math.round(5*window.devicePixelRatio);}
+        
+        var magrinRightText =  Math.round(3*window.devicePixelRatio)
+        gRctx.fillStyle = "rgb(94, 95, 96)";
+        gRctx.font = Math.round(textSize*window.devicePixelRatio)+"px TTCommons,OpenSans,sans-serif";
+        gRctx.fillText(x+nameS, xPos, YPOS);
+      }
+
+      function rgDraw(yPoss,mnoz){
+        ReGRctx.strokeStyle =   "rgb(51, 131, 116)";
+        yPoss = yPoss + mnoz;
+        let y = grafHeight - yPoss;
+        ReGRctx.moveTo(spx, spy); 
+        spx = spx + (grafWidth/100);
+        ReGRctx.lineTo(spx, y);
+        ReGRctx.stroke(); 
+        spy = y;
+        gRctx.drawImage(ReTarget, 0+marginWidth, 0-marginWidth, grafWidth, grafHeight);
+      }
+
+      function drawStr(num){
+        for(var i = 0; i < num+1;i++){
+            console.log(i)
+            drawXline(i,i,num,0)
+          
+        }
+      }
+      function drawStolb(num){
+        for(var i = 0; i < num+1;i++){
+            console.log(i)
+          
+            drawYline(i*stepMn,i,num)
+        }
+      }
+     var mn = 1;
+      var spx = -10;
+      var spy = 999;
+      ////////
+      var target = document.getElementById("grafic");
+      //true pixels calc
+      var grafWidth = Math.round(target.clientWidth*window.devicePixelRatio);
+      var grafHeight = Math.round(target.clientHeight*window.devicePixelRatio);
+      //linegraf
+        var div = document.createElement('div');
+        div.className = "none";
+        div.innerHTML = '<canvas id="grafdraw" width="'+grafWidth+'" height="'+grafHeight+'" style="width: calc(100% - 20px);height: 290px;"></canvas>';
+        document.body.append(div);
+        var ReTarget = document.getElementById("grafdraw");
+        var ReGRctx = ReTarget.getContext('2d');
+        ReTarget.style.width = target.clientWidth
+        ReTarget.style.height = target.clientHeight
+        ReTarget.remove();
+      //img fix
+      target.width = grafWidth;
+      target.height = grafHeight;  
+      //draw lines
+      var lineWidth = Math.round(2*window.devicePixelRatio);
+      var marginWidth = Math.round(20*window.devicePixelRatio);
+      var gRctx = target.getContext('2d');
+      lineWidth = Math.round(2*window.devicePixelRatio);
+      gRctx.lineWidth = lineWidth;
+      gRctx.fillStyle = '#232c31';
+      gRctx.fillRect(0,0,target.width, target.height);
+      makeCounter();
+      drawStr(strok);
+      drawStolb(stolbs)
+    }
+</script>
+
+
+</body>
+</html>
