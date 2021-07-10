@@ -207,14 +207,20 @@ var lastScroll = 0;
       function rebuildAll(){
         document.getElementById("menu").innerHTML = "";
         for(let i = 0; i < allGr.length; i ++){
-          if(allGr[i].settings[6]!="DELETE")
+          if(allGr[i].settings[6]!="DELETE"){
           buildGraf(allGr[i]);
+          }
         }
       }
    
       
       function buildGraf(grafInfo){
+        
         makeGRAF(grafInfo.settings[0],grafInfo.settings[1],grafInfo.settings[2],grafInfo.settings[3],grafInfo.settings[4],grafInfo.settings[5],grafInfo.settings[6], grafInfo.map);
+        drawmakeGRAF(grafInfo.settings[0],grafInfo.settings[1],grafInfo.settings[2],grafInfo.settings[3],grafInfo.settings[4],grafInfo.settings[5],grafInfo.settings[6], grafInfo.map);
+      }
+      function redrawerGraf(grafInfo){
+        drawmakeGRAF(grafInfo.settings[0],grafInfo.settings[1],grafInfo.settings[2],grafInfo.settings[3],grafInfo.settings[4],grafInfo.settings[5],grafInfo.settings[6], grafInfo.map);
       }
       function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -272,7 +278,7 @@ var lastScroll = 0;
       for(let i = 0; i<allGr.length;i++){
         if(allGr[i].settings[6]==canvasID){
           allGr[i].map[allGr[i].map.length-1].y+=5 ;
-          rebuildAll();
+          redrawerGraf(allGr[i]);
           document.getElementById("coucou"+canvasID).innerHTML=allGr[i].map[allGr[i].map.length-1].y;
         }
       }
@@ -284,7 +290,7 @@ var lastScroll = 0;
       for(let i = 0; i<allGr.length;i++){
         if(allGr[i].settings[6]==canvasID){
           allGr[i].map[allGr[i].map.length-1].y-=5 ;
-          rebuildAll();
+          redrawerGraf(allGr[i]);
           document.getElementById("coucou"+canvasID).innerHTML=allGr[i].map[allGr[i].map.length-1].y;
         }
       }
@@ -301,7 +307,7 @@ var lastScroll = 0;
           if( allGr[i].map==0){
             allGr[i].settings[6]="DELETE";
           }
-          rebuildAll();
+          redrawerGraf(allGr[i]);
         }
       }
       scrollLoad();
@@ -311,7 +317,7 @@ var lastScroll = 0;
       for(let i = 0; i<allGr.length;i++){
         if(allGr[i].settings[6]==canvasID){
           allGr[i].map.push({y:0}) ;
-          rebuildAll();
+          redrawerGraf(allGr[i]);
         }
       }
       scrollLoad();
@@ -369,6 +375,8 @@ var lastScroll = 0;
 let divd = document.createElement('div');
   divd.innerHTML = grafBody;
   document.getElementById("menu").append(divd);
+}
+function drawmakeGRAF(strok,stolbs,stepMn,textSize,nameS,NAME,IDCANVAS,MAP){
     function makeCounter(){
         gRctx.beginPath();
         gRctx.lineWidth = lineWidth; // bottom line drawing
@@ -455,6 +463,7 @@ let divd = document.createElement('div');
       ////////
       var globalX=0;
       var target = document.getElementById(IDCANVAS);
+      console.log(IDCANVAS)
       //true pixels calc
       var grafWidth = Math.round(target.clientWidth*window.devicePixelRatio);
       var grafHeight = Math.round(target.clientHeight*window.devicePixelRatio);
@@ -484,11 +493,11 @@ let divd = document.createElement('div');
       drawStolb(stolbs)
       var stepWidth = (grafWidth - globalX)/30;
       spx=spx-stepWidth;
-      ReGRctx.lineWidth = 3;
+      ReGRctx.lineWidth = 2*window.devicePixelRatio;
      
       console.log(stepWidth);
       for(let i = 0; i < MAP.length;i++){
-        rgDraw(MAP[i].y*3.5)
+        rgDraw(MAP[i].y*1.75*window.devicePixelRatio)
       }
       
 
