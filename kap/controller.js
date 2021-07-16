@@ -39,7 +39,7 @@ function showNoty(text,type){
                 notyLayer.style.zIndex = -1;
             },80);
         },100);
-        `
+        `;
         notyLayer.innerHTML += 
             `
             <div class="vkNoty2 notyAnim-2"  id="`+id+`">
@@ -49,6 +49,7 @@ function showNoty(text,type){
             <div class="vkNoty2Btn" id="`+"-"+id+`" onclick="`+rmProgram+`"><h5 style="color: white">`+notyAnswers[rint(0,10)]+`</h5></div></div>
             `;
         document.getElementById(id).children[0].style.marginTop = ((200 - 35 - 7)/2) - (document.getElementById(id).children[0].clientHeight/2)+"px";
+        document.getElementById("-"+id).children[0].style.marginTop = 35/2 - (document.getElementById("-"+id).children[0].clientHeight/2)+"px";
           
     }
     function setZ(num){

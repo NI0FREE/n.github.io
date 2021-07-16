@@ -180,3 +180,9 @@
     margin-bottom: 8px;
     float: left;
 }
+.standartTitle{
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    font-weight: 500;
+    margin: 14px;
+    width: 100%;
+}
