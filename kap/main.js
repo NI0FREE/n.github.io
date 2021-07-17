@@ -5,6 +5,7 @@ const screenList = [{id:"menu",status: "0",name:"Меню", back:0, color:0 },{i
 const header     = document.getElementById("head");
 const colorCards = [{title:"#FFFFFF",body:"#E5EBF1"},{title:"#00695f",body:"#015850"}]
 screenShow("menu");
+reFix();
 document.getElementById("sendMoney").addEventListener("click",()=>{
     //showNoty("К большому сожалению, перевод Флорбов на данный момент невозможен!",2)
     screenShow("cardPlace");
@@ -52,14 +53,14 @@ function screenShow(id){
 }
 
 function reFix(){
-    const nodeFix = ["florbo1"]
+    const nodeFix = ["florbo1","nameMine"]
     for(let i = 0;i< nodeFix.length; i ++){
         centerFix(nodeFix[i]);
     }
 }
 function centerFix(id){
     let $fix = document.getElementById(id);
-    $fix.style.marginTop = (document.getElementById(id).parentElement.clientHeight/2) - (document.getElementById(id).clientHeight/2) +"px";
+    $fix.style.marginTop = (document.getElementById(id).parentElement.clientHeight/2) - (document.getElementById(id).clientHeight/2)-1 +"px";
 }
 
 const enemyCard = document.getElementById("enemyCardNum");
