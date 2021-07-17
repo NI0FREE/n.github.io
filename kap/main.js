@@ -58,7 +58,7 @@ function screenShow(id){
 }
 
 function reFix(){
-    const nodeFix = ["florbo1","nameMine","coalFixer"]
+    const nodeFix = ["florbo1","nameMine","coalFixer","n1","n2","n3"]
     for(let i = 0;i< nodeFix.length; i ++){
         centerFix(nodeFix[i]);
     }
