@@ -196,3 +196,25 @@
 .btnCardActive:hover {
     background-color: #d8962b; /* Параметры рамки */
 }
+
+.showStrike {
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: showStrike;
+    animation-timing-function: linear;
+}
+@keyframes showStrike {
+    0%   { transform: translateX(-70px);}
+    10%  { transform: translateX(0px);}
+}
+
+.hideStrike {
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: hideStrike;
+    animation-timing-function: linear;
+}
+@keyframes hideStrike {
+    0%   { transform: translateX(0px);}
+    10%  { transform: translateX(-70px);}
+}

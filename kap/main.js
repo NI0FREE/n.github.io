@@ -1,6 +1,6 @@
 //const orange = new Controller("box");
 startApp();
-const backbtn = `<div onclick=" screenShow('menu');" style=" width: 30px; color: #efb96b; margin-top: calc((55px / 2) - 30px / 2); margin-left: 10px; float: left; "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="browser_back_24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><path d="M8.656 12l7.122 7.122a1.1 1.1 0 11-1.556 1.556l-7.9-7.9a1.1 1.1 0 010-1.556l7.9-7.9a1.1 1.1 0 011.556 1.556L8.656 12z" fill="currentColor" fill-rule="nonzero"></path></g></svg></div>`;
+const backbtn = `<div class="showStrike" onclick="this.classList.add('hideStrike'); setTimeout(()=>{ screenShow('menu');},100) " style=" width: 30px; color: #efb96b; margin-top: calc((55px / 2) - 30px / 2); margin-left: 10px; float: left; "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="browser_back_24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><path d="M8.656 12l7.122 7.122a1.1 1.1 0 11-1.556 1.556l-7.9-7.9a1.1 1.1 0 010-1.556l7.9-7.9a1.1 1.1 0 011.556 1.556L8.656 12z" fill="currentColor" fill-rule="nonzero"></path></g></svg></div>`;
 const screenList = [{id:"menu",status: "0",name:"Меню", back:0, color:0 },{id:"cardPlace",status: "0",name:" Управление средствами", back: 1, color:0},{id:"mine",status: "0",name:" Шахта", back: 1,color:1}];
 const header     = document.getElementById("head");
 const colorCards = [{title:"#FFFFFF",body:"#E5EBF1"},{title:"#00695f",body:"#015850"}]
