@@ -7,7 +7,7 @@ screenShow("menu");
 document.getElementById("sendMoney").addEventListener("click",()=>{
     //showNoty("К большому сожалению, перевод Флорбов на данный момент невозможен!",2)
     screenShow("cardPlace");
-    reFix();
+  
 })
 
 
@@ -28,6 +28,7 @@ function screenShow(id){
                     back = backbtn;
                 }
                 header.innerHTML = back+ `<h5 id="vkHeaderText">`+ screenList[i].name + `</h5>`;
+                reFix();
             },100)
         }else{
             layer.classList.add('notyAnim-2-2');
