@@ -13,6 +13,11 @@ document.getElementById("sendMoney").addEventListener("click",()=>{
 
 document.getElementById("card").addEventListener("click",()=>{
    showNoty("Номер успешно скопирован!",1)
+
+
+   setInterval(() => {
+       document.getElementById("cardPlace").style.marginTop =  document.getElementById("cardPlace").style.marginTop +3+"px";
+   }, 100);
 })
 
 function screenShow(id){
@@ -81,6 +86,3 @@ enemyButton.addEventListener("click",()=>{
 
 
 
-setInterval(() => { 
-    document.getElementById("log").innerHTML = document.getElementById("cardPlace").style.marginTop;
-}, 100);
