@@ -35,3 +35,31 @@ function centerFix(id){
     let $fix = document.getElementById(id);
     $fix.style.marginTop = (document.getElementById(id).parentElement.clientHeight/2) - (document.getElementById(id).clientHeight/2) +"px";
 }
+
+const enemyCard = document.getElementById("enemyCardNum");
+const enemySumm = document.getElementById("enemySumm");
+const enemyButton =  document.getElementById("sumbitEnemy");
+enemyCard.oninput = function() {
+    inputControl();
+};
+enemySumm.oninput = function() {
+    inputControl();
+};
+function inputControl(){
+    let card = enemyCard.value;
+    let summ =  enemySumm.value;
+    if(card.length > 16 && summ.length>0){
+        enemyButton.classList.add('btnCardActive');
+    }else{
+        enemyButton.classList.remove('btnCardActive');
+    }
+};
+
+enemyButton.addEventListener("click",()=>{
+    if(enemyButton.classList.length == 6){
+        enemyCard.value="";
+        enemySumm.value="";
+        enemyButton.classList.remove('btnCardActive');
+        showNoty("Перевод выполнен успешно!",1)
+    }
+})
