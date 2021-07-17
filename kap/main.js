@@ -6,6 +6,7 @@ screenShow("menu");
 document.getElementById("sendMoney").addEventListener("click",()=>{
     //showNoty("К большому сожалению, перевод Флорбов на данный момент невозможен!",2)
     screenShow("cardPlace");
+    reFix();
 })
 
 document.getElementById("card").addEventListener("click",()=>{
@@ -22,4 +23,15 @@ function screenShow(id){
             layer.style.display = "none";
         }
     }
+}
+
+function reFix(){
+    const nodeFix = ["florbo1"]
+    for(let i = 0;i< nodeFix.length; i ++){
+        centerFix(nodeFix[i]);
+    }
+}
+function centerFix(id){
+    let $fix = document.getElementById(id);
+    $fix.style.marginTop = (document.getElementById(id).parentElement.clientHeight/2) - (document.getElementById(id).clientHeight/2) +"px";
 }
