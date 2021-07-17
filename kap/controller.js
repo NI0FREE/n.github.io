@@ -23,7 +23,7 @@ function showNoty(text,type){
     let id = rint(1000000000,9000000000) + "";
 
     if(type == 1){
-        notyLayer.innerHTML += '<div class ="vkNoty1 notyAnim-1" id = "'+id+'"><h5>'+text+'</h5></div>';
+        notyLayer.innerHTML += '<div class ="vkNoty1 notyAnim-1" style="background-color:'+notyBody+';" id = "'+id+'"><h5 style="color:'+notyText+'">'+text+'</h5></div>';
         setTimeout(()=>{
             document.getElementById(id).remove();
             setZ(-1)
