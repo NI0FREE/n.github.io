@@ -78,3 +78,9 @@ enemyButton.addEventListener("click",()=>{
         showNoty("Перевод выполнен успешно!",1)
     }
 })
+
+
+
+setInterval(() => { 
+    document.getElementById("log").innerHTML = document.getElementById("cardPlace").scrollTop
+}, 100);
