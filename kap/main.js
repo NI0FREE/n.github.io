@@ -82,5 +82,5 @@ enemyButton.addEventListener("click",()=>{
 
 
 setInterval(() => { 
-    document.getElementById("log").innerHTML = document.getElementById("cardPlace").scrollTop
+    document.getElementById("log").innerHTML = document.getElementById("cardPlace").style.marginTop;
 }, 100);
