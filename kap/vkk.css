@@ -10,8 +10,10 @@
       margin: 0;
       background:#E5EBF1;
       position: relative;
+      transition: 80ms linear; 
    }
   .vk-header{
+     transition: 80ms linear; 
       height: 55px;
       z-index:999;
       width:100%;
