@@ -16,3 +16,9 @@ function drawStorage(){
     }
     storage.innerHTML = result;
 }
+
+function showinfo(id){
+
+    showItemCard({text:0})
+
+}
