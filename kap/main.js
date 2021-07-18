@@ -59,7 +59,7 @@ function screenShow(id){
 }
 
 function reFix(){
-    const nodeFix = ["florbo1","nameMine","coalFixer","n1","n2","n3","inbtn1","mine1f","inbtn2","mine2f","inbtn3","mine3f","inbtn4","mine4f","inbtn5","mine5f","nameStorage"]
+    const nodeFix = ["florbo1","nameMine","coalFixer","n1","n2","n3","m1f","-m1f","m2f","-m2f","m3f","-m3f","m4f","-m4f","m5f","-m5f","nameStorage"]
     for(let i = 0;i< nodeFix.length; i ++){
         centerFix(nodeFix[i]);
     }
