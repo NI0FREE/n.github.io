@@ -37,6 +37,10 @@
         <button style="padding: 0px;outline: none;width: 36px;float: right;background-color: #2c3e5000;border-width: 0px;margin: 3px;margin-right: 20px;margin-top: 7px;" class=""><i class="material-icons three unselectable" style="color: rgb(255 152 0);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="door_arrow_left_outline_24"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.754 20.366c-.763.407-1.512.534-3.082.534H13a.9.9 0 110-1.8h2.672c1.487 0 1.87-.128 2.233-.322.336-.18.594-.437.773-.773.194-.362.322-.746.322-2.233V8.228c0-1.487-.128-1.87-.322-2.233a1.847 1.847 0 00-.773-.774c-.362-.193-.746-.321-2.233-.321H13a.9.9 0 110-1.8h2.672c1.57 0 2.32.127 3.082.534.65.348 1.164.863 1.512 1.512.407.762.534 1.512.534 3.082v7.544c0 1.57-.127 2.32-.534 3.082a3.646 3.646 0 01-1.512 1.512zm-9.39-5.002l2.463-2.464H3.9a.9.9 0 110-1.8h7.927L9.364 8.636a.9.9 0 111.272-1.272l4 4a.9.9 0 010 1.272l-4 4a.9.9 0 11-1.272-1.272z" fill="currentColor"></path></svg>  </i></button> 
     </div>
   
+    <div class="infoCard" id="inStorage" style="background: #3f51b5;height: 52px;position: relative;overflow: hidden;">
+        <div class="userinf standartTitle" style="position: relative; z-index: 10; width: 68%; margin-top: 14.5px;" id="nameStorage">Открыть склад..</div>
+        <button style="padding: 0px;outline: none;width: 36px;float: right;background-color: #2c3e5000;border-width: 0px;margin: 3px;margin-right: 20px;margin-top: 7px;" class=""><i class="material-icons three unselectable" style="color: rgb(185 185 185);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="cube_box_outline_28"><g fill-rule="nonzero" fill="none"><path opacity=".216" d="M0 0h28v28H0z"></path><path d="M13.507 1.545c.33-.06.655-.06.986 0 .33.059.599.154 1.134.397l8.58 3.9c.528.24.793.404 1.055.66.26.253.451.55.574.89.124.346.164.655.164 1.234v10.35c0 .579-.04.888-.164 1.233-.123.34-.315.638-.574.89-.262.257-.527.421-1.054.66l-8.77 3.986c-.414.181-.656.26-.945.312a2.75 2.75 0 01-.986 0c-.33-.059-.599-.154-1.134-.397l-8.58-3.9c-.528-.24-.793-.404-1.055-.66a2.337 2.337 0 01-.574-.89C2.04 19.863 2 19.554 2 18.975l.002-10.555c.01-.452.053-.726.162-1.028.123-.34.315-.638.574-.89.262-.257.527-.421 1.054-.66l8.77-3.985c.414-.182.656-.261.945-.313zM4 8.854v10.231a2 2 0 00.024.372l.022.074c.02.055.046.096.088.137.07.069.151.119.486.27l8.38 3.81V12.932a3 3 0 01-.042-.015l-.2-.082L4 8.854zm20-.001l-8.759 3.982c-.079.036-.159.068-.24.097L15 23.748l8.38-3.81c.215-.097.325-.153.396-.198l.032-.022.058-.05a.339.339 0 00.088-.137c.034-.093.046-.187.046-.555V8.853zM8.5 5.899L5.416 7.301l8.17 3.713a1 1 0 00.713.044l.115-.044 2.669-1.213L8.5 5.899zm5.64-2.386a.752.752 0 00-.28 0c-.136.025-.262.07-.66.25L10.917 4.8 19.5 8.702l3.083-1.401-7.784-3.538c-.265-.12-.409-.18-.516-.214l-.05-.015z" fill="currentColor"></path></g></svg>  </i></button> 
+    </div>
 </div>
 
 <div class="inApp" id="cardPlace" style="display: block;">
@@ -168,7 +172,7 @@
               
           </div><div class="infoCard" style="background: #a53e61;height: 42px;position: relative;overflow: hidden;">
             <div id="mine4f" class="userinf standartTitle" style="color: rgb(179 179 179);margin: 10.5px 12px 12px;font-size: 14px;width: 100%;height: auto;">
-              <div style="float: left;">Подорвать дминамит</div>
+              <div style="float: left;">Подорвать динамит</div>
               
             <div id="coalAdd1" style="color: #e2e2e2;width: 100%;">&nbsp;+ ~100 с</div>
     
@@ -209,9 +213,16 @@
 
 
 
+<div class="inApp" id="storage" style="display: none;position: absolute;top: 55px; z-index: 1;">
+    <div class="box ratio1_1"><span class="content" style="width: 100%;height: 100%;  background-image: url(pics/rowCoal.png); background-repeat: no-repeat; border-radius: 5px;background-size: 101%;"></span><div class="vksrf">Сырьё</div></div>
+
+</div>
+
+
 
 <div class="inApp" id="notyLayer" style="display: block;position: absolute;top: 55px; z-index: -1;"></div>
-
+<script src = "mine.js"></script>    
+<script src = "storage.js"></script>  
 <script src = "controller.js"></script>    
 <script src = "main.js"></script>  
 </body>

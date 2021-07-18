@@ -218,3 +218,74 @@
     0%   { transform: translateX(0px);}
     10%  { transform: translateX(-70px);}
 }
+
+.box {
+    position: relative;
+    width: 22%;
+    margin: 2.222222% 0% 0% 2.4%;
+    float: left;
+    font-size: 12px;
+}
+section.examples {
+    border: 3px dashed #333;
+    padding: 20px;
+    position: relative;
+  }
+  section.examples:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .box:before {
+    content: "";
+    display: block;
+    margin-top: 100%; /* initial ratio of 1:1*/
+  }
+  
+  /* Other ratios */
+  .ratio2_1:before {
+    margin-top: 50%;
+  }
+  .ratio1_2:before {
+    margin-top: 200%;
+  }
+  .ratio4_3:before {
+    margin-top: 75%;
+  }
+  .ratio16_9:before {
+    margin-top: 56.25%;
+  }
+  .content {
+    /* Positioning */
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    padding: 0px;
+    /* Styling */
+    background: #20303e00;
+   
+    text-align: center;
+    vertical-align: center;
+    text-transform: uppercase;
+  }
+  .content span {
+    font-weight: bold;
+    font-size: 10px;
+    display: block;
+  }
+  
+  .vksrf{
+    color: #000000;
+    font-size: 150%;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    margin-top: -8px;
+    font-weight: 500;
+}
+  
