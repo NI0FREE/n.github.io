@@ -41,17 +41,17 @@ for(let i = 0; i < 3; i ++){
 
 document.getElementById("next").addEventListener("click",()=>{
 
-document.location.href = "file:///C:/Users/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D1%8F/Desktop/Project1/reg.html";
+document.location.href = "https://ni0free.github.io/n.github.io/Project1/reg.html";
 
 })
 document.getElementById("next2").addEventListener("click",()=>{
 
-    document.location.href = "file:///C:/Users/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D1%8F/Desktop/Project1/reg.html";
+    document.location.href = "https://ni0free.github.io/n.github.io/Project1/reg.html";
     
     })
  
     document.getElementById("next3").addEventListener("click",()=>{
 
-        document.location.href = "file:///C:/Users/%D0%9D%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D1%8F/Desktop/Project1/reg.html";
+        document.location.href = "https://ni0free.github.io/n.github.io/Project1/reg.html";
         
         })
