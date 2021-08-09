@@ -60,14 +60,15 @@ box-shadow: 0px 0px 5px 0px rgba(34, 60, 80, 0.2);
 small{
     width: 370px;
     font-family: 'Inter', sans-serif;
-    color: #adb5bd!important;
+    color: #adb5bd;
     align-self: center;
     margin-top: 15px;
 }
 
 .btn{
     height: calc(1.5em + .875rem + 2px);
-    background-color: #3755be;
+  
+    background-color: #3755be8f;
     width: 370px;
     align-self: center;
     margin-top: 15px;
