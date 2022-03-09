@@ -112,7 +112,7 @@ enemyButton.addEventListener("click",()=>{
 
 
 function hidePod(){
-    sumbitPODBlock.style.display = "none";
+    sumbitPODBlock.style.visibility = "hidden";
     canvas.style.filter = 'blur(0px)';
     acceptlock.style.opacity = 0;
     sumbitPODBlock.classList.add('notyAnim-2-2');
@@ -120,7 +120,8 @@ function hidePod(){
     sumbitPODBlock.style.opacity = 0;
 }
 function showPod(){
-    sumbitPODBlock.style.display = "block";
+    sumbitPODBlock.style.visibility = "visible";
+    sumbitPODBlock.style.display = "";
     canvas.style.filter = 'blur(0px)';
     acceptlock.style.opacity = 0;
     sumbitPODBlock.classList.remove('notyAnim-2-2');
@@ -132,8 +133,8 @@ function showPod(){
 function updateCanvas(){
     movePoints=0;
     context.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.width = getComputedStyle(canvas).width.substr(0, getComputedStyle(canvas).width.length - 2);
-    canvas.height = getComputedStyle(canvas).height.substr(0, getComputedStyle(canvas).height.length - 2);
+    canvas.width = getComputedStyle(canvas).width.substr(0, getComputedStyle(canvas).width.length - 2)/1.5;
+    canvas.height = getComputedStyle(canvas).height.substr(0, getComputedStyle(canvas).height.length - 2)/1.5;
 
 }
 var canvCont= document.getElementById("canvCont");
@@ -147,8 +148,8 @@ var draw = false;
 var movePoints = 0;
 canvCont.addEventListener("mousedown", function(e){
               
-    mouse.x = Math.trunc(e.pageX) - this.offsetLeft;
-    mouse.y = Math.trunc(e.pageY) - this.offsetTop;
+    mouse.x = (Math.trunc(e.pageX) - this.offsetLeft)/1.5;
+    mouse.y = (Math.trunc(e.pageY) - this.offsetTop)/1.5;
     draw = true;
     context.beginPath();
     context.moveTo(mouse.x, mouse.y);
@@ -157,16 +158,16 @@ canvCont.addEventListener("mousedown", function(e){
                 
     if(draw==true){
      movePoints++;           
-     mouse.x = Math.trunc(e.pageX) - this.offsetLeft;
-     mouse.y = Math.trunc(e.pageY) - this.offsetTop;
+     mouse.x = (Math.trunc(e.pageX) - this.offsetLeft)/1.5;
+     mouse.y = (Math.trunc(e.pageY) - this.offsetTop)/1.5;
      context.lineTo(mouse.x, mouse.y);
      context.stroke();
     }
 });
 canvCont.addEventListener("mouseup", function(e){
    if(movePoints > 50){endCanv();}           
-   mouse.x = Math.trunc(e.pageX) - this.offsetLeft;
-   mouse.y = Math.trunc(e.pageY) - this.offsetTop;
+   mouse.x = (Math.trunc(e.pageX) - this.offsetLeft)/1.5;
+   mouse.y = (Math.trunc(e.pageY) - this.offsetTop)/1.5;
    context.lineTo(mouse.x, mouse.y);
    context.stroke();
    context.closePath();
@@ -174,8 +175,8 @@ canvCont.addEventListener("mouseup", function(e){
 });
 
 canvCont.addEventListener("touchstart", function (event) {
-    mouse.x = Math.trunc(event.touches[0].pageX) - this.offsetLeft;
-    mouse.y = Math.trunc(event.touches[0].pageY) - this.offsetTop;
+    mouse.x = (Math.trunc(event.touches[0].pageX) - this.offsetLeft)/1.5;
+    mouse.y = (Math.trunc(event.touches[0].pageY) - this.offsetTop)/1.5;
     draw = true;
     context.beginPath();
     context.moveTo(mouse.x, mouse.y);
@@ -187,8 +188,8 @@ canvCont.addEventListener("touchmove", function (event) {
     
     if(draw==true){
         movePoints++;           
-        mouse.x = Math.trunc(event.touches[0].pageX) - this.offsetLeft;
-        mouse.y = Math.trunc(event.touches[0].pageY) - this.offsetTop;
+        mouse.x = (Math.trunc(event.touches[0].pageX) - this.offsetLeft)/1.5;
+        mouse.y = (Math.trunc(event.touches[0].pageY) - this.offsetTop)/1.5;
         context.lineTo(mouse.x, mouse.y);
         context.stroke();
         console.log(this.offsetLeft);
@@ -199,8 +200,8 @@ canvCont.addEventListener("touchmove", function (event) {
 canvCont.addEventListener("touchend", function (event) {
    
     if(movePoints > 50){endCanv();}           
-    mouse.x = Math.trunc(event.touches[0].pageX) - this.offsetLeft;
-    mouse.y = Math.trunc(event.touches[0].pageY) - this.offsetTop;
+    mouse.x = (Math.trunc(event.touches[0].pageX) - this.offsetLeft)/1.5;
+    mouse.y = (Math.trunc(event.touches[0].pageY) - this.offsetTop)/1.5;
     context.lineTo(mouse.x, mouse.y);
     context.stroke();
     context.closePath();
