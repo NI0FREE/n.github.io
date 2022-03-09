@@ -112,6 +112,7 @@ enemyButton.addEventListener("click",()=>{
 
 
 function hidePod(){
+    sumbitPODBlock.style.display = "none";
     canvas.style.filter = 'blur(0px)';
     acceptlock.style.opacity = 0;
     sumbitPODBlock.classList.add('notyAnim-2-2');
@@ -119,6 +120,7 @@ function hidePod(){
     sumbitPODBlock.style.opacity = 0;
 }
 function showPod(){
+    sumbitPODBlock.style.display = "block";
     canvas.style.filter = 'blur(0px)';
     acceptlock.style.opacity = 0;
     sumbitPODBlock.classList.remove('notyAnim-2-2');
@@ -209,6 +211,7 @@ canvCont.addEventListener("touchend", function (event) {
 
 
 function endCanv(){
+    
     canvas.style.filter = 'blur(2px)';
     acceptlock.classList.add('puls');
     acceptlock.classList.remove('notyAnim-2-2');
