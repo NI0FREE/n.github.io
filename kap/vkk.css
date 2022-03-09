@@ -289,3 +289,25 @@ section.examples {
     font-weight: 500;
 }
   
+   .hideObject{
+   
+    opacity: 0;
+    transition: 0.2s;
+   }
+
+   .maxHeight257{
+    transition: max-height 1.5s ease 0s;
+    max-height: 257px;
+   }
+
+   .puls {
+    animation-duration: 200ms;
+    animation-iteration-count: 1;
+    animation-name: puls;
+    animation-timing-function: linear;
+    }
+   @keyframes puls {
+    0%   { transform: scale(1);}
+    50%  { transform: scale(1.05);}
+    100%  { transform: scale(1);}
+    }
