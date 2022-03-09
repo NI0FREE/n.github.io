@@ -171,6 +171,43 @@ canvCont.addEventListener("mouseup", function(e){
    draw = false;
 });
 
+canvCont.addEventListener("touchstart", function (event) {
+    mouse.x = Math.trunc(event.touches[0].pageX) - this.offsetLeft;
+    mouse.y = Math.trunc(event.touches[0].pageY) - this.offsetTop;
+    draw = true;
+    context.beginPath();
+    context.moveTo(mouse.x, mouse.y);
+    //
+
+}, false); 
+
+canvCont.addEventListener("touchmove", function (event) {
+    
+    if(draw==true){
+        movePoints++;           
+        mouse.x = Math.trunc(event.touches[0].pageX) - this.offsetLeft;
+        mouse.y = Math.trunc(event.touches[0].pageY) - this.offsetTop;
+        context.lineTo(mouse.x, mouse.y);
+        context.stroke();
+        console.log(this.offsetLeft);
+       }
+
+    event.preventDefault();
+}, false,{passive: false});
+canvCont.addEventListener("touchend", function (event) {
+   
+    if(movePoints > 50){endCanv();}           
+    mouse.x = Math.trunc(event.touches[0].pageX) - this.offsetLeft;
+    mouse.y = Math.trunc(event.touches[0].pageY) - this.offsetTop;
+    context.lineTo(mouse.x, mouse.y);
+    context.stroke();
+    context.closePath();
+    draw = false;
+
+    event.preventDefault();
+}, false);
+
+
 function endCanv(){
     canvas.style.filter = 'blur(2px)';
     acceptlock.classList.add('puls');
@@ -181,5 +218,6 @@ function endCanv(){
     enemyCard.value="";
     enemySumm.value="";
     enemyButton.innerHTML = "Подтвердить";
+    showNoty("Перевод выполнен успешно!",1);
 }
 
