@@ -72,6 +72,9 @@ function centerFix(id){
 const enemyCard = document.getElementById("enemyCardNum");
 const enemySumm = document.getElementById("enemySumm");
 const enemyButton =  document.getElementById("sumbitEnemy");
+const sumbitBlock = document.getElementById("sumbitBlock");
+const sumbitPODBlock = document.getElementById("sumbitPODBlock");
+const acceptlock = document.getElementById("acceptlock");
 enemyCard.oninput = function() {
     inputControl();
 };
@@ -82,21 +85,101 @@ enemySumm.oninput = function() {
 function inputControl(){
     let card = enemyCard.value;
     let summ =  enemySumm.value;
+    if(canvStatus){hidePod();enemyButton.innerHTML = "Подтвердить";};
     if(card.length > 16 && summ.length>0){
         enemyButton.classList.add('btnCardActive');
     }else{
         enemyButton.classList.remove('btnCardActive');
+        
     }
 };
 
+var canvStatus = false;
 enemyButton.addEventListener("click",()=>{
     if(enemyButton.classList.length == 6){
-        enemyCard.value="";
-        enemySumm.value="";
+        updateCanvas();
+        hidePod();showPod();
+        //enemyCard.value="";
+        //enemySumm.value="";
+        //enemyButton.classList.add('hideObject');
+       // enemyButton.style.display = "none";
         enemyButton.classList.remove('btnCardActive');
-        showNoty("Перевод выполнен успешно!",1)
+        enemyButton.innerHTML = "Ожидание подписи";
+        canvStatus=true;
+        //showNoty("Перевод выполнен успешно!",2);
     }
 })
 
 
+function hidePod(){
+    canvas.style.filter = 'blur(0px)';
+    acceptlock.style.opacity = 0;
+    sumbitPODBlock.classList.add('notyAnim-2-2');
+    sumbitPODBlock.classList.remove('notyAnim-2');
+    sumbitPODBlock.style.opacity = 0;
+}
+function showPod(){
+    canvas.style.filter = 'blur(0px)';
+    acceptlock.style.opacity = 0;
+    sumbitPODBlock.classList.remove('notyAnim-2-2');
+    sumbitPODBlock.classList.add('notyAnim-2');
+    sumbitPODBlock.style.opacity = 1;
+}
+
+
+function updateCanvas(){
+    movePoints=0;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = getComputedStyle(canvas).width.substr(0, getComputedStyle(canvas).width.length - 2);
+    canvas.height = getComputedStyle(canvas).height.substr(0, getComputedStyle(canvas).height.length - 2);
+
+}
+var canvCont= document.getElementById("canvCont");
+var canvas = document.getElementById("sumbitPOD"), 
+context = canvas.getContext("2d"),
+w = canvas.width,
+h=canvas.height;
+                 
+var mouse = { x:0, y:0};
+var draw = false;
+var movePoints = 0;
+canvCont.addEventListener("mousedown", function(e){
+              
+    mouse.x = Math.trunc(e.pageX) - this.offsetLeft;
+    mouse.y = Math.trunc(e.pageY) - this.offsetTop;
+    draw = true;
+    context.beginPath();
+    context.moveTo(mouse.x, mouse.y);
+ });
+ canvCont.addEventListener("mousemove", function(e){
+                
+    if(draw==true){
+     movePoints++;           
+     mouse.x = Math.trunc(e.pageX) - this.offsetLeft;
+     mouse.y = Math.trunc(e.pageY) - this.offsetTop;
+     context.lineTo(mouse.x, mouse.y);
+     context.stroke();
+    }
+});
+canvCont.addEventListener("mouseup", function(e){
+   if(movePoints > 50){endCanv();}           
+   mouse.x = Math.trunc(e.pageX) - this.offsetLeft;
+   mouse.y = Math.trunc(e.pageY) - this.offsetTop;
+   context.lineTo(mouse.x, mouse.y);
+   context.stroke();
+   context.closePath();
+   draw = false;
+});
+
+function endCanv(){
+    canvas.style.filter = 'blur(2px)';
+    acceptlock.classList.add('puls');
+    acceptlock.classList.remove('notyAnim-2-2');
+    acceptlock.classList.add('notyAnim-2');
+    acceptlock.style.opacity = 1;
+    setTimeout(()=>{hidePod();},200);
+    enemyCard.value="";
+    enemySumm.value="";
+    enemyButton.innerHTML = "Подтвердить";
+}
 
