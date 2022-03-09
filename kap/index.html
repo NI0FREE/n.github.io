@@ -61,13 +61,33 @@
         <div style="float: left;">На счету: </div><div id="florb1" style="color: coral;">&nbsp;  10.000.000 f </div>
         </div>
     </div>
-    <div class="infoCard" style="background-color: #f6f8fa;height: auto;">
+    <div id = "sumbitBlock"class="infoCard" style="background-color: #f6f8fa;height: auto;transition: height 1.5s;max-height: 100000px; ">
         <div class="userinf standartTitle" style="color: black;font-size: 14px;margin: 10px;">Перевести на другую карту:</div>
     <input id="enemyCardNum" class="vkInpt" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;background-color: #ececec;color: black; placeholder=" placeholder="Номер карты">
     <input id="enemySumm"class="vkInpt" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;background-color: #ececec;color: black; placeholder=" placeholder="Сумма перевода">
     <div id="sumbitEnemy" class="vkInpt nf toCn stripe-1 standartTitle" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;color: black;text-align: center;margin-top: 10px;"> Подтвердить</div>
-    
 </div>
+<div id="sumbitPODBlock" class="infoCard" style="opacity: 0; background-color: #f6f8fa;height: auto;transition: height 1.5s;max-height: 100000px;">
+    <div id="canvCont" class="vkInpt nf toCn stripe-1 standartTitle" style="
+    transition-duration: 0.6s;
+    image-rendering: pixelated;
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-bottom: 10px;
+    color: rgb(236, 236, 236);
+    text-align: center;
+    margin-top: 10px;
+    height: 130px;
+    padding: 0px;
+    background-color: rgb(236, 236, 236);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+"><svg id = "acceptlock" style="z-index: 100;position: absolute;display: flex; opacity:0;" viewBox="-0.5 0 17.5 17.5" height="60px" width="60px" xmlns="http://www.w3.org/2000/svg"><path style="
+" fill="#699f4c" d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" stroke="#013A18" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"></path></svg><canvas id="sumbitPOD" class="vkInpt nf toCn stripe-1 standartTitle" style="height: calc(100% - 2px);transition-duration: 80ms ;image-rendering: pixelated;width: calc(100%);color: rgb(236, 236, 236);text-align: center;padding: 0px;background-color: rgb(236, 236, 236);margin: 0px;border: 0px solid rgb(214, 215, 216);" width="335" height="126">
+</canvas></div>
+</div>
+<div class="nf toCn stripe-1 standartTitle" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;text-align: center;margin-top: 10px;height: 24px;background-color: #e5ebf1;"></div>
 </div>
 
 <div class="inApp" id="mine" style="display: block;">
