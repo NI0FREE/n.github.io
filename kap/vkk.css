@@ -1,4 +1,4 @@
-   .inApp{     
+.inApp{     
     width: 100%;
     height: calc(100vh - 56px );
     overflow: auto;
@@ -310,4 +310,14 @@ section.examples {
     0%   { transform: scale(1);}
     50%  { transform: scale(1.05);}
     100%  { transform: scale(1);}
+    }
+    .notyAnim-33 {
+        animation-duration: 1500ms;
+        animation-iteration-count: 1;
+        animation-name: notyAnim-33;
+        animation-timing-function: linear;
+    }
+    @keyframes notyAnim-33 {
+        0%   { opacity: 0;}
+        5%  { opacity: 1;}
     }
