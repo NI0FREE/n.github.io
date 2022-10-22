@@ -54,12 +54,24 @@
     </div>
     <div style="width: calc(100% - 20px);background-color: #ff980061;height: 55vw;margin-left: 10px;margin-top: 10px;border-radius: 7px;border-block: inherit;border-color: azure;max-width: 300px;max-height: 170px;position: inherit;float: right;margin-top: -162px;z-index: -3;margin-right: 10px;">
         <div style="margin-top: 22px;width: 100%;height: 32px;background-color: #9a753f;"></div>
+        <div id="mypod" style="margin-top: 22px;width: 39%;height: 32px;background-color: #e7dfd3;margin-left: 21px;margin-right: 0px;background: linear-gradient(81deg,#efcc95, #e7dfd3);"></div>
+        <div style="margin-top: -32px;width: 31px;height: 32px;background-color: #e7dfd3;margin-left: 138px;text-align: center;font-family: cursive;vertical-align: middle;display: flex;align-items: center;"><p style="
+            display: block;
+            margin-block-start: 0em;
+            margin-block-end: 0em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            vertical-align: middle;
+            display: table-cell;
+        ">***</p></div>
     </div>
     <div class="infoCard" style="margin-top: 20px;background: #ffffffab;height: auto;">
         <button style="padding: 0px;outline: none;width: 25px;float: left;background-color: #2c3e5000;border-width: 0px;margin: 5px;margin-right: 1px;height: 25px;color: #d89f4c;" class=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" id="wallet_outline_20"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.29 4.086C13.057 4.009 12.74 4 11.75 4h-5.5c-.712 0-1.202 0-1.58.032-.371.03-.57.085-.714.159a1.75 1.75 0 00-.765.764c-.062.12-.11.28-.143.545H13.7l.771.001a1.387 1.387 0 00-.057-.292 1.75 1.75 0 00-1.123-1.123zM3 12.7V7h10.7c.865 0 1.423.001 1.848.036.408.033.559.09.633.127a1.5 1.5 0 01.655.656c.038.074.095.225.128.633.035.425.036.983.036 1.848v2.4c0 .865-.001 1.423-.036 1.848-.033.408-.09.559-.127.633a1.5 1.5 0 01-.656.655c-.074.038-.225.095-.633.128-.425.035-.983.036-1.848.036H6.3c-.865 0-1.423-.001-1.848-.036-.408-.033-.559-.09-.633-.128a1.5 1.5 0 01-.656-.655c-.037-.074-.094-.225-.127-.633C3 14.123 3 13.565 3 12.7zM1.5 7.219V12.7c0 1.68 0 2.52.327 3.162a3 3 0 001.311 1.311c.642.327 1.482.327 3.162.327h7.4c1.68 0 2.52 0 3.162-.327a3 3 0 001.311-1.311c.327-.642.327-1.482.327-3.162v-2.4c0-1.68 0-2.52-.327-3.162a3 3 0 00-1.311-1.311 2.692 2.692 0 00-.88-.253 3.34 3.34 0 00-.141-.828 3.25 3.25 0 00-2.087-2.087c-.492-.16-1.07-.16-1.874-.16l-.13.001H6.219c-.674 0-1.224 0-1.672.037-.463.037-.882.118-1.272.317a3.25 3.25 0 00-1.42 1.42c-.2.391-.28.81-.318 1.273-.037.447-.037.998-.037 1.672zM13.25 10.5a.75.75 0 000 1.5h1a.75.75 0 000-1.5h-1z" fill="currentColor"></path></svg></button>
         <div id="florbo1" class="userinf standartTitle" style="color: black;margin: 8px;font-size: 14px;width: 50%;height: auto;">
         <div style="float: left;">На счету: </div><div id="florb1" style="color: coral;">&nbsp;  10.000.000 f </div>
+        
         </div>
+        <button id="inStoryLine" onclick="storyUpdate();" style="padding: 0px;outline: none;width: 25px;float: left;background-color: #ffffff00;border-width: 0px;margin: 5px;margin-right: 1px;height: 25px;color: #d89f4c;float: right;margin-right: 9px;margin-bottom: 0px;margin-top: 6px;" class=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="5 5 37 37" height="23" width="23"><path d="M24.15 42q-3.75 0-7.05-1.425T11.325 36.7q-2.475-2.45-3.9-5.75Q6 27.65 6 23.9t1.425-7q1.425-3.25 3.9-5.675Q13.8 8.8 17.1 7.4 20.4 6 24.15 6q4 0 7.575 1.75t6.175 4.8v-5.3h3v10.4H30.45v-3h5.25q-2.2-2.55-5.175-4.1Q27.55 9 24.15 9q-6.25 0-10.7 4.275Q9 17.55 9 23.75q0 6.35 4.4 10.8Q17.8 39 24.15 39q6.25 0 10.55-4.4Q39 30.2 39 23.95h3q0 7.5-5.2 12.775T24.15 42Zm6.1-9.85-7.7-7.6v-10.7h3v9.45L32.4 30Z" fill="currentColor"></path></svg></button>
     </div>
     <div id = "sumbitBlock"class="infoCard" style="background-color: #f6f8fa;height: auto;transition: height 1.5s;max-height: 100000px; ">
         <div class="userinf standartTitle" style="color: black;font-size: 14px;margin: 10px;">Перевести на другую карту:</div>
@@ -67,6 +79,9 @@
     <input id="enemySumm"class="vkInpt" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;background-color: #ececec;color: black; placeholder=" placeholder="Сумма перевода">
     <div id="sumbitEnemy" class="vkInpt nf toCn stripe-1 standartTitle" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;color: black;text-align: center;margin-top: 10px;"> Подтвердить</div>
 </div>
+
+
+
 <div id="sumbitPODBlock" class="infoCard" style="opacity: 0; background-color: #f6f8fa;height: auto;transition: height 1.5s;max-height: 100000px;">
     <div id="canvCont" class="vkInpt nf toCn stripe-1 standartTitle" style="
     transition-duration: 0.6s;
@@ -88,6 +103,11 @@
 </canvas></div>
 </div>
 <div class="nf toCn stripe-1 standartTitle" style="width: calc(100% - 20px);margin-left: 10px;margin-bottom: 10px;text-align: center;margin-top: 10px;height: 24px;background-color: #e5ebf1;"></div>
+</div>
+
+<div class="inApp" id="storyLine" style="display: block;">
+
+    
 </div>
 
 <div class="inApp" id="mine" style="display: block;">
@@ -136,9 +156,11 @@
 
 
 <div class="inApp" id="notyLayer" style="display: block;position: absolute;top: 55px; z-index: -1;"></div>
+<script src = "storyLine.js"></script>  
 <script src = "mine.js"></script>    
 <script src = "storage.js"></script>  
 <script src = "controller.js"></script>    
 <script src = "main.js"></script>  
+
 </body>
 </html>

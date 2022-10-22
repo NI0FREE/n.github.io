@@ -3,7 +3,13 @@ startApp();
 var notyBody = "#FFFFFF"
 var notyText = "#223344"
 const backbtn = `<div class="showStrike" onclick="this.classList.add('hideStrike'); setTimeout(()=>{ screenShow('menu');},100) " style=" width: 30px; color: #efb96b; margin-top: calc((55px / 2) - 30px / 2); margin-left: 10px; float: left; "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="browser_back_24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><path d="M8.656 12l7.122 7.122a1.1 1.1 0 11-1.556 1.556l-7.9-7.9a1.1 1.1 0 010-1.556l7.9-7.9a1.1 1.1 0 011.556 1.556L8.656 12z" fill="currentColor" fill-rule="nonzero"></path></g></svg></div>`;
-const screenList = [{id:"menu",status: "0",name:"Меню", back:0, color:0 },{id:"cardPlace",status: "0",name:" Управление средствами", back: 1, color:0},{id:"mine",status: "0",name:" Шахта", back: 1,color:1},{id:"storage",status: "0",name:" Склад", back: 1,color:0}];
+const backbtnstatic = `<div onclick="this.classList.add('hideStrike'); setTimeout(()=>{ screenShow('menu');},100) " style=" width: 30px; color: #efb96b; margin-top: calc((55px / 2) - 30px / 2); margin-left: 10px; float: left; "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="browser_back_24"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"></path><path d="M8.656 12l7.122 7.122a1.1 1.1 0 11-1.556 1.556l-7.9-7.9a1.1 1.1 0 010-1.556l7.9-7.9a1.1 1.1 0 011.556 1.556L8.656 12z" fill="currentColor" fill-rule="nonzero"></path></g></svg></div>`;
+const screenList = [{id:"menu",status: "0",name:"Меню", back:0, color:0,strikeSatic:0 },
+                    {id:"cardPlace",status: "0",name:" Управление средствами", back: 1, color:0,strikeSatic:0 },
+                    {id:"mine",status: "0",name:" Шахта", back: 1,color:1 ,strikeSatic:0 },
+                    {id:"storyLine",status: "0",name:" История счета", back: 1,color:0 ,strikeSatic:1 },
+                    {id:"storage",status: "0",name:" Склад", back: 1,color:0 ,strikeSatic:0 }
+                   ];
 const header     = document.getElementById("head");
 const colorCards = [{title:"#FFFFFF",body:"#E5EBF1",notyb:"#FFFFFF",notyt:"#223344"},{title:"#00695f",body:"#015850",notyb:"#00695f",notyt:"white"}]
 screenShow("menu");
@@ -20,6 +26,10 @@ document.getElementById("inStorage").addEventListener("click",()=>{
     screenShow("storage");
 })
 
+document.getElementById("inStoryLine").addEventListener("click",()=>{
+    storyUpdate();
+    screenShow("storyLine");
+})
 
 document.getElementById("card").addEventListener("click",()=>{
    showNoty("Номер успешно скопирован!",1)
@@ -43,7 +53,11 @@ function screenShow(id){
                 layer.style.display = "block";
                 let back = "";
                 if(screenList[i].back){
-                    back = backbtn;
+                    if(screenList[i].strikeSatic){
+                      back = backbtnstatic;
+                    }else{
+                      back = backbtn;
+                    }
                 }
                 header.innerHTML = back+ `<h5 id="vkHeaderText">`+ screenList[i].name + `</h5>`;
                 reFix();
