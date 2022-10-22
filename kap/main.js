@@ -27,8 +27,10 @@ document.getElementById("inStorage").addEventListener("click",()=>{
 })
 
 document.getElementById("inStoryLine").addEventListener("click",()=>{
-    storyUpdate();
+    
     screenShow("storyLine");
+    setTimeout(()=>{storyUpdate();},150);
+    
 })
 
 document.getElementById("card").addEventListener("click",()=>{
