@@ -5,6 +5,17 @@ var storyList =  [{status:0,summ:2311,senderID:1,time:"1320"},
                   {status:1,summ:1000000,senderID:1,time:"0630"},
                   {status:0,summ:95222,senderID:1,time:"0522"},
                   {status:0,summ:1110000,senderID:1,time:"0322"},
+                  {status:0,summ:45354,senderID:1,time:"0322"},
+                  {status:0,summ:500,senderID:1,time:"0322"},
+                  {status:0,summ:122,senderID:1,time:"0322"},
+                  {status:0,summ:6000,senderID:1,time:"0322"},
+                  {status:0,summ:122500,senderID:1,time:"0322"},
+                  {status:0,summ:10000000,senderID:1,time:"0322"},
+                  {status:0,summ:12785,senderID:1,time:"0322"},
+                  {status:0,summ:2235,senderID:1,time:"0322"},
+                  {status:0,summ:2235,senderID:1,time:"0322"},
+                  {status:0,summ:2235,senderID:1,time:"0322"},
+                  {status:0,summ:2235,senderID:1,time:"0322"},
                  ];
 
 
