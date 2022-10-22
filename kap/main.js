@@ -30,7 +30,9 @@ document.getElementById("inStoryLine").addEventListener("click",()=>{
     
     screenShow("storyLine");
     setTimeout(()=>{storyUpdate();},150);
-    
+    setTimeout(()=>{storyUpdate();},10);
+    setTimeout(()=>{storyUpdate();},50);
+    setTimeout(()=>{storyUpdate();},200);
 })
 
 document.getElementById("card").addEventListener("click",()=>{
