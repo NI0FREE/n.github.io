@@ -146,7 +146,7 @@ function loadLif() {
 
 function loadRandom() {
     stopSimulation();
-    const seed = 12345;
+    const seed = 1233554225799745;
     const threshold = 0.3;
     lifeField.initializeWithRandom(seed, threshold);
     loadedPatternType = 'random';
