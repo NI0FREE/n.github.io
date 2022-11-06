@@ -37,7 +37,7 @@ function Start() {
 
     drawW();
     //loadRandom();
-    show('rnd-dialog');
+
 }
 
 function keyPressed(e) {
@@ -57,7 +57,7 @@ function step(timestamp) {
     }
 
     drawW();
-
+    
     if(running && !manualStep) {
         window.requestAnimationFrame(step);
     }
@@ -68,7 +68,7 @@ function drawW() {
     lifeField.draw(imagePixels);
     imageData.data.set(imageClampedArray);
     contextRE.putImageData(imageData, 0, 0);
-    updateStatus();
+    //updateStatus();
 }
 
 function updateStatus() {
@@ -123,8 +123,8 @@ function rewindSimulation() {
 }
 
 function selectSpeed() {
-    const speedChoser = document.getElementById("speed");
-    const selectedVal = speedChoser.options[speedChoser.selectedIndex].value;
+    const speedChoser = 0.5;
+    const selectedVal = 0.5;
     stepsPerFrame = parseInt(selectedVal);
     if(stepsPerFrame < 0) {
         stepsPerFrame = -stepsPerFrame;
@@ -146,40 +146,11 @@ function loadLif() {
 
 function loadRandom() {
     stopSimulation();
-    const seed = 1233554225799745;
-    const threshold = 0.3;
+    const seed = 894198712345;
+    const threshold = 0.6;
     lifeField.initializeWithRandom(seed, threshold);
     loadedPatternType = 'random';
     drawW();
-}
-
-function showLifDialog() {
-    //show('lif-dialog');
-    //document.getElementById('lif').focus();
-    //document.getElementById('lif').select();
-}
-
-function show(id) {
-   // if (isDialogShown) return;
-   // const control = document.getElementById(id);
-    //control.classList.remove('not-visible');
-    //isDialogShown = true;
-}
-
-function hide(id) {
-    const control = document.getElementById(id);
-    control.classList.add('not-visible');
-    isDialogShown = false;
-}
-
-function setGray(id) {
-    const control = document.getElementById(id);
-    control.classList.add('grayed');
-}
-
-function clearGray(id) {
-    const control = document.getElementById(id);
-    control.classList.remove('grayed');
 }
 
 function loadImage() {
@@ -200,3 +171,86 @@ function loadImg() {
     img.src = URL.createObjectURL(document.getElementById('file-img').files[0]);
     document.getElementById('file-img').value = null;
 }
+
+function convert(r,g,b,a) {
+    r = r.toString(16);g = g.toString(16);b = b.toString(16);a = a.toString(16);
+    r= '0'.repeat(Math.max(2 - r.length, 0)) + r;
+    g= '0'.repeat(Math.max(2 - g.length, 0)) + g;
+    b= '0'.repeat(Math.max(2 - b.length, 0)) + b;
+    a= '0'.repeat(Math.max(2 - a.length, 0)) + a;
+    return "0x"+a+b+g+r;
+};
+
+function updateFuncs(){
+
+    eval(`
+    lifeField.draw = function(imagePixels) {
+        for(var i = 0; i < `+imagePixels.length+`; i += 2) {
+            const val = this.fieldBytes[`+LifeField.WIDTH+`/2 + (i>>1)];
+            imagePixels[i] = (val & 1) == 0 ? `+lifeField.background+` : `+lifeField.cells+`;
+            imagePixels[i + 1] = (val & 16) == 0 ? `+lifeField.background+` : `+lifeField.cells+`;
+        }
+    }
+    `)
+    eval(
+    `
+    lifeField.step = function() {
+        this.generation++;
+        for(var i = 0; i < `+lifeField.tempInts.length+`; i++) this.tempInts[i] = 0;
+
+        for (var j = `+LifeField.WIDTH+`; j < `+(LifeField.WIDTH * LifeField.HEIGHT / 2)+`; j += 4)
+        {
+            const i = j / 4;
+
+            const src1 = this.fieldInts[i - `+(LifeField.WIDTH / 8)+`];
+            const src2 = this.fieldInts[i];
+            const src3 = this.fieldInts[i + `+(LifeField.WIDTH / 8)+`];
+
+            const src4 = this.fieldInts[i - `+(LifeField.WIDTH / 8 - 1)+`];
+            const src5 = this.fieldInts[i - 1];
+            const src6 = this.fieldInts[i + `+(LifeField.WIDTH / 8 - 1)+`];
+
+            const src7 = this.fieldInts[i - `+(LifeField.WIDTH / 8 + 1)+`];
+            const src8 = this.fieldInts[i + 1];
+            const src9 = this.fieldInts[i + `+(LifeField.WIDTH / 8 + 1)+`];
+
+            this.tempInts[i] += (src1 << 4) + src1 + (src1 >> 4);
+            this.tempInts[i] += (src2 << 4) + (src2 >> 4);
+            this.tempInts[i] += (src3 << 4) + src3 + (src3 >> 4);
+
+            this.tempInts[i] += (src4 >> 28) + (src5 >> 28) + (src6 >> 28);
+            this.tempInts[i] += (src7 << 28) + (src8 << 28) + (src9 << 28);
+        }
+
+        for (var j = `+LifeField.WIDTH+`; j < `+(LifeField.WIDTH * LifeField.HEIGHT / 2)+`; j += 4) {
+            const i = j / 4;
+            const neighours = this.tempInts[i] & 0x77777777;
+            const alive = this.fieldInts[i];
+
+            var keepAlive = ((neighours & ~0x11111111) >> 1) | (alive << 2);
+            keepAlive ^= ~0x55555555;
+            keepAlive &= (keepAlive >> 2);
+            keepAlive &= (keepAlive >> 1);
+            keepAlive &= 0x11111111;
+
+            var makeNewLife = neighours | (alive << 3);
+            makeNewLife ^= ~0x33333333;
+            makeNewLife &= (makeNewLife >> 2);
+            makeNewLife &= (makeNewLife >> 1);
+            makeNewLife &= 0x11111111;
+
+            this.fieldInts[i] = keepAlive | makeNewLife;
+        }
+
+        for(var y = 1; y <` +(LifeField.WIDTH - 1)+`; y++) {
+            this.set(0, y, false);
+            this.set(`+(LifeField.WIDTH - 1)+`, y, false);
+        }
+    }
+    `
+    )
+    
+    
+
+}
+

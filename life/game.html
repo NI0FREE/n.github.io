@@ -45,29 +45,27 @@
     vkBridge.send("VKWebAppGetUserInfo").then(result => {
         myinfo = result;})
     </script> 
-    <script src="file:///C:/Users/vasin/Desktop/helloworld/fabric.min%20(1).js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="http://now-you-will-get-banned-in-my-app.glitch.me/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
     <script src="second.js"></script>
 <div class="intro">
     <p id="log" style="position: absolute;">-</p>
     <canvas id="largecanv" ></canvas>
     <canvas id="scanv" ></canvas>
-    <canvas id="field" width="2000" height="2000"></canvas>
+    <canvas id="field" width="5000" height="2500"></canvas>
 </div>
                 
 </body>
 <script>
  window.onload = function() {
-
-   
-
-   setTimeout(()=>{loadRandom()},2000);
-   setTimeout(()=>{startSimulation()},10000);
-
-    var wallSIZE1 = 2000;
+   // selectSpeed() ;
+   setTimeout(()=>{loadRandom()},2500);
+   setTimeout(()=>{startSimulation()},5000);
+ 
+    var wallSIZE1 = 5000;
+    var wallSIZE2 = 2500;
     Start();
+    updateFuncs();
      gameGameGame(1)
     // var socket = 0;
     //// setTimeout(tryconn(),2500)
@@ -90,7 +88,7 @@
        // console.log(that90k[0].c)
         var scanv = document.getElementById('scanv');
         scanv.width = wallSIZE1*30;
-        scanv.height = wallSIZE1*30;
+        scanv.height = wallSIZE2*30;
         document.getElementById('scanv').remove();
         var scanvx = scanv.getContext('2d');
         scanvx.lineWidth = 1;
@@ -99,9 +97,9 @@
             scanvx.lineTo(xl, wallSIZE1*30);
         }
 
-        for (var yl = 0; yl < wallSIZE1*30; yl += 30) {
+        for (var yl = 0; yl < wallSIZE2*30; yl += 30) {
             scanvx.moveTo(0, yl);
-            scanvx.lineTo(wallSIZE1*30, yl);
+            scanvx.lineTo(wallSIZE2*30, yl);
         }
 
         scanvx.strokeStyle = "#a9203e";
@@ -145,14 +143,25 @@
     function placePix(e){
         console.log(e)
     let pixLenght = gSize/300;
+    let c = lifeField.cells;
+    let b = lifeField.background;
     let Xx=Math.floor((e.clientX-gameX)/pixLenght)
     let Yy=Math.floor((e.clientY-gameY)/pixLenght)
-    lifeField.set(Xx, Yy, true);
-    drawW();
+    let moodPIX = lifeField.getNormal(Xx, Yy);
+    console.log(moodPIX);
+    if(moodPIX){
+        lifeField.set(Xx, Yy, false);
+        gtx.fillStyle = "rgb("+parseInt(b[8]+b[9], 16)+","+parseInt(b[6]+b[7], 16)+","+parseInt(b[4]+b[5], 16)+")";
+    }else{
+        lifeField.set(Xx, Yy, true);
+        gtx.fillStyle = "rgb("+parseInt(c[8]+c[9], 16)+","+parseInt(c[6]+c[7], 16)+","+parseInt(c[4]+c[5], 16)+")";
+    }
+    //lifeField.set(Xx, Yy, true);
+    //drawW();
    // let  ID = Yy*wallSIZE1+Xx;
     //console.log(ID)
-    //gtx.fillStyle = "rgb("+randomInteger(0, 254)+","+randomInteger(0, 200)+","+randomInteger(0, 200)+")";;
-    //gtx.fillRect(Xx,Yy,1,1);
+    
+    gtx.fillRect(Xx,Yy,1,1);
     //draw(gSize)
     }
     function draw(size,X){
@@ -161,9 +170,9 @@
         ctx.mozImageSmoothingEnabled = false;ctx.webkitImageSmoothingEnabled = false;ctx.msImageSmoothingEnabled = false;ctx.imageSmoothingEnabled = false;gtx.mozImageSmoothingEnabled = false;gtx.webkitImageSmoothingEnabled = false;gtx.msImageSmoothingEnabled = false;gtx.imageSmoothingEnabled = false;
     
         
-        ctx.drawImage(lcanv, gameX*X, gameY*X, size/300*wallSIZE1, size/300*wallSIZE1);
+        ctx.drawImage(lcanv, gameX*X, gameY*X, size/300*wallSIZE1, size/300*wallSIZE2);
         if(size>5500){
-        ctx.drawImage(scanv, gameX*X, gameY*X, size/300*wallSIZE1, size/300*wallSIZE1);
+        ctx.drawImage(scanv, gameX*X, gameY*X, size/300*wallSIZE1, size/300*wallSIZE2);
         }
         //ctx.fillRect(gameX,gameY,size,size);
     }
@@ -205,17 +214,18 @@
 
     function addOnWheel(elem, handler) {if (elem.addEventListener) {if ('onwheel' in document) {elem.addEventListener("wheel", handler);} else if ('onmousewheel' in document) {elem.addEventListener("mousewheel", handler);} else {elem.addEventListener("MozMousePixelScroll", handler);}}else{text.attachEvent("onmousewheel", handler);}}
     let zoomP = 70;
+    let scaleresuctor = 60;
     addOnWheel(canvcanv, function(e) {
         
         if(e.deltaY<0 && zoomP<1315){//zoom
-            zoomP = zoomP + 70;
+            zoomP = zoomP + 10;
             let xxx = Math.trunc(((gameX-lastX)*-1)/(gSize/zoomP)*1000)/1000
             let yyy = Math.trunc(((gameY-lastY)*-1)/(gSize/zoomP)*1000)/1000
             gSize = gSize+zoomP;
             gameX = gameX-xxx;
             gameY = gameY-yyy;
             //draw(gSize)
-            
+            scaleresuctor +5;
             
         }else
         if( e.deltaY>0 && gSize > 505*300/1000){ //back
@@ -227,7 +237,8 @@
             gameX = gameX+xxx;
             gameY = gameY+yyy;
             //draw(gSize)
-            if(zoomP<140){}else{ zoomP = zoomP - 70;}  
+            if(zoomP<140){}else{ zoomP = zoomP - 10;}  
+            scaleresuctor -5;
         }
         
         e.preventDefault();
@@ -369,43 +380,31 @@
             }
             ///////////////////////////////////////////////////////
             
-            ///////////////////////////////////////////////////////
-            var stop = false;
-            var frameCount = 0;
-            var $results = $("#results");
-            var fps, fpsInterval, startTime, now, then, elapsed;
+            // ///////////////////////////////////////////////////////
+            // var stop = false;
+            // var frameCount = 0;
+            // var $results = $("#results");
+            // var fps, fpsInterval, startTime, now, then, elapsed;
 
-            startAnimating(30);
-            // initialize the timer variables and start the animation
+            // startAnimating(30);
+            // // initialize the timer variables and start the animation
 
-            function startAnimating(fps) {
-                fpsInterval = 1000 / fps;
-                then = Date.now();
-                startTime = then;
-                animate();
-            }
+            // function startAnimating(fps) {
+            //     fpsInterval = 1000 / fps;
+            //     then = Date.now();
+            //     startTime = then;
+            //     animate();
+            // }
+            animate();
             function animate() {
-
-                    // request another frame
-
                     requestAnimationFrame(animate);
-
-                    // calc elapsed time since last loop
-
-                    now = Date.now();
-                    elapsed = now - then;
-
-                    // if enough time has elapsed, draw the next frame
-
-                    if (elapsed > fpsInterval) {
-
-                        // Get ready for next frame by setting then=now, but also adjust for your
-                        // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
-                        then = now - (elapsed % fpsInterval);
+                  //  now = Date.now();
+                  //  elapsed = now - then;
+                  //  if (elapsed > fpsInterval) {
+                   //     then = now - (elapsed % fpsInterval);
                         draw(gSize)
-                        // Put your drawing code here
 
-                    }
+                    //}
             }
             
             // function step(timestamp) {
@@ -415,6 +414,13 @@
             // }
             // window.requestAnimationFrame(step);
         }
+
+        setInterval(()=>{
+
+            document.getElementById('log').innerHTML= "iterations per second: "+lifeField.generation;
+            lifeField.generation=0;
+
+        },1000)
 }
 //////////////////////////////////////////////////////
 

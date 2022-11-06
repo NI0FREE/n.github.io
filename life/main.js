@@ -20,6 +20,8 @@ class LifeField {
         this.fieldInts = new Uint32Array(this.field);
         this.tempInts = new Uint32Array(this.temp);
         this.generation = 0;
+        this.background = "0xff2c422a";
+        this.cells = "0xff23bf15";
     }
 
     get(x, y) { 
@@ -245,15 +247,25 @@ class LifeField {
 
     draw(imagePixels) {
         for(var i = 0; i < imagePixels.length; i += 2) {
-            const val = this.fieldBytes[LifeField.WIDTH / 2 + (i>>1)];
+            const val = this.fieldBytes[500 + (i>>1)];
             imagePixels[i] = (val & 1) == 0 ? 0xFF000000 : 0xFFFFFFFF;
             imagePixels[i + 1] = (val & 16) == 0 ? 0xFF000000 : 0xFFFFFFFF;
         }
+       
     }
+
+    getNormal(x,y){
+        
+        const pos = LifeField.WIDTH / 2 + y * (LifeField.WIDTH / 2) + (x >> 1);
+        if ((x & 1) == 1) return (this.fieldBytes[pos] & 0x10) == 0x10;
+        else return (this.fieldBytes[pos] & 1) == 1;
+    }
+
+    
 
 }
 
 // this works in Edge; however performance is terrible in Edge anyway.
-LifeField.WIDTH = 2000;
-LifeField.HEIGHT = 2000;
+LifeField.WIDTH = 5000;
+LifeField.HEIGHT = 2500;
 
