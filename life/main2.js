@@ -8,7 +8,7 @@ const screenList = [{id:"menu",status: "0",name:"", back:0, color:0,strikeSatic:
                     {id:"game",status: "0",name:" Поле", back: 1,color:1 ,strikeSatic:1 },
                    ];
 var header     = document.getElementById("head");
-const colorCards = [{title:"#ffffff00",body:"#E5EBF1",notyb:"#FFFFFF",notyt:"#223344",text:"#9A9A9A"},{title:"#00695f",body:"#015850",notyb:"#00695f",notyt:"white",text:"#9A9A9A"}]
+const colorCards = [{title:"#ffffff00",body:"#E5EBF1",notyb:"#FFFFFF",notyt:"#223344",text:"#9A9A9A"},{title:"#ffffff00",body:"#015850",notyb:"#00695f",notyt:"white",text:"#9A9A9A"}]
 screenShow("menu");
 reFix();
 // document.getElementById("sendMoney").addEventListener("click",()=>{
