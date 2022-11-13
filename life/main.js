@@ -267,6 +267,6 @@ class LifeField {
 }
 
 // this works in Edge; however performance is terrible in Edge anyway.
-LifeField.WIDTH = 250;
-LifeField.HEIGHT = 250;
+LifeField.WIDTH = 1024;
+LifeField.HEIGHT = 1024;
 
