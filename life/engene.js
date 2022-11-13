@@ -1,7 +1,6 @@
 window.onload = function() {
     setTimeout(function() {
       loadRandom();
-      startSimulation();
     }, 1250);
     setTimeout(function() {
       setInterval(function() {
@@ -9,8 +8,8 @@ window.onload = function() {
         lifeField.generation = 0;
       }, 1000);
     }, 5000);
-    var wallSIZE1 = 1024;
-    var wallSIZE2 = 1024;
+    var wallSIZE1 = 250;
+    var wallSIZE2 = 250;
     Start();
     updateFuncs();
     gameGameGame();

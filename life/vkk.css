@@ -1,0 +1,324 @@
+.inApp{     
+    width: 100%;
+    height: calc(100vh - 56px );
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 0px;
+    }
+   body {
+      overflow: hidden;
+      margin: 0;
+      background:#E5EBF1;
+      position: relative;
+      transition: 80ms linear; 
+   }
+  .vk-header{
+     transition: 80ms linear; 
+      height: 55px;
+      z-index:999;
+      width:100%;
+      background-color:#FFFFFF;
+      text-align:left;
+      top:0px;
+      overflow:hidden;
+      position:-webkit-sticky;
+      position:sticky;
+   }
+  .vk-header h5{
+    color:#9A9A9A;margin: 17px;font-size: 16px; opacity: 1;
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    font-weight: 500;
+    color: #9A9A9A;
+    float: left;
+    margin-inline-end: 7px;
+   }
+   .vkInpt{
+
+    margin: 15px;
+    width: calc(100% - 30px);
+    display: block;
+    box-sizing: border-box;
+    height: 44px;
+    font-size: 16px;
+    color: aliceblue;
+    position: relative;
+    z-index: 2;
+    border-radius: 5px;
+    border-style: none;
+    background-color: #efcc95;
+    outline: aliceblue;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #d6d7d8;
+
+}:focus {
+     border: 1px solid #79b3ec; /* Параметры рамки */
+   }
+
+.noselect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;   
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -khtml-user-select: none;
+}
+
+.vkNoty1 {
+
+    width: calc( 100% - 22px);
+    height: 55px;
+    background-color: white;
+    margin-left: 11px;
+    bottom: 11px;
+    position: absolute;
+    border-radius: 6px;
+
+}
+.vkNoty1 h5{
+    margin: 17px;
+    font-size: 16px;
+    opacity: 1;
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    font-weight: 500;
+    color: #223344;
+    float: left;
+    margin-inline-end: 7px;
+}
+.vkNoty2 {
+    width: calc( 100% - 22px);
+    height: 200px;
+    background-color: white;
+    margin-left: 11px;
+    position: absolute;
+    border-radius: 6px;
+    top: calc((100% - 55px)/2 - 100px);
+}
+.vkNoty2 h5{
+    margin: 5px;
+    font-size: 16px;
+    opacity: 1;
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    font-weight: 500;
+    color: #223344;
+    float: left;
+    margin-inline-end: 7px;
+    text-align: center;
+    width: calc(100% - 15px);
+}
+.vkNoty2Btn{
+    color: #FFFFFF;
+    bottom: 9px;
+    position: absolute;
+    width: calc(100% - 14px);
+    background-color: #2196f3;
+    height: 35px;
+    margin-left: 9px;
+    border-radius: 5px;
+}
+.vkNoty2Btn:hover {
+    background-color: #3788ca; /* Параметры рамки */
+  }
+.notyAnim-1 {
+    transform: translateY(68px);
+    position: fixed;
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: notyAnim-1;
+    animation-timing-function: linear;
+}
+@keyframes notyAnim-1 {
+    0%   { transform: translateY(68px); opacity: 0; }
+    10%  { transform: translateY(0px);  opacity: 1;}
+    90%  { transform: translateY(0px);  opacity: 1;}
+    100% { transform: translateY(68px);  opacity: 0;}
+}
+.notyAnim-2 {
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: notyAnim-2;
+    animation-timing-function: linear;
+}
+@keyframes notyAnim-2 {
+    0%   { opacity: 0;}
+    5%  { opacity: 1;}
+}
+.notyAnim-2-2 {
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: notyAnim-2-2;
+    animation-timing-function: linear;
+}
+@keyframes notyAnim-2-2 {
+    0%   { opacity: 1;}
+    5%  { opacity: 0;}
+}
+.infoCard{
+    
+    width: calc(100% - 130px);
+    margin-left: 70px;
+    height: 69px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: #7ca9d6;
+    overflow: hidden;
+}
+.Avatar{
+    border-radius: 50%;
+    width: auto;
+    height: 70%;
+    margin: 9px;
+    border: 2px solid rgb(255 255 255);
+    color: rgb(191, 192, 193);
+    float: left;
+    margin-left: 10px;
+}
+.userinf{
+    float: left;
+    font-family:"TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    margin-top: auto;
+    color: white;
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    float: left;
+}
+.standartTitle{
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    font-weight: 500;
+    margin: 14px;
+    width: 100%;
+}
+
+.btnCardActive{
+    background-color: #f9ac32;
+}
+.btnCardActive:hover {
+    background-color: #d8962b; /* Параметры рамки */
+}
+
+.showStrike {
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: showStrike;
+    animation-timing-function: linear;
+}
+@keyframes showStrike {
+    0%   { transform: translateX(-70px);}
+    10%  { transform: translateX(0px);}
+}
+
+.hideStrike {
+    animation-duration: 1500ms;
+    animation-iteration-count: 1;
+    animation-name: hideStrike;
+    animation-timing-function: linear;
+}
+@keyframes hideStrike {
+    0%   { transform: translateX(0px);}
+    10%  { transform: translateX(-70px);}
+}
+
+.box {
+    position: relative;
+    width: 22%;
+    margin: 2.222222% 0% 0% 2.4%;
+    float: left;
+    font-size: 12px;
+}
+section.examples {
+    border: 3px dashed #333;
+    padding: 20px;
+    position: relative;
+  }
+  section.examples:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .box:before {
+    content: "";
+    display: block;
+    margin-top: 100%; /* initial ratio of 1:1*/
+  }
+  
+  /* Other ratios */
+  .ratio2_1:before {
+    margin-top: 50%;
+  }
+  .ratio1_2:before {
+    margin-top: 200%;
+  }
+  .ratio4_3:before {
+    margin-top: 75%;
+  }
+  .ratio16_9:before {
+    margin-top: 56.25%;
+  }
+  .content {
+    /* Positioning */
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    padding: 0px;
+    /* Styling */
+    background: #20303e00;
+   
+    text-align: center;
+    vertical-align: center;
+    text-transform: uppercase;
+  }
+  .content span {
+    font-weight: bold;
+    font-size: 10px;
+    display: block;
+  }
+  
+  .vksrf{
+    color: #000000;
+    font-size: 150%;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    font-family: "TT Commons",-apple-system,system-ui,Helvetica Neue,Roboto,sans-serif;
+    margin-top: -8px;
+    font-weight: 500;
+}
+  
+   .hideObject{
+   
+    opacity: 0;
+    transition: 0.2s;
+   }
+
+   .maxHeight257{
+    transition: max-height 1.5s ease 0s;
+    max-height: 257px;
+   }
+
+   .puls {
+    animation-duration: 200ms;
+    animation-iteration-count: 1;
+    animation-name: puls;
+    animation-timing-function: linear;
+    }
+   @keyframes puls {
+    0%   { transform: scale(1);}
+    50%  { transform: scale(1.05);}
+    100%  { transform: scale(1);}
+    }
+    .notyAnim-33 {
+        animation-duration: 1500ms;
+        animation-iteration-count: 1;
+        animation-name: notyAnim-33;
+        animation-timing-function: linear;
+    }
+    @keyframes notyAnim-33 {
+        0%   { opacity: 0;}
+        5%  { opacity: 1;}
+    }

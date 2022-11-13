@@ -45,16 +45,29 @@
     vkBridge.send("VKWebAppGetUserInfo").then(result => {
         myinfo = result;})
     </script> 
+
+    <link rel="stylesheet" href="vkk.css">
+    <div class="vk-header" id="head" style="background-color: rgba(255, 255, 255, 0);"><h5 id="vkHeaderText"></h5></div>
+    <div class="inApp" id="menu" style="display: block; ">
+        
+        <div id="toGame" class="infoCard" style="background: #6fa76c;height: 105px;position: relative;overflow: hidden;">
+            <div class="userinf standartTitle" style="position: relative;z-index: 10;font-size: 50px;text-align: center;margin-left: 0px;" "="">Поле</div>
+        </div>
+    </div>
+    <div class="inApp" id="game" style="display: block; ">
+        <div class="intro">
+            <p id="log" style="position: absolute;">-</p>
+            <canvas id="largecanv" ></canvas>
+            <canvas id="scanv" ></canvas>
+            <canvas id="field" width="250" height="250"></canvas>
+        </div>
+       
+    </div>
     <script src="engene.js"></script>
     <script src="main.js"></script>
     <script src="second.js"></script>
-<div class="intro">
-    <p id="log" style="position: absolute;">-</p>
-    <canvas id="largecanv" ></canvas>
-    <canvas id="scanv" ></canvas>
-    <canvas id="field" width="1024" height="1024"></canvas>
-</div>
-                
+    <script src="controller.js"></script>
+    <script src="main2.js"></script>
 </body>
 
 </html>
