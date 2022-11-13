@@ -8,8 +8,8 @@ window.onload = function() {
         lifeField.generation = 0;
       }, 1000);
     }, 5000);
-    var wallSIZE1 = 250;
-    var wallSIZE2 = 250;
+    var wallSIZE1 = 1024;
+    var wallSIZE2 = 1024;
     Start();
     updateFuncs();
     gameGameGame();
