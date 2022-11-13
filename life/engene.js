@@ -3,9 +3,10 @@ window.onload = function() {
       loadRandom();
     }, 1250);
     setTimeout(function() {
+        startSimulation();
       setInterval(function() {
-        document.getElementById("log").innerHTML = "iterations per second: " + lifeField.generation;
-        lifeField.generation = 0;
+        document.getElementById("log").innerHTML = document.getElementById("largecanv").width+"///"+document.getElementById("largecanv").height
+
       }, 1000);
     }, 5000);
     var wallSIZE1 = 250;
@@ -14,6 +15,7 @@ window.onload = function() {
     updateFuncs();
     gameGameGame();
     function gameGameGame() {
+
       var countMove = 0;
       setInterval(function() {
         if (countMove > 1) {
@@ -160,7 +162,7 @@ window.onload = function() {
       });
       var log = document.getElementById("log");
       function loglog(logg) {
-        log.innerHTML = "VER 21.01.06.01 / " + logg;
+     
       }
       var lastRazn = 0;
       var movecount = 0;
