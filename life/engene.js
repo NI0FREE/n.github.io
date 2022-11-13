@@ -5,12 +5,12 @@ window.onload = function() {
     setTimeout(function() {
         startSimulation();
       setInterval(function() {
-        document.getElementById("log").innerHTML = document.getElementById("largecanv").width+"///"+document.getElementById("largecanv").height
+        document.getElementById("log").innerHTML = document.getElementById("largecanv").width+"///"+document.getElementById("largecanv").height+"("+window.outerWidth+"||"+window.innerHeight+")"
 
       }, 1000);
     }, 5000);
-    var wallSIZE1 = 250;
-    var wallSIZE2 = 250;
+    var wallSIZE1 = 512;
+    var wallSIZE2 = 512;
     Start();
     updateFuncs();
     gameGameGame();
