@@ -156,8 +156,8 @@
 }
 .infoCard{
     
-    width: calc(100% - 130px);
-    margin-left: 70px;
+    width: calc(100% - 20px);
+    margin-left: 10px;
     height: 69px;
     margin-top: 10px;
     border-radius: 5px;
