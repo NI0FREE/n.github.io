@@ -1,6 +1,7 @@
 window.onload = function() {
     setTimeout(function() {
       loadRandom();
+      startSimulation();
     }, 1250);
     setTimeout(function() {
       setInterval(function() {
