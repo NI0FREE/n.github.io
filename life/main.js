@@ -254,6 +254,7 @@ class LifeField {
        
     }
 
+    
     getNormal(x,y){
         
         const pos = LifeField.WIDTH / 2 + y * (LifeField.WIDTH / 2) + (x >> 1);
@@ -266,6 +267,6 @@ class LifeField {
 }
 
 // this works in Edge; however performance is terrible in Edge anyway.
-LifeField.WIDTH = 2400;
-LifeField.HEIGHT = 1200;
+LifeField.WIDTH = 250;
+LifeField.HEIGHT = 250;
 
