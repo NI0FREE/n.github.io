@@ -13,6 +13,10 @@
     window.onload = function() {
       var width  = 1000;
       var height = 1000;
+      
+      var midlePointX = width/2;
+      var midlePointY = height/2
+          
       var canvas = document.getElementbyId("field");
       var ctx = canvas.getContext("2d");
       ctx.mozImageSmoothingEnabled = false;
@@ -22,8 +26,10 @@
       
       function draw() {
         ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
-        
-        
+        ctx.beginPath();
+        ctx.arc(midlePointX, midlePointY, 10, 0, 2 * Math.PI, false);
+        ctx.fillStyle = 'green';
+        ctx.fill();
       }  
         
         
