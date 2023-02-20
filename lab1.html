@@ -11,7 +11,27 @@
 </body>
 <script>
     window.onload = function() {
+      var width  = 1000;
+      var height = 1000;
       var canvas = document.getElementbyId("field");
+      var ctx = canvas.getContext("2d");
+      ctx.mozImageSmoothingEnabled = false;
+      ctx.webkitImageSmoothingEnabled = false;
+      ctx.msImageSmoothingEnabled = false;
+      ctx.imageSmoothingEnabled = false;
+      
+      function draw() {
+        ctx.clearRect(0, 0, canvcanv.width, canvcanv.height);
         
+        
+      }  
+        
+        
+        
+      animate();
+      function animate() {
+        requestAnimationFrame(animate);
+        draw();
+      }
     }
 </script>
