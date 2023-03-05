@@ -1,258 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lab1</title>
-</head>
-<body>
-    <canvas id="field" width="2000" height="1250" style="
-     border: 3px    
-     solid     
-     #000000;  
-    "></canvas>
-    <p>Координаты: <span id="mouseCoords"></span></p>
-
-    <h1>Настройки</h1>
-    <label for="velocity">Скорость:</label>
-    <input type="number" id="velocity" value="30"><br>
-    <label for="mass">Масса:</label>
-    <input type="number" id="mass" value="20"><br>
-    <label for="height">Y:</label>
-    <input type="number" id="height" value="150"><br>
-    <label for="distance">X:</label>
-    <input type="number" id="distance" value="400"><br>
-    <label for="acceleration">Ускорение:</label>
-    <input type="number" id="acceleration" value="1"><br>
-    <label for="time">Точность:</label>
-    <input type="number" id="time" value="1"><br>
-    <button id="apply">Применить</button>
-    <label>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>lab1</title>
+   </head>
+   <body>
+      <canvas id="field" width="2000" height="1250" style="
+         border: 3px    
+         solid     
+         #000000;  
+         "></canvas>
+      <p>Координаты: <span id="mouseCoords"></span></p>
+      <h1>Настройки</h1>
+      <label for="velocity">Скорость:</label>
+      <input type="number" id="velocity" value="30"><br>
+      <label for="mass">Масса:</label>
+      <input type="number" id="mass" value="20"><br>
+      <label for="height">Y:</label>
+      <input type="number" id="height" value="150"><br>
+      <label for="distance">X:</label>
+      <input type="number" id="distance" value="400"><br>
+      <label for="acceleration">Ускорение:</label>
+      <input type="number" id="acceleration" value="1"><br>
+      <label for="time">Точность:</label>
+      <input type="number" id="time" value="1"><br>
+      <button id="apply">Применить</button>
+      <label>
       <input type="checkbox" id="asyncToggle" async>
       Асинхронный расчет
-    </label>
-</body>
-<script>
-     var width  = 2000;
-      var height = 1250;
-      
+      </label>
+   </body>
+   <script>
+      var width  = 2000;
+       var height = 1250;
+       
+       var midlePointX = width/2;
+       var midlePointY = height/2
+           
+      var mouseCoordsSpan = document.getElementById("mouseCoords");
+      var canvas85 = document.getElementById("field");
+      canvas85.addEventListener("mousemove", function(event) {
+      // Получаем координаты курсора на странице
+      var clientX = event.clientX;
+      var clientY = event.clientY;
       var midlePointX = width/2;
       var midlePointY = height/2
-          
-var mouseCoordsSpan = document.getElementById("mouseCoords");
-var canvas85 = document.getElementById("field");
-canvas85.addEventListener("mousemove", function(event) {
-  // Получаем координаты курсора на странице
-  var clientX = event.clientX;
-  var clientY = event.clientY;
-  var midlePointX = width/2;
-  var midlePointY = height/2
-  // Получаем позицию канваса на странице
-  var canvasRect = canvas85.getBoundingClientRect();
-  var canvasLeft = canvasRect.left;
-  var canvasTop = canvasRect.top;
-
-  // Вычисляем относительные координаты
-  var relativeX = clientX - canvasLeft;
-  var relativeY = clientY - canvasTop;
-
-  // Выводим относительные координаты в span элемент
-  mouseCoordsSpan.innerHTML = "(" + ( midlePointX-relativeX)*-1 + ", " + (midlePointY-relativeY)*-1 + ")";
-});
-
-
-
-var BREAKER = 0;
-    var velocity1,mass1,height1,acceleration1,time1,distance1;
-    
-document.getElementById("apply").addEventListener("click", function() {
-			// Получаем значения из полей ввода
-			velocity1 = parseFloat(document.getElementById("velocity").value);
-			mass1 = parseFloat(document.getElementById("mass").value);
-			height1 = parseFloat(document.getElementById("height").value);
-			acceleration1 = parseFloat(document.getElementById("acceleration").value);
-			time1 = parseFloat(document.getElementById("time").value);
-			distance1 = parseFloat(document.getElementById("distance").value);
-      BREAKER = 1;
-      setTimeout(()=>{sstart();},1000)
+      // Получаем позицию канваса на странице
+      var canvasRect = canvas85.getBoundingClientRect();
+      var canvasLeft = canvasRect.left;
+      var canvasTop = canvasRect.top;
       
-		});
-    const asyncToggle = document.getElementById('asyncToggle');
-    var async = 0;
-    asyncToggle.addEventListener('change', () => {
-      if (asyncToggle.checked) {
-        async=true;
-      }else{
-        async=false;
-      }
-    });
-
-    function sstart() {
-      BREAKER=0
-   
-      var canvas = document.getElementById("field");
-      var ctx = canvas.getContext("2d");
-      //ctx.mozImageSmoothingEnabled = false;
-     // ctx.msImageSmoothingEnabled = false;
-     // ctx.imageSmoothingEnabled = false;
+      // Вычисляем относительные координаты
+      var relativeX = clientX - canvasLeft;
+      var relativeY = clientY - canvasTop;
       
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.rect(0, 0, width, height);
-      ctx.fillStyle = '#f0f8ff';
-      ctx.fill();
-      function draw() {
-
-        
-        
-        ctx.beginPath();
-        ctx.arc(midlePointX, midlePointY, 5, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'black';
-        ctx.fill();
-      }  
-        
-      let LAST_X= 0, LAST_Y = 0;
-      let start = 0;
-      function drawPoint(color,x,y){
-        if(BREAKER){return 0;}
-        if(start){
-          ctx.beginPath();
-          ctx.strokeStyle = 'red';
-          ctx.moveTo(LAST_X, LAST_Y);
-          ctx.lineTo(x, y);
-          ctx.stroke();
-        }else{start=1;}
-
-        let dx1 = x - LAST_X;
-        let dy1 = y - LAST_Y;
-
-        let dx = midlePointX - LAST_X;
-        let  dy = midlePointY - LAST_Y;
-
-        S = dx1 * dy - dx * dy1;
-
-        let ab = Math.sqrt(dx1 * dx1 + dy1 * dy1);
-
-        let h = S / ab;
-        if (Math.abs(h) < 2)
-        {
-          BREAKER=1;
-      //    x = midlePointX;
-       //   y = midlePointY;
-       console.log("hit1!")
-          
-        }
-        LAST_X = x;
-        LAST_Y = y;
-        
-
-        ctx.beginPath();
-        ctx.arc(x, y, 1, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'red';
-        ctx.fill();
-
-        
-      }
-        
-        
-      animate();
-      function animate() {
-        requestAnimationFrame(animate);
-        draw();
-      }
-    
-
-      simulate()
-
-
-
-    function simulate(){
-    // Задаем значение константы ПИ
-      const PI = 3.14159265;
-      const RPI = 3.14159265/180.0;
-      var lookspeed = 2;
-      var timeSetting = 0;
-      // Задаем начальные значения переменных
-      let velocity = velocity1, // скорость
-      mass = mass1, // масса
-      height = height1, // высота
-      acceleration = acceleration1, // ускорение
-      time = time1, // время
-      distance = distance1; // расстояние
-
-      //let time1 = 0;
-      let radius = new Array(100);
-      let x_coord = new Array(100);
-      let y_coord = new Array(100);
-      let angle = new Array(100);
-
-      // Вычисляем начальные значения радиуса, угла и координат x и y
-      radius[0] = Math.sqrt(Math.pow(distance, 2) + Math.pow(height, 2));
-      radius[1] = Math.sqrt(Math.pow((distance - velocity * time), 2) + Math.pow(height, 2));
-      angle[0] = Math.acos(distance / radius[0]) * 180.0 / PI;
-      angle[1] = Math.acos((distance - velocity * time) / radius[1]) * 180.0 / PI;
-      x_coord[0] = radius[0] * Math.cos(angle[0] * RPI);
-      y_coord[0] = radius[0] * Math.sin(angle[0] * RPI);
-      x_coord[1] = radius[1] * Math.cos(angle[1] * RPI);
-      y_coord[1] = radius[1] * Math.sin(angle[1] * RPI);
-
-      // Выводим координаты точек на экран
-      console.log(x_coord[0] + " " + y_coord[0]);
-      console.log(x_coord[1] + " " + y_coord[1]);
-      drawPoint('#ff000024',x_coord[0]+midlePointX ,y_coord[0]+midlePointY)
-      drawPoint('#ff000024',x_coord[1]+midlePointX ,y_coord[1]+midlePointY)
-      // Вычисляем значения радиуса, угла и координат x и y для каждого последующего шага времени
-      if(async){
-      var i = 2;
-      F();
-      }else{
-      for (let i = 2;; i++) {
-          radius[i] = 2 * radius[i - 1] - (Math.pow(time, 2) * acceleration * RPI) / (Math.pow(radius[i - 2], 2) * mass) - radius[i - 2];
-          angle[i] = 2 * angle[i - 1] - angle[i - 2];
-          x_coord[i] = radius[i] * Math.cos(angle[i] * RPI);
-          y_coord[i] = radius[i] * Math.sin(angle[i] * RPI);
-          if ((x_coord[i] < 7 && !(x_coord[i] < -7)) && (y_coord[i] < 7 && !(y_coord[i] < -7))||x_coord[i]>midlePointX||x_coord[i]<-midlePointX||y_coord[i]>midlePointY||y_coord[i]<-midlePointY||BREAKER) {
-            drawPoint('#ff000024',x_coord[i]+midlePointX ,y_coord[i]+midlePointY)
-            break;
-          }
-          drawPoint('#ff000024',x_coord[i]+midlePointX ,y_coord[i]+midlePointY)
-          console.log(x_coord[i] + " " + y_coord[i]);
-      }
-    }
-      function F(){
-        
-      //for (let i = 2;; i++) {
-      radius[i] = 2 * radius[i - 1] - (Math.pow(time, 2) * acceleration * RPI) / (Math.pow(radius[i - 2], 2) * mass) - radius[i - 2];
-      angle[i] = 2 * angle[i - 1] - angle[i - 2];
-      x_coord[i] = radius[i] * Math.cos(angle[i] * RPI);
-      y_coord[i] = radius[i] * Math.sin(angle[i] * RPI);
-
-      // Проверяем условие остановки и завершаем цикл, если оно выполнено
-      if ((x_coord[i] < 7 && !(x_coord[i] < -7)) && (y_coord[i] < 7 && !(y_coord[i] < -7))||x_coord[i]>midlePointX||x_coord[i]<-midlePointX||y_coord[i]>midlePointY||y_coord[i]<-midlePointY||BREAKER) {
-        console.log("TOUCH "+x_coord[i] + " " + y_coord[i]);
-      // drawPoint('green',x_coord[0] ,y_coord[0]);
-      }else{
-        setTimeout(()=>{
-          F();
-        },0)
-      }
-      //setTimeout(()=>{
-        drawPoint('#ff000024',x_coord[i]+midlePointX ,y_coord[i]+midlePointY)
-      //},acceleration/lookspeed);
-      //timeSetting+=lookspeed;
+      // Выводим относительные координаты в span элемент
+      mouseCoordsSpan.innerHTML = "(" + ( midlePointX-relativeX)*-1 + ", " + (midlePointY-relativeY)*-1 + ")";
+      });
       
-      // Выводим координаты точек на экран
-      console.log(x_coord[i] + " " + y_coord[i]);
-      i++;
+      
+      
+      var BREAKER = 0;
+      var velocity1,mass1,height1,acceleration1,time1,distance1;
+      
+      document.getElementById("apply").addEventListener("click", function() {
+      // Получаем значения из полей ввода
+      velocity1 = parseFloat(document.getElementById("velocity").value);
+      mass1 = parseFloat(document.getElementById("mass").value);
+      height1 = parseFloat(document.getElementById("height").value);
+      acceleration1 = parseFloat(document.getElementById("acceleration").value);
+      time1 = parseFloat(document.getElementById("time").value);
+      distance1 = parseFloat(document.getElementById("distance").value);
+       BREAKER = 1;
+       setTimeout(()=>{sstart();},1000)
+       
+      });
+      const asyncToggle = document.getElementById('asyncToggle');
+      var async = 0;
+      asyncToggle.addEventListener('change', () => {
+       if (asyncToggle.checked) {
+         async=true;
+       }else{
+         async=false;
+       }
+      });
+      
+      function sstart() {
+       BREAKER=0
+      
+       var canvas = document.getElementById("field");
+       var ctx = canvas.getContext("2d");
+       //ctx.mozImageSmoothingEnabled = false;
+      // ctx.msImageSmoothingEnabled = false;
+      // ctx.imageSmoothingEnabled = false;
+       
+      
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
+       ctx.rect(0, 0, width, height);
+       ctx.fillStyle = '#f0f8ff';
+       ctx.fill();
+       function draw() {
+      
+         
+         
+         ctx.beginPath();
+         ctx.arc(midlePointX, midlePointY, 5, 0, 2 * Math.PI, false);
+         ctx.fillStyle = 'black';
+         ctx.fill();
+       }  
+         
+       let LAST_X= 0, LAST_Y = 0;
+       let start = 0;
+       function drawPoint(color,x,y){
+         if(BREAKER){return 0;}
+         if(start){
+           ctx.beginPath();
+           ctx.strokeStyle = 'red';
+           ctx.moveTo(LAST_X, LAST_Y);
+           ctx.lineTo(x, y);
+           ctx.stroke();
+         }else{start=1;}
+      
+         let dx1 = x - LAST_X;
+         let dy1 = y - LAST_Y;
+      
+         let dx = midlePointX - LAST_X;
+         let  dy = midlePointY - LAST_Y;
+      
+         S = dx1 * dy - dx * dy1;
+      
+         let ab = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+      
+         let h = S / ab;
+         if (Math.abs(h) < 2)
+         {
+           BREAKER=1;
+       //    x = midlePointX;
+        //   y = midlePointY;
+        console.log("hit1!")
+           
+         }
+         LAST_X = x;
+         LAST_Y = y;
+         
+      
+         ctx.beginPath();
+         ctx.arc(x, y, 1, 0, 2 * Math.PI, false);
+         ctx.fillStyle = 'red';
+         ctx.fill();
+      
+         
+       }
+         
+         
+       animate();
+       function animate() {
+         requestAnimationFrame(animate);
+         draw();
+       }
+      
+      
+       simulate()
+      
+      
+      
+      function simulate(){
+      // Задаем значение константы ПИ
+       const PI = 3.14159265;
+       const RPI = 3.14159265/180.0;
+       var lookspeed = 2;
+       var timeSetting = 0;
+       // Задаем начальные значения переменных
+       let velocity = velocity1, // скорость
+       mass = mass1, // масса
+       height = height1, // высота
+       acceleration = acceleration1, // ускорение
+       time = time1, // время
+       distance = distance1; // расстояние
+      
+       //let time1 = 0;
+       let radius = new Array(100);
+       let x_coord = new Array(100);
+       let y_coord = new Array(100);
+       let angle = new Array(100);
+      
+       // Вычисляем начальные значения радиуса, угла и координат x и y
+       radius[0] = Math.sqrt(Math.pow(distance, 2) + Math.pow(height, 2));
+       radius[1] = Math.sqrt(Math.pow((distance - velocity * time), 2) + Math.pow(height, 2));
+       angle[0] = Math.acos(distance / radius[0]) * 180.0 / PI;
+       angle[1] = Math.acos((distance - velocity * time) / radius[1]) * 180.0 / PI;
+       x_coord[0] = radius[0] * Math.cos(angle[0] * RPI);
+       y_coord[0] = radius[0] * Math.sin(angle[0] * RPI);
+       x_coord[1] = radius[1] * Math.cos(angle[1] * RPI);
+       y_coord[1] = radius[1] * Math.sin(angle[1] * RPI);
+      
+       // Выводим координаты точек на экран
+       console.log(x_coord[0] + " " + y_coord[0]);
+       console.log(x_coord[1] + " " + y_coord[1]);
+       drawPoint('#ff000024',x_coord[0]+midlePointX ,y_coord[0]+midlePointY)
+       drawPoint('#ff000024',x_coord[1]+midlePointX ,y_coord[1]+midlePointY)
+       // Вычисляем значения радиуса, угла и координат x и y для каждого последующего шага времени
+       if(async){
+       var i = 2;
+       F();
+       }else{
+       for (let i = 2;; i++) {
+           radius[i] = 2 * radius[i - 1] - (Math.pow(time, 2) * acceleration * RPI) / (Math.pow(radius[i - 2], 2) * mass) - radius[i - 2];
+           angle[i] = 2 * angle[i - 1] - angle[i - 2];
+           x_coord[i] = radius[i] * Math.cos(angle[i] * RPI);
+           y_coord[i] = radius[i] * Math.sin(angle[i] * RPI);
+           if ((x_coord[i] < 7 && !(x_coord[i] < -7)) && (y_coord[i] < 7 && !(y_coord[i] < -7))||x_coord[i]>midlePointX||x_coord[i]<-midlePointX||y_coord[i]>midlePointY||y_coord[i]<-midlePointY||BREAKER) {
+             drawPoint('#ff000024',x_coord[i]+midlePointX ,y_coord[i]+midlePointY)
+             break;
+           }
+           drawPoint('#ff000024',x_coord[i]+midlePointX ,y_coord[i]+midlePointY)
+           console.log(x_coord[i] + " " + y_coord[i]);
+       }
       }
-    //}
-
-      // Освобождаем выделенную память
-      delete radius;
-      delete x_coord;
-      delete y_coord;
-      delete angle;
-    }
-  }
-</script>
+       function F(){
+         
+       //for (let i = 2;; i++) {
+       radius[i] = 2 * radius[i - 1] - (Math.pow(time, 2) * acceleration * RPI) / (Math.pow(radius[i - 2], 2) * mass) - radius[i - 2];
+       angle[i] = 2 * angle[i - 1] - angle[i - 2];
+       x_coord[i] = radius[i] * Math.cos(angle[i] * RPI);
+       y_coord[i] = radius[i] * Math.sin(angle[i] * RPI);
+      
+       // Проверяем условие остановки и завершаем цикл, если оно выполнено
+       if ((x_coord[i] < 7 && !(x_coord[i] < -7)) && (y_coord[i] < 7 && !(y_coord[i] < -7))||x_coord[i]>midlePointX||x_coord[i]<-midlePointX||y_coord[i]>midlePointY||y_coord[i]<-midlePointY||BREAKER) {
+         console.log("TOUCH "+x_coord[i] + " " + y_coord[i]);
+       // drawPoint('green',x_coord[0] ,y_coord[0]);
+       }else{
+         setTimeout(()=>{
+           F();
+         },0)
+       }
+       //setTimeout(()=>{
+         drawPoint('#ff000024',x_coord[i]+midlePointX ,y_coord[i]+midlePointY)
+       //},acceleration/lookspeed);
+       //timeSetting+=lookspeed;
+       
+       // Выводим координаты точек на экран
+       console.log(x_coord[i] + " " + y_coord[i]);
+       i++;
+       }
+      //}
+      
+       // Освобождаем выделенную память
+       delete radius;
+       delete x_coord;
+       delete y_coord;
+       delete angle;
+      }
+      }
+   </script>
