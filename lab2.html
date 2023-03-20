@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Графики на Canvas</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        canvas {
+            border: 1px solid #000;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-family: monospace;">Правило Джонсона</h1>
+    <canvas  id="canvas1" width="800" height="400"></canvas>
+    <h1 style="font-family: monospace;">Метод перебора</h1>
+    <canvas id="canvas2" width="800" height="400"></canvas>
+    <h1 style="font-family: monospace;">Сравнение</h1>
+    <canvas id="canvas3" width="800" height="400"></canvas>
+    <script>
+        const canvas1 = document.getElementById('canvas1');
+        const canvas2 = document.getElementById('canvas2');
+        const canvas3 = document.getElementById('canvas3');
+
+        const ctx1 = canvas1.getContext('2d');
+        const ctx2 = canvas2.getContext('2d');
+        const ctx3 = canvas3.getContext('2d');
+
+        // Примеры данных
+        const data1 = [
+
+        ];
+
+        const data2 = [
+
+        ];
+
+        const data3 = [
+
+        ];
+
+        function drawLine(ctx, x1, y1, x2, y2, color = '#000') {
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
+
+        function drawGraph(ctx, data, color = 'black', mode) {
+            const paddingLeft = 50;
+            const paddingRight = 20;
+            const paddingTop = 20;
+            const paddingBottom = 50;
+
+            const canvas = ctx.canvas;
+            const graphWidth = canvas.width - paddingLeft - paddingRight;
+            const graphHeight = canvas.height - paddingTop - paddingBottom;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const maxValue = Math.max(...data.map(point => point.y));
+            const minValue = Math.min(...data.map(point => point.y));
+
+            const scaleX = graphWidth / (data1.length - 1);
+            const scaleY = graphHeight / (maxValue - minValue);
+            drawLine(ctx, paddingLeft, paddingTop, paddingLeft, canvas.height - paddingBottom);
+            drawLine(ctx, paddingLeft, canvas.height - paddingBottom, canvas.width - paddingRight, canvas.height - paddingBottom);
+
+            // Отрисовка графика
+            if(mode){
+            for (let i = 0; i < data.length - 1; i++) {
+        const x1 = paddingLeft + i * scaleX;
+        const y1 = paddingTop + graphHeight - scaleY * (data[i].y - minValue);
+        const x2 = paddingLeft + (i + 1) * scaleX;
+        const y2 = paddingTop + graphHeight - scaleY * (data[i + 1].y - minValue);
+
+        drawLine(ctx, x1, y1, x2, y2, data[i].color || color);
+    }
+    ctx.fillStyle = 'black';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            for (let i = 0; i < data.length; i++) {
+                const x = paddingLeft + i * scaleX;
+                const y = paddingTop + graphHeight - scaleY * (data[i].y - minValue);
+                ctx.fillText(data[i].y, x, y + 5);
+            }
+            }else{
+
+                for (let i = 0; i < data1.length - 1; i++) {
+        const x1 = paddingLeft + i * scaleX;
+        const y1 = paddingTop + graphHeight - scaleY * (data1[i].y - minValue);
+        const x2 = paddingLeft + (i + 1) * scaleX;
+        const y2 = paddingTop + graphHeight - scaleY * (data1[i + 1].y - minValue);
+
+        drawLine(ctx, x1, y1, x2, y2, data1[i].color || 'blue');
+                }
+        for (let i = 0; i < data2.length - 1; i++) {
+        const x1 = paddingLeft + i * scaleX;
+        const y1 = paddingTop + graphHeight - scaleY * (data2[i].y - minValue);
+        const x2 = paddingLeft + (i + 1) * scaleX;
+        const y2 = paddingTop + graphHeight - scaleY * (data2[i + 1].y - minValue);
+
+        drawLine(ctx, x1, y1, x2, y2, data2[i].color || 'red');
+        }
+        ctx.fillStyle = 'black';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            for (let i = 0; i < data1.length; i++) {
+                const x = paddingLeft + i * scaleX;
+                const y = paddingTop + graphHeight - scaleY * (data1[i].y - minValue);
+                ctx.fillText(data1[i].y, x, y + 5);
+            }
+            ctx.fillStyle = 'black';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            for (let i = 0; i < data2.length; i++) {
+                const x = paddingLeft + i * scaleX;
+                const y = paddingTop + graphHeight - scaleY * (data2[i].y - minValue);
+                ctx.fillText(data2[i].y, x, y + 5);
+            } 
+    }
+            // Отрисовка чисел под точками
+        
+            ctx.fillStyle = 'black';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            for (let i = 0; i < data.length; i=i+1) {
+                const x = paddingLeft + i * scaleX;
+                const y = canvas.height - paddingBottom;
+                ctx.fillText(3+i, x, y + 20);
+            }
+        }
+
+        drawGraph(ctx1, data1);
+        drawGraph(ctx2, data2);
+        drawGraph(ctx3, data3);
+
+
+        /////////////////
+        
+         function johnsonAlgorithm(jobs) {
+            const firstGroup = [];
+            const secondGroup = [];
+
+            jobs.forEach((job) => {
+                if (job.a <= job.b) {
+                firstGroup.push(job);
+                } else {
+                secondGroup.push(job);
+                }
+            });
+
+            firstGroup.sort((a, b) => a.a - b.a || a.b - b.b);
+            secondGroup.sort((a, b) => b.b - a.b || b.a - a.a);
+
+            return [...firstGroup, ...secondGroup];
+            }
+
+            function calculateTotalTime(jobs) {
+            let totalA = 0;
+            let totalB = 0;
+            let totalTime = 0;
+
+            jobs.forEach((job) => {
+                totalA += job.a;
+                totalTime = Math.max(totalA, totalB) + job.b;
+                totalB = totalTime;
+            });
+
+            return totalTime;
+            }
+
+            function bruteForce(jobs) {
+            const n = jobs.length;
+            const optimalOrder = [];
+            let minTime = Number.MAX_SAFE_INTEGER;
+
+            function bound(currentOrder, level) {
+                let totalA = 0;
+                let totalB = 0;
+
+                for (let i = 0; i < level; i++) {
+                totalA += currentOrder[i].a;
+                totalB = Math.max(totalA, totalB) + currentOrder[i].b;
+                }
+
+                for (let i = level; i < n; i++) {
+                totalA += jobs[i].a;
+                totalB = Math.max(totalA, totalB) + jobs[i].b;
+                }
+
+                return totalB;
+            }
+
+            function search(currentOrder, level) {
+                if (level === n) {
+                const totalTime = calculateTotalTime(currentOrder);
+                if (totalTime < minTime) {
+                    minTime = totalTime;
+                    optimalOrder.length = 0;
+                    optimalOrder.push(...currentOrder);
+                }
+                }
+
+                for (let i = level; i < n; i++) {
+                const nextOrder = currentOrder.slice();
+                [nextOrder[level], nextOrder[i]] = [nextOrder[i], nextOrder[level]];
+
+                if (bound(nextOrder, level + 1) < minTime) {
+                    search(nextOrder, level + 1);
+                }
+                }
+            }
+
+            search(jobs, 0);
+            return optimalOrder;
+            }
+
+            class Job {
+            constructor(a, b, id) {
+                this.a = a;
+                this.b = b;
+                this.id = id;
+            }
+            }
+
+            function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function generateJobs(n) {
+            const jobs = [];
+            for (let i = 0; i < n; i++) {
+                jobs.push(new Job(randomInt(1, 10), randomInt(1, 10), i + 1));
+            }
+            return jobs;
+            }
+
+            var jobs = generateJobs(20);
+
+            let startTime, endTime;
+
+function experement(n) {
+    var totalTime1 = 0;
+    var totalTime2 = 0;
+    for (let i = 1; i <= 20; i++) {
+        var jobs = generateJobs(n);
+        startTime = performance.now();
+        var optimalOrderJohnson = johnsonAlgorithm(jobs);
+        endTime = performance.now();
+        var johnsonTime = endTime - startTime;
+
+        startTime = performance.now();
+        var optimalOrderBruteForce = bruteForce(jobs);
+        endTime = performance.now();
+        var bruteForceTime = endTime - startTime;
+
+        totalTime1 += johnsonTime;
+        totalTime2 += bruteForceTime;
+    }
+
+    var avgTime1 = totalTime1 / 20;
+    var avgTime2 = totalTime2 / 20;
+
+    data1.push({ x: n, y: avgTime1.toFixed(3) });
+    data2.push({ x: n, y: avgTime2.toFixed(3) });
+    data3.push({ x: n, y: avgTime1.toFixed(3), color: 'blue' });
+    data3.push({ x: n, y: avgTime2.toFixed(3), color: 'red' });
+
+    drawGraph(ctx1, data1, 'blue',1);
+    drawGraph(ctx2, data2, 'red',1);
+    drawGraph(ctx3, data3,0,0);
+}
+           
+
+let z =3;
+setInterval(()=>{experement(z);z++;},5000)
+
+    </script>
+</body>
+</html>
